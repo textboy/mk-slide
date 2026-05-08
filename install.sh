@@ -2,10 +2,10 @@
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
-SKILL_NAME="next-slide"
+SKILL_NAME="mk-slide"
 SKILL_DIR="$HOME/.claude/skills/$SKILL_NAME"
 
-echo "Next Slide Installer"
+echo "MK Slide Installer"
 echo "===================="
 echo ""
 
@@ -67,12 +67,12 @@ fi
 echo ""
 
 if [ "$installed" = true ]; then
-  echo "Done! Next Slide is ready."
+  echo "Done! MK Slide is ready."
   echo ""
   echo "Usage:"
-  echo "  - In Claude Code: say '/next-slide' or '帮我做个演示'"
+  echo "  - In Claude Code: say '/mk-slide' or '帮我做个演示'"
   echo "  - In OpenClaw:    the skill triggers on presentation-related prompts"
-  echo "  - In Hermes:      say '/next-slide' or describe a presentation you want"
+  echo "  - In Hermes:      say '/mk-slide' or describe a presentation you want"
   echo ""
   echo "50+ styles, zero dependencies, bilingual. 你的下个 ppt，何必是 PPT"
 else
@@ -87,5 +87,5 @@ else
   echo "  cp -r $SCRIPT_DIR ~/.hermes/skills/$SKILL_NAME"
   echo ""
   echo "To install via OpenClaw:"
-  echo "  clawhub install next-slide"
+  echo "  clawhub install mk-slide"
 fi

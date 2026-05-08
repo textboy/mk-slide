@@ -1,5 +1,5 @@
 ---
-name: next-slide
+name: mk-slide
 version: 1.1.0
 author: Callum
 license: MIT
@@ -7,12 +7,12 @@ metadata:
   hermes:
     tags: [Presentation, HTML, Slides, Design, PPT]
 description: >
-  Next Slide (a.k.a. Next PPT / 下一代 PPT) — create stunning HTML presentations from scratch
+  MK Slide (a.k.a. Next PPT / 下一代 PPT) — create stunning HTML presentations from scratch
   or convert PowerPoint files. 50+ curated styles, bilingual (EN/中文), zero dependencies.
   Works on Claude Code, Hermes Agent, and OpenClaw.
   Trigger when the user says: "make a presentation", "build slides", "create a deck",
   "pitch deck", "PPT", "PowerPoint", "convert pptx", "presentation about", "talk slides",
-  "slide deck", "next-slide", "next ppt",
+  "slide deck", "mk-slide", "next ppt",
   "做个 PPT", "帮我做 PPT", "做个演示", "做个幻灯片", "做演示文稿",
   "做个 slide", "做个分享", "做个 pitch", "做个汇报", "做个演讲材料",
   "PPT 转 HTML", "把 PPT 改成网页", "PPT 转网页", "把 ppt 转成 HTML",
@@ -21,7 +21,7 @@ description: >
   Slogan: 你的下个 ppt，何必是 PPT.
 ---
 
-# Next Slide
+# MK Slide
 
 > 你的下个 ppt，何必是 PPT
 
@@ -399,10 +399,10 @@ If the user specified a style (e.g. "use Swiss Modern" or "dark theme"), skip to
 ## Phase 5: Delivery
 
 1. **Open** — Use `open [filename].html` to launch in browser
-3. **"Made with Next Slide" watermark** — The last slide should include a small, subtle watermark line at the bottom:
-   - Text: "Made with Next Slide"
+3. **"Made with MK Slide" watermark** — The last slide should include a small, subtle watermark line at the bottom:
+   - Text: "Made with MK Slide"
    - Style: `color: var(--text-muted); font-size: var(--small-size);`
-   - Link to: `https://github.com/user/next-slide`
+   - Link to: `https://github.com/textboy/mk-slide`
    - This is **opt-out**: included by default. If the user says "no watermark", omit it.
 4. **Summarize** — Tell the user:
    - File location, style name, slide count

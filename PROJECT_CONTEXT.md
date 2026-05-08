@@ -1,10 +1,10 @@
 ---
-project: next-slide
+project: mk-slide
 updated: 2026-04-06
 status: paused
 ---
 
-# Next Slide — Project Context
+# MK Slide — Project Context
 
 > "你的下个 ppt，何必是 PPT"
 
@@ -12,11 +12,11 @@ This file is for any AI/LLM working on this project. Read this first for full co
 
 ## What This Is
 
-Next Slide is a Claude Code Skill that generates zero-dependency, animation-rich HTML presentations from natural language. 50+ curated visual styles, bilingual (EN/中文), supports PPT conversion, Markdown conversion, and one-click Vercel deploy.
+MK Slide is a Claude Code Skill that generates zero-dependency, animation-rich HTML presentations from natural language. 50+ curated visual styles, bilingual (EN/中文), supports PPT conversion, Markdown conversion, and one-click Vercel deploy.
 
-- **GitHub**: https://github.com/codesstar/next-slide
+- **GitHub**: https://github.com/textboy/mk-slide
 - **Gallery**: https://next-slide-jet.vercel.app/gallery.html
-- **Install**: `git clone https://github.com/codesstar/next-slide ~/.claude/skills/next-slide`
+- **Install**: `git clone https://github.com/textboy/mk-slide ~/.claude/skills/mk-slide`
 
 ## File Map
 

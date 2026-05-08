@@ -1,6 +1,6 @@
 # Style Presets Reference
 
-53 curated visual styles for Next Slide — 你的下个 ppt，何必是 PPT. Each preset is inspired by real design references with distinct personality. **Abstract shapes only — no illustrations.**
+53 curated visual styles for MK Slide — 你的下个 ppt，何必是 PPT. Each preset is inspired by real design references with distinct personality. **Abstract shapes only — no illustrations.**
 
 **Viewport CSS:** For mandatory base styles, see [viewport-base.css](viewport-base.css). Include in every presentation.
 

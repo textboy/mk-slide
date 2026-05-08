@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CI/CD Pipeline — Rule Deployment Flow</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { height: 100%; overflow: hidden; }
+
+body {
+  background: #0a0a12;
+  color: #c8cce0;
+  font-family: 'Inter', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  display: flex; align-items: center; justify-content: center;
+  height: 100vh; height: 100dvh;
+  position: relative;
+}
+
+/* Grid background */
+body::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(61,90,254,.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(61,90,254,.05) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events: none; z-index: 0;
+}
+
+/* Scan lines */
+body::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,.08) 2px, rgba(0,0,0,.08) 4px);
+  pointer-events: none; z-index: 0;
+}
+
+.container {
+  position: relative; z-index: 1;
+  width: min(95vw, 1300px);
+  padding: clamp(20px, 3vh, 40px);
+}
+
+/* Title */
+.title {
+  font-family: 'Archivo', sans-serif;
+  font-weight: 900;
+  font-size: clamp(20px, 2.5vw, 36px);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  text-align: center;
+  margin-bottom: clamp(24px, 4vh, 48px);
+}
+.title .accent {
+  color: #3d5afe;
+  text-shadow: 0 0 30px rgba(61,90,254,.3);
+}
+.title .dim {
+  color: #4a4e6a;
+  font-weight: 400;
+}
+
+/* Diagram layout */
+.diagram {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+}
+
+/* Main pipeline row */
+.pipeline {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+/* Node */
+.node {
+  background: rgba(61,90,254,.08);
+  border: 1px solid rgba(61,90,254,.15);
+  border-radius: 8px;
+  padding: clamp(10px, 1.2vh, 18px) clamp(12px, 1.2vw, 20px);
+  text-align: center;
+  min-width: clamp(80px, 10vw, 130px);
+  position: relative;
+  transition: border-color 0.3s ease;
+}
+
+.node-icon {
+  font-size: clamp(16px, 1.6vw, 24px);
+  margin-bottom: clamp(4px, 0.4vh, 8px);
+}
+.node-label {
+  font-family: 'Archivo', sans-serif;
+  font-weight: 700;
+  font-size: clamp(9px, 0.8vw, 13px);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #e0e3f0;
+  line-height: 1.2;
+}
+.node-sub {
+  font-size: clamp(7px, 0.6vw, 10px);
+  color: #4a4e6a;
+  margin-top: 2px;
+  letter-spacing: 0.05em;
+}
+
+/* Node variants */
+.node-start {
+  background: rgba(0,229,255,.08);
+  border-color: rgba(0,229,255,.2);
+}
+.node-start .node-label { color: #00e5ff; }
+
+.node-gate {
+  background: rgba(255,20,147,.08);
+  border-color: rgba(255,20,147,.15);
+}
+.node-gate .node-label { color: #ff1493; }
+
+.node-process {
+  background: rgba(124,77,255,.08);
+  border-color: rgba(124,77,255,.15);
+}
+.node-process .node-label { color: #7c4dff; }
+
+.node-end {
+  background: rgba(0,229,255,.06);
+  border-color: rgba(0,229,255,.12);
+}
+.node-end .node-label { color: #00e5ff; }
+
+.node-fallback {
+  background: rgba(255,152,0,.08);
+  border-color: rgba(255,152,0,.2);
+}
+.node-fallback .node-label { color: #ff9800; }
+
+/* Arrow */
+.arrow {
+  color: #3d5afe;
+  font-size: clamp(10px, 0.9vw, 14px);
+  padding: 0 clamp(2px, 0.3vw, 8px);
+  opacity: 0.5;
+  font-family: 'Archivo', sans-serif;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* Feedback loop */
+.feedback-section {
+  margin-top: clamp(16px, 2.5vh, 36px);
+  display: flex;
+  justify-content: center;
+}
+
+.feedback-node {
+  background: rgba(255,152,0,.06);
+  border: 1px dashed rgba(255,152,0,.25);
+  border-radius: 8px;
+  padding: clamp(8px, 1vh, 14px) clamp(16px, 2vw, 32px);
+  text-align: center;
+  min-width: clamp(100px, 14vw, 180px);
+}
+.feedback-node .node-label {
+  color: #ff9800;
+}
+.feedback-node .node-sub {
+  color: #5a4a2a;
+}
+
+.fallback-arrow {
+  display: flex;
+  align-items: center;
+  gap: clamp(4px, 0.5vw, 8px);
+  color: rgba(255,152,0,.4);
+  font-size: clamp(8px, 0.7vw, 11px);
+  font-family: 'Archivo', sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+}
+
+/* Connection labels */
+.conn-label {
+  font-size: clamp(6px, 0.5vw, 8px);
+  color: rgba(255,20,147,.4);
+  font-family: 'Archivo', sans-serif;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  text-align: center;
+  margin: 2px 0;
+}
+
+/* Success/error labels */
+.status-pass {
+  color: #00e676;
+  font-size: clamp(6px, 0.5vw, 9px);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+}
+.status-fail {
+  color: #ff1744;
+  font-size: clamp(6px, 0.5vw, 9px);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+}
+
+/* Arrow SVG connectors */
+.arrow-svg {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 clamp(1px, 0.2vw, 4px);
+}
+.arrow-svg .line {
+  width: clamp(12px, 1.5vw, 28px);
+  height: 2px;
+  background: linear-gradient(90deg, rgba(61,90,254,.3), rgba(61,90,254,.5));
+  position: relative;
+}
+.arrow-svg .line::after {
+  content: '';
+  position: absolute;
+  right: -1px;
+  top: -3px;
+  border: 4px solid transparent;
+  border-left-color: rgba(61,90,254,.6);
+}
+
+/* Feedback flow connector */
+.feedback-connector {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+.feedback-connector .vline {
+  width: 2px;
+  height: clamp(12px, 1.5vh, 20px);
+  background: rgba(255,152,0,.2);
+}
+.feedback-connector .hline {
+  width: clamp(40px, 6vw, 80px);
+  height: 2px;
+  background: rgba(255,152,0,.2);
+  position: relative;
+}
+.feedback-connector .hline::after {
+  content: '';
+  position: absolute;
+  right: -1px;
+  top: -3px;
+  border: 4px solid transparent;
+  border-left-color: rgba(255,152,0,.3);
+}
+
+/* Glow orbs */
+.glow-orb {
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(80px);
+  pointer-events: none;
+  z-index: 0;
+}
+.glow-orb-1 { width: clamp(200px, 30vw, 400px); height: clamp(200px, 30vw, 400px); top: -15%; right: -10%; background: radial-gradient(circle, rgba(61,90,254,0.1) 0%, transparent 70%); }
+.glow-orb-2 { width: clamp(200px, 25vw, 350px); height: clamp(200px, 25vw, 350px); bottom: -10%; left: -5%; background: radial-gradient(circle, rgba(124,77,255,0.08) 0%, transparent 70%); }
+
+/* Checkmark / X indicators */
+.indicator {
+  display: inline-block;
+  width: clamp(14px, 1.2vw, 20px);
+  height: clamp(14px, 1.2vw, 20px);
+  border-radius: 50%;
+  line-height: clamp(14px, 1.2vw, 20px);
+  text-align: center;
+  font-size: clamp(8px, 0.7vw, 11px);
+  font-weight: 700;
+  margin-left: 4px;
+}
+.indicator-pass { background: rgba(0,230,118,.15); color: #00e676; }
+.indicator-fail { background: rgba(255,23,68,.15); color: #ff1744; }
+
+/* Row label for stages */
+.stage-label {
+  font-family: 'Archivo', sans-serif;
+  font-size: clamp(8px, 0.6vw, 10px);
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #4a4e6a;
+  text-align: center;
+  margin-bottom: clamp(6px, 0.6vh, 10px);
+}
+
+@media (max-width: 800px) {
+  .pipeline { gap: clamp(4px, 0.8vw, 8px); }
+  .node { min-width: 60px; padding: 8px 6px; }
+  .feedback-section { flex-direction: column; align-items: center; }
+}
+
+@media (max-height: 500px) {
+  .container { padding: 8px; }
+  .title { margin-bottom: 12px; font-size: 16px; }
+  .node { padding: 4px 6px; min-width: 50px; }
+  .node-icon { font-size: 12px; margin-bottom: 2px; }
+}
+</style>
+</head>
+<body>
+
+<div class="glow-orb glow-orb-1"></div>
+<div class="glow-orb glow-orb-2"></div>
+
+<div class="container">
+  <div class="title">
+    <span class="dim">//</span> Rule Deployment <span class="accent">Pipeline</span>
+  </div>
+
+  <div class="diagram">
+
+    <!-- === ROW 1: Main pipeline === -->
+    <div class="pipeline">
+
+      <!-- 1. User upload -->
+      <div class="node node-start">
+        <div class="node-icon">&#128196;</div>
+        <div class="node-label">User Upload</div>
+        <div class="node-sub">Push to GitHub</div>
+      </div>
+
+      <div class="arrow-svg"><div class="line"></div></div>
+
+      <!-- 2. IT merge -->
+      <div class="node node-process">
+        <div class="node-icon">&#128279;</div>
+        <div class="node-label">IT Merge</div>
+        <div class="node-sub">Experiment Branch</div>
+      </div>
+
+      <div class="arrow-svg"><div class="line"></div></div>
+
+      <!-- 3. Auto Test -->
+      <div class="node node-gate">
+        <div class="node-icon">&#9881;</div>
+        <div class="node-label">Auto Test</div>
+        <div class="node-sub"><span class="status-pass">&#10003; PASS</span> / <span class="status-fail">&#10007; FAIL</span></div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;align-items:center;">
+        <div class="arrow-svg"><div class="line"></div></div>
+        <div class="conn-label">Pass</div>
+      </div>
+
+      <!-- 4. Security Check -->
+      <div class="node node-gate">
+        <div class="node-icon">&#128737;</div>
+        <div class="node-label">Security Check</div>
+        <div class="node-sub"><span class="status-pass">&#10003; PASS</span> / <span class="status-fail">&#10007; FAIL</span></div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;align-items:center;">
+        <div class="arrow-svg"><div class="line"></div></div>
+        <div class="conn-label">Pass</div>
+      </div>
+
+      <!-- 5. AI Code Review -->
+      <div class="node node-process">
+        <div class="node-icon">&#129302;</div>
+        <div class="node-label">AI Code Review</div>
+        <div class="node-sub"><span class="status-pass">&#10003; PASS</span> / <span class="status-fail">&#10007; FAIL</span></div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;align-items:center;">
+        <div class="arrow-svg"><div class="line"></div></div>
+        <div class="conn-label">Pass</div>
+      </div>
+
+      <!-- 6. Peer Review -->
+      <div class="node node-process">
+        <div class="node-icon">&#128101;</div>
+        <div class="node-label">Peer Review</div>
+        <div class="node-sub"><span class="status-pass">&#10003; PASS</span> / <span class="status-fail">&#10007; FAIL</span></div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;align-items:center;">
+        <div class="arrow-svg"><div class="line"></div></div>
+        <div class="conn-label">Pass</div>
+      </div>
+
+      <!-- 7. Deploy -->
+      <div class="node node-end">
+        <div class="node-icon">&#128640;</div>
+        <div class="node-label">Deploy</div>
+        <div class="node-sub">Production</div>
+      </div>
+
+      <div class="arrow-svg"><div class="line"></div></div>
+
+      <!-- 8. Monitor -->
+      <div class="node node-end">
+        <div class="node-icon">&#128200;</div>
+        <div class="node-label">Monitor</div>
+        <div class="node-sub">Observability</div>
+      </div>
+    </div>
+
+    <!-- === ROW 2: Feedback fallback === -->
+    <div class="feedback-section">
+      <!-- left arrow going up to fail -->
+      <div style="display:flex;align-items:center;gap:clamp(4px,0.5vw,8px);">
+        <div class="feedback-connector" style="flex-direction:row;align-items:center;">
+          <div class="vline" style="height:2px;width:clamp(16px,2vw,32px);"></div>
+          <span class="conn-label" style="color:rgba(255,23,68,.5);">Fail</span>
+          <div class="vline" style="height:2px;width:clamp(8px,1vw,16px);"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- === ROW 3: Fallback node centered === -->
+    <div style="display:flex;justify-content:center;margin-top:clamp(8px,1vh,16px);">
+      <div class="feedback-node">
+        <div class="node-icon">&#128260;</div>
+        <div class="node-label">Fallback to User</div>
+        <div class="node-sub">Check &amp; Reupload Rules</div>
+      </div>
+    </div>
+
+    <!-- connector from fallback back to top -->
+    <div style="display:flex;justify-content:center;margin-top:clamp(4px,0.5vh,8px);">
+      <div class="feedback-connector" style="flex-direction:column;">
+        <div class="vline"></div>
+        <div style="display:flex;align-items:center;gap:clamp(4px,0.5vw,8px);">
+          <div class="hline"></div>
+          <span style="font-size:clamp(7px,0.6vw,10px);color:rgba(255,152,0,.3);font-family:'Archivo',sans-serif;font-weight:600;letter-spacing:0.1em;white-space:nowrap;">Re-upload</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+// Simple keyboard nav for presentation context
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') window.close();
+});
+</script>
+</body>
+</html>

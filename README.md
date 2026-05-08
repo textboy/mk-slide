@@ -2,7 +2,7 @@
   <strong>English</strong> | <a href="README_CN.md">中文</a>
 </p>
 
-# Next Slide
+# MK Slide
 
 ### 你的下个 ppt，何必是 PPT
 
@@ -14,7 +14,7 @@ Works on **Claude Code** · **Hermes Agent** · **OpenClaw**
 
 ## What It Does
 
-You talk to your AI assistant in natural language. Next Slide turns your words into a polished, animated HTML presentation — a single file you can open in any browser.
+You talk to your AI assistant in natural language. MK Slide turns your words into a polished, animated HTML presentation — a single file you can open in any browser.
 
 ```
 You: "帮我做一个 AI agents 的演讲，10 页左右，科技感强一点"
@@ -33,13 +33,13 @@ You: "帮我做一个 AI agents 的演讲，10 页左右，科技感强一点"
 
 ```bash
 # 1. Install as Claude Code skill
-git clone https://github.com/codesstar/next-slide ~/.claude/skills/next-slide
+git clone https://github.com/textboy/mk-slide ~/.claude/skills/mk-slide
 
 # 2. Use — just talk naturally
 # "Make me a presentation about..."
 # "帮我做个关于 XX 的 slide"
 # or invoke directly:
-/next-slide
+/mk-slide
 
 # 3. Present
 open my-presentation.html    # One file. Zero dependencies.
@@ -49,9 +49,9 @@ open my-presentation.html    # One file. Zero dependencies.
 
 | Platform | Install |
 |----------|---------|
-| **Claude Code** | `git clone https://github.com/codesstar/next-slide ~/.claude/skills/next-slide` |
-| **Hermes Agent** | `git clone https://github.com/codesstar/next-slide ~/.hermes/skills/next-slide` |
-| **OpenClaw** | `clawhub install next-slide` |
+| **Claude Code** | `git clone https://github.com/textboy/mk-slide ~/.claude/skills/mk-slide` |
+| **Hermes Agent** | `git clone https://github.com/textboy/mk-slide ~/.hermes/skills/mk-slide` |
+| **OpenClaw** | `clawhub install mk-slide` |
 | **Any AI tool** | Paste `SKILL.md` as system prompt + reference the support files |
 
 > Or run `bash install.sh` from a clone — it auto-detects all three and symlinks for you.
@@ -132,7 +132,7 @@ Each style is a complete design system: curated typography, color palette, layou
 
 ## Design Philosophy
 
-Next Slide isn't a template engine. It's an opinionated design system that teaches AI to think like a designer:
+MK Slide isn't a template engine. It's an opinionated design system that teaches AI to think like a designer:
 
 1. **No AI Slop** — Every style is hand-crafted with intentional typography, spacing, and motion. The AI follows exact specifications, not vibes.
 2. **Layout DNA** — Each style defines its structural patterns: slide mechanism, title alignment, navigation style, background treatment, animation approach, and component structure.
@@ -170,7 +170,7 @@ Every presentation uses CSS custom properties. Override in `:root`:
 ## File Structure
 
 ```
-next-slide/
+mk-slide/
 ├── SKILL.md               # AI instructions (the brain)
 ├── STYLE_PRESETS.md        # 50+ style definitions with Layout DNA
 ├── style-gallery.html      # Local style browser (lightweight)

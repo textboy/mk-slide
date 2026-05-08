@@ -1,11 +1,11 @@
 {
-  "name": "next-slide",
-  "displayName": "Next Slide 🦞",
+  "name": "mk-slide",
+  "displayName": "MK Slide 🦞",
   "description": "AI-powered HTML presentations. 50+ styles, zero dependencies, bilingual. 你的下个 ppt，何必是 PPT",
   "version": "0.1.0",
   "kind": "skill",
   "author": "Callum",
-  "homepage": "https://github.com/codesstar/next-slide",
+  "homepage": "https://github.com/textboy/mk-slide",
   "instructions": "./SKILL.md",
   "assets": [
     "STYLE_PRESETS.md",
@@ -18,7 +18,7 @@
     "scripts/extract-pptx.py"
   ],
   "triggers": [
-    "presentation", "slides", "slide deck", "PPT", "演示", "做个slide", "next-slide",
+    "presentation", "slides", "slide deck", "PPT", "演示", "做个slide", "mk-slide",
     "pptx", "convert ppt", "markdown to slides"
   ],
   "tags": ["presentation", "design", "html", "bilingual"]
