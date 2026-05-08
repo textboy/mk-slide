@@ -36,6 +36,11 @@
 | `scripts/extract-pptx.py` | PowerPoint content extraction script |
 | `install.sh` | Auto-detection & install for Claude Code / Hermes / OpenClaw |
 | `openclaw.plugin.json` | OpenClaw plugin manifest |
+| `tools/generate-drawio.py` | Drawio diagram generation → PNG embedding | Phase 8 |
+| `reference/diagram/shape.md` | Shape semantics, container logic, connectors | Phase 8 |
+| `reference/diagram/generate-diagram.md` | Diagram types and Mermaid.js integration | Phase 8 |
+| `reference/diagram/flow-with-branch.md` | Branch flow with elbow connectors | Phase 8 |
+| `reference/diagram/cross-cutting.md` | Cross-cutting layer design | Phase 8 |
 
 ## 3. Architecture Diagram
 
@@ -138,3 +143,20 @@ presentation.html
 | Hermes Agent | `git clone ... ~/.hermes/skills/mk-slide` | Natural language or `/mk-slide` |
 | OpenClaw | `clawhub install mk-slide` | Plugin manifest triggers |
 | Any AI tool | Paste `SKILL.md` as system prompt | Manual |
+
+## 7. New Features: Diagram Generation
+
+Two new diagram features added in v1.2:
+
+| Feature | Methods | Spec |
+|---------|---------|------|
+| **Architecture Diagram** | HTML Direct / Drawio → PNG | [spec/10-diagram-generation.md](spec/10-diagram-generation.md) |
+| **Flow Diagram** | HTML Direct / Drawio → PNG | [spec/10-diagram-generation.md](spec/10-diagram-generation.md) |
+
+See [spec/10-diagram-generation.md](spec/10-diagram-generation.md) for full details on:
+- Architecture types (layered, tiered, swimlane, business, application, physical)
+- Flow types (linear, branch, CI/CD, swimlane, system)
+- Shape semantics, container logic, connector rules
+- Actor color coding for flow diagrams
+- Cross-cutting layer design
+- Quality control checklist

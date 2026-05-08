@@ -135,6 +135,8 @@ Determine what the user wants:
 - **Mode D: Reference Match** — User provides a screenshot/URL as style reference. Match to closest preset or create custom style. Go to Phase 2.
 - **Mode E: Markdown Conversion** — User provides a `.md` file path or pastes markdown content. Go to Phase 4B.
 - **Mode F: Style Comparison** — User has an **already-generated** presentation and wants to compare it with a different style. This is post-delivery only — never triggered during initial style selection. Triggers: "对比", "换个风格看看", "试试另一个". Go to Phase 7.
+- **Mode G: Architecture Diagram** — Generate an architecture diagram (layered, tiered, business, data, system). Go to Phase 8.
+- **Mode H: Flow Diagram** — Generate a flow diagram (pipeline, swimlane, CI/CD, process). Go to Phase 8.
 
 ### Mode E: Markdown Detection
 
@@ -521,3 +523,126 @@ Introduce naturally **after delivery** (Phase 5), not during style selection:
 | [animation-patterns.md](animation-patterns.md) | Animation snippets | Phase 3 |
 | [SCENARIO_TEMPLATES.md](SCENARIO_TEMPLATES.md) | Scenario structures, narrative arcs, extra slide types | Phase 1 (when user picks a scenario) & Phase 3 |
 | [scripts/extract-pptx.py](scripts/extract-pptx.py) | PPT content extraction | Phase 4A |
+| [tools/generate-drawio.py](tools/generate-drawio.py) | Drawio diagram generation → PNG embedding | Phase 8 |
+| [tools/generate-html-flow.js](tools/generate-html-flow.js) | HTML flow diagram generation | Phase 8 |
+| [tools/generate-html-architecture.js](tools/generate-html-architecture.js) | HTML architecture diagram generation | Phase 8 |
+
+---
+
+## Phase 8: Diagram Generation (Architecture & Flow)
+
+When the user wants an architecture diagram or flow diagram (Modes G & H), first ask which generation method they prefer.
+
+### Step 8.1: Ask Generation Method
+
+Use a single `AskUserQuestion` call:
+
+**Question — Generation Method** (header: "Diagram Method"):
+Options:
+- **HTML Direct** — Generate diagram as pure HTML/CSS inline in the slide. Fully customizable, no external dependencies.
+- **Drawio → PNG** — Generate a .drawio file, convert to PNG at 2x resolution, embed as `<img>` in the slide. Editable later in diagrams.net.
+
+### Step 8.2A: HTML Direct Method
+
+Generate architecture/flow diagrams as pure HTML/CSS within a single slide (or full deck). Uses `position: absolute` elements, flexbox layouts, and SVG arrows.
+
+**Architecture Types Supported:**
+| Type | Description | Layout |
+|------|-------------|--------|
+| Layered (Data Architecture) | Vertical stack with clear boundaries | Horizontal bands, vertical data flow |
+| Tiered (System Logical) | Three-tier "sandwich" layout | Top: Analysis, Middle: Data, Bottom: Control |
+| Swimlane (Business Flow) | Horizontal lanes by actor | Process rows per department/persona |
+| Business Architecture | Block/grid layout | Top-level domains with sub-capabilities |
+| Data Architecture | Cylinders + rectangles + arrows | Data flow between storage and processing |
+| Application Architecture | Grouped rectangles | Application clusters with integration lines |
+| Physical Architecture | Hardware/cloud icons with connections | Network topology map |
+
+**Flow Types Supported:**
+| Type | Description |
+|------|-------------|
+| Linear Pipeline | Sequential steps with arrows |
+| Branch Flow | Decision gates with pass/fail paths and fallback loop |
+| CI/CD Pipeline | Multi-stage with auto test, security check, deploy |
+| Swimlane Flow | Horizontal lanes by actor with handoffs |
+| System Flow | Request flow through modules, queues, logic gates |
+
+**Architecture Shape Semantics (HTML):**
+| Shape | CSS Technique | Meaning |
+|-------|--------------|---------|
+| Rectangle | `border: 1px solid` | Standard component |
+| Cylinder | `border-radius: 50% / 100% 100% 0 0` | Database / Storage |
+| Cloud | SVG path or CSS `border-radius` | External network |
+| Diamond | `clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)` | Decision point |
+| Pill/Rounded | `border-radius: 999px` | Start/End point |
+| Container | Dashed border, light fill | Logical grouping |
+
+**Key Rules:**
+- Single accent color per diagram (semantic colors allowed for pass/fail)
+- Consistent border weight (1pt standard)
+- 20% padding / breathing room inside shapes
+- Edge-based connectors, never through center
+- Flat design — no shadows, no 3D, no bevels
+- Container fill: 10-15% opacity, dashed border for logical groups
+- For flow diagrams: actor color coding (system=blue, human=amber, IT=violet)
+
+**Reference files:**
+- `reference/diagram/shape.md` — Shape semantics, container logic, connector rules
+- `reference/diagram/cross-cutting.md` — Cross-cutting layers for governance/security/monitoring
+- `reference/diagram/generate-diagram.md` — Diagram types, Mermaid.js integration
+- `reference/diagram/flow-with-branch.md` — Branch flow with elbow connectors
+
+### Step 8.2B: Drawio → PNG Method
+
+1. **Generate .drawio file** — Use `tools/generate-drawio.py` with a spec JSON:
+   ```bash
+   python tools/generate-drawio.py <spec.json> --output <diagram_name>
+   ```
+   Produces: `<diagram_name>.drawio` + `<diagram_name>.png` (2x Retina resolution)
+
+2. **Drawio file** is editable in [diagrams.net](https://app.diagrams.net) for post-generation tweaks.
+
+3. **Embed PNG** into the HTML slide:
+   ```html
+   <img src="<diagram_name>.png" alt="Architecture Diagram"
+        style="max-width: 90%; max-height: min(60vh, 500px); object-fit: contain;">
+   ```
+
+4. **Spec JSON format** for drawio generation:
+   ```json
+   {
+     "title": "CI/CD Delivery Pipeline",
+     "type": "flow",
+     "steps": [
+       { "label": "Upload Rules", "actor": "human" },
+       { "label": "Merge to Exp", "actor": "it" },
+       { "label": "Auto Test", "actor": "system" },
+       { "label": "Security Check", "actor": "system" },
+       { "label": "AI Code Review", "actor": "system" },
+       { "label": "Peer Review", "actor": "human" },
+       { "label": "Deploy", "actor": "system" },
+       { "label": "Monitor", "actor": "system" }
+     ],
+     "decisionAt": [2, 3, 4, 5],
+     "fallback": { "label": "Issue Found", "actor": "human" }
+   }
+   ```
+
+   ```json
+   {
+     "title": "System Architecture",
+     "type": "architecture",
+     "tiers": [
+       { "name": "Analysis Layer", "color": "blue", "items": ["UI Dashboard", "Reporting", "API Gateway"] },
+       { "name": "Data Layer", "color": "green", "items": ["Data Lake", "Warehouse", "Cache"] },
+       { "name": "Control Layer", "color": "purple", "items": ["Security", "Governance", "Monitoring"] }
+     ]
+   }
+   ```
+
+### Step 8.3: Style Application
+
+After generating the diagram (either method), apply it to the chosen MK Slide theme:
+- Match the diagram's color palette to the theme's CSS variables
+- For HTML method: inject diagram CSS inline with theme CSS
+- For drawio method: ensure the PNG fits within the theme's slide container
+- Apply viewport-base.css constraints to the containing slide

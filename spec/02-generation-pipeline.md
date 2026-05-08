@@ -12,6 +12,8 @@ Auto-detect user intent from the initial message:
 | **D: Reference Match** | Match style from screenshot | User provides image as style reference |
 | **E: Markdown Conversion** | Convert .md or markdown paste | Path ending in .md, or content with `---` / `##` slide patterns |
 | **F: Style Comparison** | Post-delivery style comparison | "compare styles", "try another style" |
+| **G: Architecture Diagram** | Generate architecture diagram | "architecture", "system design", "data architecture", "layered", "tiered" |
+| **H: Flow Diagram** | Generate flow diagram | "flow", "pipeline", "swimlane", "process", "workflow", "CI/CD" |
 
 ### 1.1 Mode E: Auto-Detection Rules
 
@@ -221,3 +223,77 @@ Post-delivery only. Generate split-screen comparison page:
 - Synced navigation: arrow keys advance both simultaneously via `window.go()`
 - `pointer-events: none` on iframes to prevent independent clicking
 - User picks winner, delete unchosen file
+
+## 11. Phase 8: Diagram Generation (Architecture & Flow)
+
+### 11.1 Method Selection
+
+When Mode G or H is detected, ASK the user which generation method they prefer:
+
+| Method | Description | Output |
+|--------|-------------|--------|
+| **HTML Direct** | Pure HTML/CSS/SVG inline in slide | `.html` (editable in source) |
+| **Drawio → PNG** | Generate .drawio file, convert to 2x PNG, embed as `<img>` | `.drawio` + `.png` + `.html` |
+
+### 11.2 HTML Direct Method
+
+Generate diagram using CSS positioning, flexbox, and inline SVG arrows.
+
+**Architecture types:**
+- Layered (data flow — vertical bands)
+- Tiered (system logical — three-tier hybrid grid)
+- Swimlane (business flow — horizontal actor lanes)
+- Business Architecture (block grid)
+- Application Architecture (clusters with integration lines)
+- Physical Architecture (network topology)
+
+**Flow types:**
+- Linear pipeline
+- Branch flow with decision gates and fallback loops
+- CI/CD pipeline
+- Swimlane flow
+- System flow with error loops
+
+### 11.3 Drawio → PNG Method
+
+Generate diagram via drawio XML, render to PNG, embed in HTML.
+
+**Commands:**
+```bash
+python tools/generate-drawio.py <spec.json> --output <diagram_name>
+```
+
+**Spec JSON examples:**
+
+Flow diagram:
+```json
+{
+  "title": "CI/CD Pipeline",
+  "type": "flow",
+  "steps": [
+    { "label": "Upload", "actor": "human" },
+    { "label": "Auto Test", "actor": "system" }
+  ],
+  "decisionAt": [1],
+  "fallback": { "label": "Issue Found", "actor": "human" }
+}
+```
+
+Architecture diagram:
+```json
+{
+  "title": "System Architecture",
+  "type": "architecture",
+  "tiers": [
+    { "name": "Analysis Layer", "color": "blue", "items": ["UI", "API"] },
+    { "name": "Data Layer", "color": "green", "items": ["Lake", "Warehouse"] }
+  ]
+}
+```
+
+### 11.4 Style Integration
+
+After generating the diagram (either method), apply the chosen MK Slide theme:
+- Map diagram colors to theme CSS variables
+- For HTML: inject inline CSS consistent with theme
+- For drawio/PNG: ensure `<img>` fits within theme slide constraints
