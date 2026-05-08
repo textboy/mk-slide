@@ -75,7 +75,7 @@ If no platforms detected: prints manual install instructions for all three platf
 ### 4.1 Claude Code Triggers
 
 The skill triggers when user says:
-- English: "make a presentation", "build slides", "create a deck", "pitch deck", "PPT", "PowerPoint", "convert pptx", "presentation about", "talk slides", "slide deck", "mk-slide", "next ppt"
+- English: "make a presentation", "build slides", "create a deck", "pitch deck", "PPT", "PowerPoint", "convert pptx", "presentation about", "talk slides", "slide deck", "mk-slide"
 - Chinese trigger keywords
 
 ### 4.2 Slogan-Based Trigger

@@ -2,13 +2,11 @@
   <a href="README.md">English</a> | <strong>中文</strong>
 </p>
 
-# Next PPT
-
-### 你的下个 ppt，何必是 PPT
+# MK Slide
 
 > 一句话描述你想要的，挑个风格，得到一份漂亮的 HTML 演示。不用 PowerPoint，不用打包工具，无任何依赖。
 
-> 仓库 / 命令名为 `mk-slide`，中文称呼 **Next PPT**。
+> 仓库 / 命令名为 `mk-slide`，中文称呼 **MK Slide**。
 
 兼容平台：**Claude Code** · **Hermes Agent** · **OpenClaw**
 
@@ -16,7 +14,7 @@
 
 ## 它做什么
 
-跟你的 AI 编程助手用大白话说一句，Next PPT 就把它变成一份精致、带动画的 HTML 演示 —— 单个文件，浏览器打开就能放。
+跟你的 AI 编程助手用大白话说一句，MK Slide 就把它变成一份精致、带动画的 HTML 演示 —— 单个文件，浏览器打开就能放。
 
 ```
 你："帮我做一个 AI agents 的演讲，10 页左右，科技感强一点"
@@ -146,7 +144,7 @@ open my-presentation.html    # 单个文件，零依赖
 
 ## 设计哲学
 
-Next PPT 不是模板引擎。它是一套有立场的设计系统，教 AI 像设计师一样思考：
+MK Slide 不是模板引擎。它是一套有立场的设计系统，教 AI 像设计师一样思考：
 
 1. **拒绝 AI 屎山** —— 每个风格都是手工调教的字体、间距、动效。AI 跟着精确规格走，不靠"感觉"
 2. **Layout DNA** —— 每个风格都定义了结构模式：slide 机制、标题对齐、导航样式、背景处理、动画路数、组件结构

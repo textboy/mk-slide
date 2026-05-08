@@ -2,7 +2,7 @@
 
 ## 1. Product Overview
 
-**MK Slide (a.k.a. Next PPT)** is an AI-agent skill that generates zero-dependency, animation-rich HTML presentations from natural language. It operates as a skill within Claude Code, Hermes Agent, and OpenClaw.
+**MK Slide (a.k.a. MK Slide)** is an AI-agent skill that generates zero-dependency, animation-rich HTML presentations from natural language. It operates as a skill within Claude Code, Hermes Agent, and OpenClaw.
 
 - **Slogan:** Your next PPT, doesn't have to be PPT.
 - **License:** MIT
