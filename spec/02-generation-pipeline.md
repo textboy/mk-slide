@@ -230,70 +230,68 @@ Post-delivery only. Generate split-screen comparison page:
 
 When Mode G or H is detected, ASK the user which generation method they prefer:
 
-| Method | Description | Output |
-|--------|-------------|--------|
-| **HTML Direct** | Pure HTML/CSS/SVG inline in slide | `.html` (editable in source) |
-| **Drawio → PNG** | Generate .drawio file, convert to 2x PNG, embed as `<img>` | `.drawio` + `.png` + `.html` |
+| Method | Pipeline | Output | Sample Reference |
+|--------|----------|--------|------------------|
+| **Drawio → PNG → PPTX** | drawio XML → PNG (2x) → embed in HTML → convert to PPTX | `.drawio` + `.png` + `.html` + `.pptx` | `diagram/samples/*.drawio.xml` |
+| **Native PowerPoint** | HTML (CSS cards + SVG connectors) → convert to PPTX via native shapes | `.html` + `.pptx` | `diagram/samples/*.html` |
 
-### 11.2 HTML Direct Method
+Sample files are available in `diagram/samples/`:
+- `flow-chart.drawio.xml` / `flow-chart.html` — DevOps CI/CD pipeline flowchart
+- `logical-flow-diagram.drawio.xml` / `logical-flow-diagram.html` — System logical flow
+- `logical-architecture.drawio.xml` / `logical-architecture.html` — Metadata application logical architecture
+- `enterprise-architecture-house.drawio.xml` / `enterprise-architecture-house.html` — Enterprise architecture
+- `physical-architecture-gcp.drawio.xml` / `physical-architecture-gcp.html` — GCP physical architecture
+- `system-architecture-gcp.drawio.xml` / `system-architecture-gcp.html` — GCP system architecture
+- `api-sequence-diagram.drawio.xml` — API sequence diagram
 
-Generate diagram using CSS positioning, flexbox, and inline SVG arrows.
+### 11.2 Drawio → PNG → PPTX Workflow
 
-**Architecture types:**
-- Layered (data flow — vertical bands)
-- Tiered (system logical — three-tier hybrid grid)
-- Swimlane (business flow — horizontal actor lanes)
-- Business Architecture (block grid)
-- Application Architecture (clusters with integration lines)
-- Physical Architecture (network topology)
+1. Reference the `.drawio.xml` samples for mxCell structure, shape styles, and layout patterns
+2. Generate or modify drawio XML → convert to PNG:
+   ```bash
+   python scripts/generate-drawio.py <spec.json> --output <diagram_name>
+   ```
+3. Embed PNG into HTML slide:
+   ```html
+   <img src="<diagram_name>.png" alt="Diagram"
+        style="max-width: 90%; max-height: min(60vh, 500px); object-fit: contain;">
+   ```
+4. Convert to PPTX (Playwright screenshot method, embeds PNG as full-slide image):
+   ```bash
+   python scripts/generate-pptx.py <deck.html> --output <deck.pptx>
+   ```
+5. The `.drawio` file is editable in diagrams.net for post-generation tweaks.
 
-**Flow types:**
-- Linear pipeline
-- Branch flow with decision gates and fallback loops
-- CI/CD pipeline
-- Swimlane flow
-- System flow with error loops
+### 11.3 Native PowerPoint Workflow
 
-### 11.3 Drawio → PNG Method
-
-Generate diagram via drawio XML, render to PNG, embed in HTML.
-
-**Commands:**
-```bash
-python tools/generate-drawio.py <spec.json> --output <diagram_name>
-```
-
-**Spec JSON examples:**
-
-Flow diagram:
-```json
-{
-  "title": "CI/CD Pipeline",
-  "type": "flow",
-  "steps": [
-    { "label": "Upload", "actor": "human" },
-    { "label": "Auto Test", "actor": "system" }
-  ],
-  "decisionAt": [1],
-  "fallback": { "label": "Issue Found", "actor": "human" }
-}
-```
-
-Architecture diagram:
-```json
-{
-  "title": "System Architecture",
-  "type": "architecture",
-  "tiers": [
-    { "name": "Analysis Layer", "color": "blue", "items": ["UI", "API"] },
-    { "name": "Data Layer", "color": "green", "items": ["Lake", "Warehouse"] }
-  ]
-}
-```
+1. Reference the `.html` samples for CSS card positioning, SVG connector patterns, and layout structure
+2. Generate HTML with CSS `position: absolute` cards + inline SVG connectors
+3. Convert to PPTX via HTML screenshot:
+   ```bash
+   python scripts/generate-pptx.py <deck.html> --output <deck.pptx>
+   ```
+   Captures each slide as 1920×1080 screenshot image.
 
 ### 11.4 Style Integration
 
-After generating the diagram (either method), apply the chosen MK Slide theme:
-- Map diagram colors to theme CSS variables
-- For HTML: inject inline CSS consistent with theme
-- For drawio/PNG: ensure `<img>` fits within theme slide constraints
+After generating the diagram:
+- **Drawio method**: Ensure the PNG fits within theme slide container. Match drawio colors to MK Slide theme.
+- **Native PowerPoint (HTML)**: Inject diagram CSS inline with theme CSS variables.
+- Apply viewport-base.css constraints to the containing slide.
+
+## 12. Phase 9: PPTX Conversion
+
+Convert HTML presentations to PowerPoint (.pptx) format via Playwright screenshot.
+
+### 12.1 Usage
+
+```bash
+pip install playwright && playwright install chromium
+python scripts/generate-pptx.py <deck.html> --output <deck.pptx>
+```
+
+### 12.2 How It Works
+
+Opens the HTML in headless Chromium at 1920×1080, screenshots each `.slide` element, and embeds each screenshot as a full-slide image in the PPTX.
+
+Supports any HTML presentation — all MK Slide themes and styles.

@@ -5,22 +5,26 @@
 ### 1. Business Architecture
 **Visuals:** A "block" or "grid" layout. Top-level blocks represent high-level business domains (e.g., Finance, Operations). Sub-blocks underneath show specific capabilities (e.g., Accounts Payable).
 **Look:** It feels like a high-level floor plan of a company's functions, often using color coding to show maturity or strategic importance.
-**Sample** references/diagram/screens/business-architecture*.*
+**DrawIO Sample:** `diagram/samples/enterprise-architecture-house.drawio.xml`
+**HTML Sample:** `diagram/samples/enterprise-architecture-house.html`
 
 ### 2. Data Architecture
 **Visuals:** Cylinders represent databases; rectangles represent systems or processes. Arrows indicate the movement of data.
 **Look:** It looks like a "plumbing" diagram, showing where data is stored, where it is transformed, and who consumes it.
-**Sample** references/diagram/screens/data-architecture*.*
+**DrawIO Sample:** `diagram/samples/logical-architecture.drawio.xml`
+**HTML Sample:** `diagram/samples/logical-architecture.html`
 
 ### 3. Application Architecture
 **Visuals:** Grouped rectangles representing different applications (ERP, CRM, Custom Apps). Lines show integrations between them.
 **Look:** Organized into layers or functional clusters, showing how different software systems coexist and talk to each other.
-**Sample** references/diagram/screens/application-architecture*.*
+**DrawIO Sample:** `diagram/samples/system-architecture-gcp.drawio.xml`
+**HTML Sample:** `diagram/samples/system-architecture-gcp.html`
 
 ### 4. Physical Architecture
 **Visuals:** Icons of physical hardware: racks, servers, cables, routers, and firewalls. In cloud contexts, it uses provider-specific icons (e.g., an AWS EC2 icon).
 **Look:** It looks like a network map, focusing on the actual location (On-prem vs. Cloud) and the physical wiring/networking connecting components.
-**Sample** references/diagram/screens/physical-architecture*.*
+**DrawIO Sample:** `diagram/samples/physical-architecture-gcp.drawio.xml`
+**HTML Sample:** `diagram/samples/physical-architecture-gcp.html`
 
 ### 5. System Logical Architecture
 **Visuals:** A tiered approach (The Layered Architecture look).
@@ -28,24 +32,31 @@
 2) Middle: Business Logic/Services.
 3) Bottom: Data Access/Integration layers.
 **Look:** A stack of horizontal "sandwiches" or tiers, emphasizing the separation of concerns.
+**DrawIO Sample:** `diagram/samples/logical-architecture.drawio.xml`
+**HTML Sample:** `diagram/samples/logical-architecture.html`
 
 ### 6. Business Flow
 **Visuals:** Swimlanes (horizontal or vertical rows). Each lane represents a department or persona (e.g., Customer, Sales, Warehouse).
 **Look:** A chronological flow of "Who does what." It uses standard flowcharts shapes (diamonds for decisions, rectangles for tasks).
-**Sample** references/diagram/screens/business-flow*.*
+**DrawIO Sample:** `diagram/samples/logical-flow-diagram.drawio.xml`
+**HTML Sample:** `diagram/samples/logical-flow-diagram.html`
 
 ### 7. System Flow
 **Visuals:** Similar to a business flow but without swimlanes. It maps how a request moves through various system modules, queues, and logic gates.
 **Look:** Technical and logic-heavy, showing error loops, retry logic, and automated triggers.
-**Sample** references/diagram/screens/system-flow*.*
+**DrawIO Sample:** `diagram/samples/flow-chart.drawio.xml`
+**HTML Sample:** `diagram/samples/flow-chart.html`
 
 ### 8. MLOps/DevOps/CI-CD Flow
 **Visuals:** Often drawn as a horizontal Figure-8 (Infinity symbol) or a linear pipeline.
 **Look:** A series of connected chevrons (Plan → Code → Build → Test → Release → Deploy → Operate → Monitor). In MLOps, this includes extra loops for "Data Prep" and "Model Training."
+**DrawIO Sample:** `diagram/samples/logical-flow-diagram.drawio.xml`
+**HTML Sample:** `diagram/samples/logical-flow-diagram.html`
 
 ### 9. API Sequence Diagram
 **Visuals:** Vertical dotted lines (Lifelines) representing different actors (e.g., Browser, API Gateway, Microservice, DB). Horizontal arrows show messages/calls sent between them.
 **Look:** A "ladder" or "staircase" of arrows moving back and forth, showing the exact order of events in time.
+**DrawIO Sample:** `diagram/samples/api-sequence-diagram.drawio.xml`
 
 ### 10. Data Conceptual Modelling
 **Visuals:** Simple boxes with names (e.g., "Customer," "Order") and lines connecting them.
@@ -53,7 +64,7 @@
 
 ### 11. Data Logical Modelling
 **Visuals:** Detailed boxes with headers. Lists every attribute/field (e.g., cust_id, first_name). Lines have "crow's foot" notation to show relationships (1-to-many, etc.).
-**Look:** Dense and structured. This is th/screense stage where "Foreign Keys" and "Primary Keys" are clearly labeled.
+**Look:** Dense and structured. This is the stage where "Foreign Keys" and "Primary Keys" are clearly labeled.
 
 ---
 

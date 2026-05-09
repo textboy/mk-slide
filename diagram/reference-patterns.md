@@ -2,7 +2,7 @@
 
 ## Overview
 
-This document analyzes the architecture samples in `/Users/mk/.hermes/profiles/mk-ppt/skills/mk-ppt/references/diagram/screens/` to extract design patterns that should be followed.
+This document analyzes the architecture samples in `diagram/samples/` to extract design patterns that should be followed.
 
 ---
 

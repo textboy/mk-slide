@@ -50,10 +50,10 @@ Spec JSON → generate-drawio.py → .drawio file + .png (2x Retina)
                                     <img src="diagram.png">
 ```
 
-**Tool:** `tools/generate-drawio.py`
+**Tool:** `scripts/generate-drawio.py`
 
 ```bash
-python tools/generate-drawio.py <spec.json> --output <diagram_name>
+python scripts/generate-drawio.py <spec.json> --output <diagram_name>
 # Produces: <diagram_name>.drawio + <diagram_name>.png
 ```
 

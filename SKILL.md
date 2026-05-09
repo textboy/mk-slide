@@ -496,6 +496,33 @@ Introduce naturally **after delivery** (Phase 5), not during style selection:
 
 ---
 
+## Phase 9: PPTX Conversion
+
+After delivering the HTML presentation (Phase 5), offer to convert it to PowerPoint (.pptx).
+
+**Ask:** "Want me to convert this to a PowerPoint file?"
+
+Opens the HTML in a headless browser (Playwright), screenshots each slide at 1920×1080, and embeds each as a full-slide image in the PPTX.
+
+```bash
+# Install Playwright (first time)
+pip install playwright && playwright install chromium
+
+# Convert HTML to PPTX
+python scripts/generate-pptx.py test/deck.html --output test/deck.pptx
+```
+
+**Supports:** ANY HTML presentation — works with all MK Slide themes and styles.
+
+### Dependencies
+
+```bash
+pip install playwright        # Required for PPTX conversion
+playwright install chromium   # Browser engine for screenshots
+```
+
+---
+
 ## Style Library
 
 50+ curated styles across 7 categories. See [STYLE_PRESETS.md](STYLE_PRESETS.md) for full specifications. Browse visually: `open style-gallery.html`
@@ -523,41 +550,115 @@ Introduce naturally **after delivery** (Phase 5), not during style selection:
 | [animation-patterns.md](animation-patterns.md) | Animation snippets | Phase 3 |
 | [SCENARIO_TEMPLATES.md](SCENARIO_TEMPLATES.md) | Scenario structures, narrative arcs, extra slide types | Phase 1 (when user picks a scenario) & Phase 3 |
 | [scripts/extract-pptx.py](scripts/extract-pptx.py) | PPT content extraction | Phase 4A |
-| [tools/generate-drawio.py](tools/generate-drawio.py) | Drawio diagram generation → PNG embedding | Phase 8 |
+| [scripts/generate-drawio.py](scripts/generate-drawio.py) | Drawio diagram generation → PNG embedding | Phase 8 |
 | [tools/generate-html-flow.js](tools/generate-html-flow.js) | HTML flow diagram generation | Phase 8 |
 | [tools/generate-html-architecture.js](tools/generate-html-architecture.js) | HTML architecture diagram generation | Phase 8 |
+| [scripts/generate-pptx.py](scripts/generate-pptx.py) | PPTX converter (HTML screenshot via Playwright) | Phase 9 |
+| [diagram/samples/](diagram/samples/) | Drawio XML + HTML sample diagrams | Phase 8 |
 
 ---
 
 ## Phase 8: Diagram Generation (Architecture & Flow)
 
-When the user wants an architecture diagram or flow diagram (Modes G & H), first ask which generation method they prefer.
+When the user wants an architecture diagram, flow diagram, or chart (Modes G & H), first ask which generation method they prefer.
 
 ### Step 8.1: Ask Generation Method
 
 Use a single `AskUserQuestion` call:
 
-**Question — Generation Method** (header: "Diagram Method"):
+**Question — Diagram Method** (header: "Diagram Method"):
 Options:
-- **HTML Direct** — Generate diagram as pure HTML/CSS inline in the slide. Fully customizable, no external dependencies.
-- **Drawio → PNG** — Generate a .drawio file, convert to PNG at 2x resolution, embed as `<img>` in the slide. Editable later in diagrams.net.
+- **Drawio → PNG → PPTX** — Build as drawio XML, convert to PNG at 2x Retina, embed PNG into HTML deck, then convert to PPTX. Result is editable in [diagrams.net](https://app.diagrams.net). Reference samples in `diagram/samples/*.drawio.xml`.
+- **Native PowerPoint** — Generate as HTML with CSS-positioned cards + SVG connectors, then convert to PPTX using native PowerPoint shapes. Direct shape mapping, fully editable in PowerPoint. Reference samples in `diagram/samples/*.html`.
 
-### Step 8.2A: HTML Direct Method
+### Step 8.2A: Drawio → PNG → PPTX Workflow
 
-Generate architecture/flow diagrams as pure HTML/CSS within a single slide (or full deck). Uses `position: absolute` elements, flexbox layouts, and SVG arrows.
+**Pipeline:**
+```
+Reference sample (.drawio.xml) → Modify XML → generate-drawio.py → .drawio + .png (2x)
+                                                                              ↓
+                                                                     Embed PNG in HTML
+                                                                              ↓
+                                                                     generate-pptx.py → .pptx
+```
 
-**Architecture Types Supported:**
+**Reference samples** (in `diagram/samples/`):
+
+| Sample | Type | Files |
+|--------|------|-------|
+| Flow Chart (DevOps CI/CD) | Flow | `flow-chart.drawio.xml` + `flow-chart.html` |
+| Logical Flow Diagram | Flow | `logical-flow-diagram.drawio.xml` + `logical-flow-diagram.html` |
+| API Sequence Diagram | Architecture | `api-sequence-diagram.drawio.xml` |
+| Logical Architecture | Architecture | `logical-architecture.drawio.xml` + `logical-architecture.html` |
+| Enterprise Architecture House | Architecture | `enterprise-architecture-house.drawio.xml` + `enterprise-architecture-house.html` |
+| Physical Architecture (GCP) | Architecture | `physical-architecture-gcp.drawio.xml` + `physical-architecture-gcp.html` |
+| System Architecture (GCP) | Architecture | `system-architecture-gcp.drawio.xml` + `system-architecture-gcp.html` |
+
+**Steps:**
+
+1. **Create or modify drawio XML** — Reference the sample `.drawio.xml` files for the mxCell structure, shape styles, and layout patterns.
+
+2. **Generate PNG** from the drawio XML:
+   ```bash
+   python scripts/generate-drawio.py <spec.json> --output <diagram_name>
+   ```
+   Produces: `<diagram_name>.drawio` + `<diagram_name>.png` (2x Retina)
+
+   For existing `.drawio.xml` files, copy them and render PNG manually via diagrams.net, or use the spec-based generator.
+
+3. **Embed PNG** into the HTML slide:
+   ```html
+   <img src="<diagram_name>.png" alt="Diagram"
+        style="max-width: 90%; max-height: min(60vh, 500px); object-fit: contain;">
+   ```
+
+4. **Convert to PPTX** using the HTML screenshot method (embeds PNG as full-slide image):
+   ```bash
+   pip install playwright && playwright install chromium   # First time
+   python scripts/generate-pptx.py <deck.html> --output <deck.pptx>
+   ```
+
+5. The `.drawio` file is editable in [diagrams.net](https://app.diagrams.net) for post-generation tweaks.
+
+### Step 8.2B: Native PowerPoint Workflow
+
+**Pipeline:**
+```
+Reference sample (.html) → Generate HTML (CSS cards + SVG connectors)
+                                        ↓
+                         generate-pptx.py (Playwright screenshot) → .pptx
+```
+
+**Steps:**
+
+1. **Generate HTML** — Reference the sample `.html` files in `diagram/samples/`:
+   - CSS `position: absolute` cards for each component
+   - Inline SVG for connector lines and arrows
+   - Actor color coding for flow diagrams
+   - Tiered/layered containers for architecture
+
+   Each `.html` sample is a complete working diagram that can be opened in a browser and converted to PPTX.
+
+2. **Convert to PPTX** via HTML screenshot:
+   ```bash
+   python scripts/generate-pptx.py <deck.html> --output <deck.pptx>
+   ```
+   Captures each slide as a 1920×1080 screenshot image and embeds it full-slide.
+
+### Step 8.3: Architecture Types Supported
+
 | Type | Description | Layout |
 |------|-------------|--------|
 | Layered (Data Architecture) | Vertical stack with clear boundaries | Horizontal bands, vertical data flow |
 | Tiered (System Logical) | Three-tier "sandwich" layout | Top: Analysis, Middle: Data, Bottom: Control |
 | Swimlane (Business Flow) | Horizontal lanes by actor | Process rows per department/persona |
 | Business Architecture | Block/grid layout | Top-level domains with sub-capabilities |
-| Data Architecture | Cylinders + rectangles + arrows | Data flow between storage and processing |
 | Application Architecture | Grouped rectangles | Application clusters with integration lines |
 | Physical Architecture | Hardware/cloud icons with connections | Network topology map |
+| API Sequence Diagram | Vertical lifelines with horizontal arrows | Time-ordered message flow |
 
-**Flow Types Supported:**
+### Step 8.4: Flow Types Supported
+
 | Type | Description |
 |------|-------------|
 | Linear Pipeline | Sequential steps with arrows |
@@ -566,83 +667,21 @@ Generate architecture/flow diagrams as pure HTML/CSS within a single slide (or f
 | Swimlane Flow | Horizontal lanes by actor with handoffs |
 | System Flow | Request flow through modules, queues, logic gates |
 
-**Architecture Shape Semantics (HTML):**
-| Shape | CSS Technique | Meaning |
-|-------|--------------|---------|
-| Rectangle | `border: 1px solid` | Standard component |
-| Cylinder | `border-radius: 50% / 100% 100% 0 0` | Database / Storage |
-| Cloud | SVG path or CSS `border-radius` | External network |
-| Diamond | `clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)` | Decision point |
-| Pill/Rounded | `border-radius: 999px` | Start/End point |
-| Container | Dashed border, light fill | Logical grouping |
-
-**Key Rules:**
-- Single accent color per diagram (semantic colors allowed for pass/fail)
-- Consistent border weight (1pt standard)
-- 20% padding / breathing room inside shapes
-- Edge-based connectors, never through center
-- Flat design — no shadows, no 3D, no bevels
-- Container fill: 10-15% opacity, dashed border for logical groups
-- For flow diagrams: actor color coding (system=blue, human=amber, IT=violet)
-
-**Reference files:**
-- `reference/diagram/shape.md` — Shape semantics, container logic, connector rules
-- `reference/diagram/cross-cutting.md` — Cross-cutting layers for governance/security/monitoring
-- `reference/diagram/generate-diagram.md` — Diagram types, Mermaid.js integration
-- `reference/diagram/flow-with-branch.md` — Branch flow with elbow connectors
-
-### Step 8.2B: Drawio → PNG Method
-
-1. **Generate .drawio file** — Use `tools/generate-drawio.py` with a spec JSON:
-   ```bash
-   python tools/generate-drawio.py <spec.json> --output <diagram_name>
-   ```
-   Produces: `<diagram_name>.drawio` + `<diagram_name>.png` (2x Retina resolution)
-
-2. **Drawio file** is editable in [diagrams.net](https://app.diagrams.net) for post-generation tweaks.
-
-3. **Embed PNG** into the HTML slide:
-   ```html
-   <img src="<diagram_name>.png" alt="Architecture Diagram"
-        style="max-width: 90%; max-height: min(60vh, 500px); object-fit: contain;">
-   ```
-
-4. **Spec JSON format** for drawio generation:
-   ```json
-   {
-     "title": "CI/CD Delivery Pipeline",
-     "type": "flow",
-     "steps": [
-       { "label": "Upload Rules", "actor": "human" },
-       { "label": "Merge to Exp", "actor": "it" },
-       { "label": "Auto Test", "actor": "system" },
-       { "label": "Security Check", "actor": "system" },
-       { "label": "AI Code Review", "actor": "system" },
-       { "label": "Peer Review", "actor": "human" },
-       { "label": "Deploy", "actor": "system" },
-       { "label": "Monitor", "actor": "system" }
-     ],
-     "decisionAt": [2, 3, 4, 5],
-     "fallback": { "label": "Issue Found", "actor": "human" }
-   }
-   ```
-
-   ```json
-   {
-     "title": "System Architecture",
-     "type": "architecture",
-     "tiers": [
-       { "name": "Analysis Layer", "color": "blue", "items": ["UI Dashboard", "Reporting", "API Gateway"] },
-       { "name": "Data Layer", "color": "green", "items": ["Data Lake", "Warehouse", "Cache"] },
-       { "name": "Control Layer", "color": "purple", "items": ["Security", "Governance", "Monitoring"] }
-     ]
-   }
-   ```
-
-### Step 8.3: Style Application
+### Step 8.5: Style Application
 
 After generating the diagram (either method), apply it to the chosen MK Slide theme:
-- Match the diagram's color palette to the theme's CSS variables
-- For HTML method: inject diagram CSS inline with theme CSS
-- For drawio method: ensure the PNG fits within the theme's slide container
-- Apply viewport-base.css constraints to the containing slide
+- **Drawio method**: Ensure the PNG fits within the theme's slide container. The drawio colors are independent — consider matching to theme.
+- **Native PowerPoint (HTML)**: Inject diagram CSS inline with theme CSS variables. The diagram inherits the theme's typography and color palette.
+- Apply viewport-base.css constraints to the containing slide.
+
+### Step 8.6: Shape Semantics Reference
+
+| Shape | CSS (HTML Method) | Drawio mxCell style | Meaning |
+|-------|--------------------|-------------------|---------|
+| Rectangle | `border: 1px solid; border-radius: 4px` | `rounded=1;whiteSpace=wrap` | Standard component |
+| Cylinder | `border-radius: 50% / 0 0 100% 100%` | `shape=cylinder` | Database / Storage |
+| Cloud | SVG path | `ellipse` or `shape=cloud` | External network |
+| Diamond | `clip-path: polygon(...)` | `rhombus` | Decision point |
+| Pill | `border-radius: 999px` | `rounded=1` with large radius | Start/End point |
+| Parallelogram | CSS skew/transform | `shape=parallelogram` | Input/Output |
+| Document | `border-radius: 0 0 0 16px` | `shape=note` | Report / File |

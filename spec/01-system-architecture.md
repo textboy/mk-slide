@@ -36,11 +36,14 @@
 | `scripts/extract-pptx.py` | PowerPoint content extraction script |
 | `install.sh` | Auto-detection & install for Claude Code / Hermes / OpenClaw |
 | `openclaw.plugin.json` | OpenClaw plugin manifest |
-| `tools/generate-drawio.py` | Drawio diagram generation → PNG embedding | Phase 8 |
-| `reference/diagram/shape.md` | Shape semantics, container logic, connectors | Phase 8 |
-| `reference/diagram/generate-diagram.md` | Diagram types and Mermaid.js integration | Phase 8 |
-| `reference/diagram/flow-with-branch.md` | Branch flow with elbow connectors | Phase 8 |
-| `reference/diagram/cross-cutting.md` | Cross-cutting layer design | Phase 8 |
+| `scripts/generate-drawio.py` | Drawio diagram generation → PNG embedding | Phase 8 |
+| `diagram/shape.md` | Shape semantics, container logic, connectors | Phase 8 |
+| `diagram/generate-diagram.md` | Diagram types and Mermaid.js integration | Phase 8 |
+| `diagram/flow-with-branch.md` | Branch flow with elbow connectors | Phase 8 |
+| `diagram/cross-cutting.md` | Cross-cutting layer design | Phase 8 |
+| `diagram/samples/{name}.drawio.xml` | Drawio XML sample diagrams | Phase 8 |
+| `diagram/samples/{name}.html` | HTML sample diagrams | Phase 8 |
+| `scripts/generate-pptx.py` | PPTX converter (HTML screenshot via Playwright) | Phase 9 |
 
 ## 3. Architecture Diagram
 
