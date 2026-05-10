@@ -178,6 +178,14 @@ def build_slide_from_elements(slide, elements, bg_color, slide_w, slide_h):
         if w <= 0 or h <= 0:
             continue
 
+        # Clamp shapes to slide boundary — no component may exceed the deck edge
+        if x + w > PPTX_W:
+            w = max(0, PPTX_W - x)
+        if y + h > PPTX_H:
+            h = max(0, PPTX_H - y)
+        if w <= 0 or h <= 0:
+            continue
+
         has_bg = el['bg'] and el['bg'] not in ('transparent', 'rgba(0, 0, 0, 0)') and el['bg'] != ''
         has_border = el['borderWidth'] > 0 and el['borderColor'] not in ('transparent', 'rgba(0, 0, 0, 0)')
         has_text = el['text'] and el['fontSize'] > 0

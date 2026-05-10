@@ -504,6 +504,15 @@ After delivering the HTML presentation (Phase 5), offer to convert it to PowerPo
 
 Opens the HTML in a headless browser (Playwright), extracts the full visual tree from each slide (text nodes with exact font, size, color, style; backgrounds; borders; text-shadow; inline styled spans; outline text), and rebuilds them as native PowerPoint shapes — not screenshots.
 
+### Slide Boundary Rules
+
+The converter enforces these spatial invariants for every element:
+
+1. **Slide boundary detection** — Each presentation slide becomes one PPTX slide. Elements are mapped 1:1 from HTML to PowerPoint.
+2. **Content mapping** — Every visible text element, background shape, and border from the HTML is converted to a native PowerPoint equivalent. Inline styled spans (accent colors, glow, outline) remain as separate elements to preserve visual styling.
+3. **No deck-edge overflow** — All components are clamped to the slide boundary (1920×1080 → 13.333×7.5 inches). Any element extending beyond the slide edge is trimmed. Shapes and text boxes are both bounded.
+4. **Parent-container containment** — Child elements inherit their position from the HTML layout. If a child naturally extends beyond its parent container's bounds (e.g., due to CSS overflow), it is NOT repositioned — parent-child relationship data is not tracked in the current visual tree extraction. For complex nested layouts, manual adjustment in PowerPoint may be needed.
+
 ```bash
 # Install dependencies (first time)
 pip install playwright python-pptx && playwright install chromium
@@ -518,7 +527,8 @@ python scripts/generate-pptx.py test/deck.html --output test/deck.pptx
 
 - Some CSS effects (gradient backgrounds, box-shadow, CSS animations) may not translate exactly to PowerPoint equivalents
 - Google Fonts are mapped to system fonts (Orbitron → Orbitron, Space Mono → Space Mono, Inter → Inter, etc.)
-- Complex layouts with many overlapping elements may need manual adjustment in PowerPoint
+- Parent-child container boundaries are not tracked — deeply nested layouts may need manual adjustment
+- Overlapping inline spans (e.g., accent-colored word within a heading) render as separate text boxes; depending on font metrics, they may not pixel-perfectly align with the base text
 
 ---
 
