@@ -111,9 +111,9 @@ var sw=parseFloat(cs.webkitTextStrokeWidth)||0;var ol=sw>0;
 var hasBg=cs.backgroundColor&&!cs.backgroundColor.match(/rgba\\(0,\\s*0,\\s*0,\\s*0\\)|transparent/);
 var hasB=parseFloat(cs.borderTopWidth)>0&&cs.borderTopStyle!=='none';
 var isTextTag=(tag==='h1'||tag==='h2'||tag==='h3'||tag==='h4'||tag==='p'||tag==='li'||tag==='span'||tag==='b'||tag==='strong'||tag==='em');
-if(tag==='div'&&!hasBg&&!hasB){
+if(tag==='div'&&!hasBg&&(!hasB||parseFloat(cs.borderTopWidth)<=1.5)){
 var dc=n.className&&(typeof n.className==='string'?n.className:n.className.baseVal)||'';
-if(!/(^|\s)(number|label|section-label|hud-info|cursor|close-title|close-sub|quote-bar|feature-row|pillar-card|maturity-row|roadmap-row|floor-item|house-roof|house-floor|col)\s/.test(dc+' '))continue;}
+if(!/(^|\s)(number|label|section-label|hud-info|cursor|close-title|close-sub|quote-bar|feature-row|pillar-card|floor-item|house-roof|house-floor|col)\s/.test(dc+' '))continue;}
 if(isTextTag&&!txt&&!ol)continue;
 // For heading outlines, keep them as separate elements so they render with outline effect
 // Dont skip outline spans inside headings - let them render as separate outlined text
@@ -123,7 +123,7 @@ var sh=cs.textShadow;var glow=sh&&sh!=='none'&&sh.indexOf('0px 0px 0px')===-1;
 els.push({tag:tag,text:txt.slice(0,800),x:r.left,y:r.top,w:r.width,h:r.height,bg:hasBg?cs.backgroundColor:'',borderColor:cs.borderTopColor,borderWidth:parseFloat(cs.borderTopWidth)||0,borderRadius:parseFloat(cs.borderTopLeftRadius)||0,opacity:parseFloat(cs.opacity)||1,isOutline:ol,strokeColor:strokeColor,hasGlow:glow,paddingTop:parseFloat(cs.paddingTop)||0,paddingRight:parseFloat(cs.paddingRight)||0,paddingBottom:parseFloat(cs.paddingBottom)||0,paddingLeft:parseFloat(cs.paddingLeft)||0,fontFamily:cs.fontFamily,fontSize:parseFloat(cs.fontSize)||0,fontWeight:parseInt(cs.fontWeight)||400,fontStyle:cs.fontStyle||'normal',color:cs.color,textAlign:cs.textAlign||'left',textTransform:cs.textTransform||'none'});
 }
 // Keep outline+h1+h2 first, then sort by priority then text length
-var pri={'h1':7,'h2':6,'h3':5,'h4':4,'p':3,'li':3,'div':2,'span':1,'b':1};
+var pri={'h1':7,'h2':6,'h3':5,'h4':4,'p':3,'li':3,'span':2,'div':1,'b':1};
 var byPos={};
 for(var i=0;i<els.length;i++){var e=els[i];if(!e.text&&!e.bg)continue;
 var k=Math.round(e.x/8)+','+Math.round(e.y/8);var p=byPos[k];var pc=pri[e.tag]||0;var pp=p?(pri[p.tag]||0):-1;
@@ -132,19 +132,19 @@ var items=Object.values(byPos);
 items.sort(function(a,b){return b.text.length-a.text.length;});
 var keep=[];
 for(var i=0;i<items.length;i++){var a=items[i];
-// Outline elements are always kept (they need special rendering)
-if(a.isOutline){keep.push(a);continue;}
+// Outline and glow elements are always kept (special visual styling would be lost)
+if(a.isOutline||a.hasGlow){keep.push(a);continue;}
 var dup=false;
 for(var j=0;j<keep.length;j++){var b=keep[j];
-if(Math.abs(a.x-b.x)<25&&Math.abs(a.y-b.y)<15){
-if(b.isOutline)continue; // outline elements are different renderings
+if(Math.abs(a.x-b.x)<5&&Math.abs(a.y-b.y)<5){
+if(b.isOutline||b.hasGlow)continue; // outline/glow are different renderings
 if(b.text.indexOf(a.text)>=0&&a.text.length<b.text.length){dup=true;break;}
 if(a.text.indexOf(b.text)>=0&&b.text.length<a.text.length){dup=true;break;}}}
 if(!dup)keep.push(a);}
 keep.sort(function(a,b){return Math.abs(a.y-b.y)<5?a.x-b.x:a.y-b.y;});
 // Remove parent elements whose text is entirely covered by styled child elements
 for(var i=keep.length-1;i>=0;i--){var a=keep[i];
-if(a.isOutline||a.text.length===0)continue;
+if(a.isOutline||a.hasGlow||a.text.length===0)continue;
 // Collect children in vertical bounds, sorted by text length descending
 // (longest first prevents short text like "%" from breaking longer matches)
 var children=[];var remaining=a.text;
@@ -155,7 +155,7 @@ children.push(b.text);}}
 children.sort(function(x,y){return y.length-x.length;});
 for(var ci=0;ci<children.length;ci++){remaining=remaining.replace(children[ci],'');}
 remaining=remaining.replace(/\s+/g,'').trim();
-if(remaining.length===0){keep.splice(i,1);}}
+if(remaining.length===0||(a.bg&&remaining.length<30)){a.text='';a.fontSize=0;}}
 return{elements:keep,bg:bg};})()
 """
 
