@@ -502,11 +502,11 @@ After delivering the HTML presentation (Phase 5), offer to convert it to PowerPo
 
 **Ask:** "Want me to convert this to a PowerPoint file?"
 
-Opens the HTML in a headless browser (Playwright), screenshots each slide at 1920×1080, and embeds each as a full-slide image in the PPTX.
+Opens the HTML in a headless browser (Playwright), extracts the full visual tree from each slide (text nodes with exact font, size, color, style; backgrounds; borders; text-shadow; inline styled spans; outline text), and rebuilds them as native PowerPoint shapes — not screenshots.
 
 ```bash
-# Install Playwright (first time)
-pip install playwright && playwright install chromium
+# Install dependencies (first time)
+pip install playwright python-pptx && playwright install chromium
 
 # Convert HTML to PPTX
 python scripts/generate-pptx.py test/deck.html --output test/deck.pptx
@@ -514,12 +514,11 @@ python scripts/generate-pptx.py test/deck.html --output test/deck.pptx
 
 **Supports:** ANY HTML presentation — works with all MK Slide themes and styles.
 
-### Dependencies
+### Limitations
 
-```bash
-pip install playwright        # Required for PPTX conversion
-playwright install chromium   # Browser engine for screenshots
-```
+- Some CSS effects (gradient backgrounds, box-shadow, CSS animations) may not translate exactly to PowerPoint equivalents
+- Google Fonts are mapped to system fonts (Orbitron → Orbitron, Space Mono → Space Mono, Inter → Inter, etc.)
+- Complex layouts with many overlapping elements may need manual adjustment in PowerPoint
 
 ---
 
@@ -551,9 +550,7 @@ playwright install chromium   # Browser engine for screenshots
 | [SCENARIO_TEMPLATES.md](SCENARIO_TEMPLATES.md) | Scenario structures, narrative arcs, extra slide types | Phase 1 (when user picks a scenario) & Phase 3 |
 | [scripts/extract-pptx.py](scripts/extract-pptx.py) | PPT content extraction | Phase 4A |
 | [scripts/generate-drawio.py](scripts/generate-drawio.py) | Drawio diagram generation → PNG embedding | Phase 8 |
-| [tools/generate-html-flow.js](tools/generate-html-flow.js) | HTML flow diagram generation | Phase 8 |
-| [tools/generate-html-architecture.js](tools/generate-html-architecture.js) | HTML architecture diagram generation | Phase 8 |
-| [scripts/generate-pptx.py](scripts/generate-pptx.py) | PPTX converter (HTML screenshot via Playwright) | Phase 9 |
+| [scripts/generate-pptx.py](scripts/generate-pptx.py) | PPTX converter (visual tree extraction → native PowerPoint shapes) | Phase 9 |
 | [diagram/samples/](diagram/samples/) | Drawio XML + HTML sample diagrams | Phase 8 |
 
 ---

@@ -15,7 +15,7 @@ Works on **Claude Code** · **Hermes Agent** · **OpenClaw**
 You talk to your AI assistant in natural language. MK Slide turns your words into a polished, animated HTML presentation — a single file you can open in any browser.
 
 ```
-You: "帮我做一个 AI agents 的演讲，10 页左右，科技感强一点"
+You: "Make me a 10-slide presentation about AI agents, with a strong tech vibe"
 
 → AI asks you to pick a style (50+ options with live preview)
 → Generates a complete HTML presentation
@@ -35,7 +35,7 @@ git clone https://github.com/textboy/mk-slide ~/.claude/skills/mk-slide
 
 # 2. Use — just talk naturally
 # "Make me a presentation about..."
-# "帮我做个关于 XX 的 slide"
+# "Make me a slide about XX" (in Chinese)
 # or invoke directly:
 /mk-slide
 
@@ -68,7 +68,7 @@ No runtime, no API keys, no vendor lock-in. Just markdown instructions + CSS/HTM
 | **Bold** | 7 | Electric Studio, Creative Voltage, Split Pastel, Pop Art, Bold Typography, Neon Brutalism, Memphis Pop | Startups, creative pitches |
 | **Retro** | 5 | Grainy Retro, Art Deco Gatsby, Risograph Overprint, Vintage Poster, Retro Arcade | Nostalgic, stylized |
 | **Artistic** | 7 | Surrealism Gallery, Scrapbook Portfolio, Blue Collage, Pink Handwritten, Art Nouveau Botanical, Soft Dreamy, Terracotta Earth | Art, design, portfolio |
-| **Cultural** | 8 | 东方墨韵, 和風, Gradient Dreams, Blueprint, Bauhaus Primary, Swiss Grid, Aurora Mesh, Chinese Ink Wash | Cultural events, themed talks |
+| **Cultural** | 8 | Ink Wash, Wafu, Gradient Dreams, Blueprint, Bauhaus Primary, Swiss Grid, Aurora Mesh, Chinese Ink Wash | Cultural events, themed talks |
 
 Each style is a complete design system: curated typography, color palette, layout patterns, signature animations, and responsive breakpoints.
 

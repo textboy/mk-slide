@@ -27,5 +27,6 @@
     "animation-patterns.md",
     "scripts/",
     "openclaw.plugin.json"
-  ]
+  ],
+  "dependencies": {}
 }

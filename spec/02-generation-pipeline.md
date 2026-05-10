@@ -266,11 +266,11 @@ Sample files are available in `diagram/samples/`:
 
 1. Reference the `.html` samples for CSS card positioning, SVG connector patterns, and layout structure
 2. Generate HTML with CSS `position: absolute` cards + inline SVG connectors
-3. Convert to PPTX via HTML screenshot:
+3. Convert to PPTX via visual tree extraction (native PowerPoint shapes):
    ```bash
    python scripts/generate-pptx.py <deck.html> --output <deck.pptx>
    ```
-   Captures each slide as 1920×1080 screenshot image.
+   Extracts each slide's visual tree and builds editable PowerPoint shapes.
 
 ### 11.4 Style Integration
 
@@ -281,17 +281,24 @@ After generating the diagram:
 
 ## 12. Phase 9: PPTX Conversion
 
-Convert HTML presentations to PowerPoint (.pptx) format via Playwright screenshot.
+Convert HTML presentations to PowerPoint (.pptx) format via Playwright visual tree extraction.
 
 ### 12.1 Usage
 
 ```bash
-pip install playwright && playwright install chromium
+pip install playwright python-pptx && playwright install chromium
 python scripts/generate-pptx.py <deck.html> --output <deck.pptx>
 ```
 
 ### 12.2 How It Works
 
-Opens the HTML in headless Chromium at 1920×1080, screenshots each `.slide` element, and embeds each screenshot as a full-slide image in the PPTX.
+Opens the HTML in headless Chromium at 1920×1080, extracts the full visual tree from each slide (text nodes with computed styles, backgrounds, borders, text-shadow, inline spans, outline text), and rebuilds them as native PowerPoint shapes — text boxes, rectangles, rounded rectangles, with exact colors, fonts, and effects. Text is rendered as editable PowerPoint text, not screenshots.
 
 Supports any HTML presentation — all MK Slide themes and styles.
+
+### 12.3 Limitations
+
+- Gradient backgrounds are not yet supported (rendered as solid fills)
+- CSS box-shadow has no PowerPoint equivalent
+- Google Fonts mapped to nearest system font equivalent
+- Complex overlapping elements may need manual adjustment

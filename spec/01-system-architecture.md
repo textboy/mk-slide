@@ -43,7 +43,7 @@
 | `diagram/cross-cutting.md` | Cross-cutting layer design | Phase 8 |
 | `diagram/samples/{name}.drawio.xml` | Drawio XML sample diagrams | Phase 8 |
 | `diagram/samples/{name}.html` | HTML sample diagrams | Phase 8 |
-| `scripts/generate-pptx.py` | PPTX converter (HTML screenshot via Playwright) | Phase 9 |
+| `scripts/generate-pptx.py` | PPTX converter (visual tree extraction → native PowerPoint shapes) | Phase 9 |
 
 ## 3. Architecture Diagram
 

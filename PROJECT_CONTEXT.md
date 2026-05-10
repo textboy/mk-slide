@@ -1,12 +1,10 @@
 ---
 project: mk-slide
-updated: 2026-04-06
-status: paused
+updated: 2026-05-10
+status: active
 ---
 
 # MK Slide — Project Context
-
-> "你的下个 ppt，何必是 PPT"
 
 This file is for any AI/LLM working on this project. Read this first for full context.
 
@@ -15,7 +13,7 @@ This file is for any AI/LLM working on this project. Read this first for full co
 MK Slide is a Claude Code Skill that generates zero-dependency, animation-rich HTML presentations from natural language. 50+ curated visual styles, bilingual (EN/中文), supports PPT conversion, Markdown conversion, and one-click Vercel deploy.
 
 - **GitHub**: https://github.com/textboy/mk-slide
-- **Gallery**: https://next-slide-jet.vercel.app/gallery.html
+- **Gallery**: https://mk-slide.vercel.app/gallery.html (or open `gallery.html` locally)
 - **Install**: `git clone https://github.com/textboy/mk-slide ~/.claude/skills/mk-slide`
 
 ## File Map
@@ -33,6 +31,10 @@ MK Slide is a Claude Code Skill that generates zero-dependency, animation-rich H
 | `style-gallery.html` | Local lightweight gallery |
 | `landing/` | Product landing page |
 | `scripts/extract-pptx.py` | PPT content extraction |
+| `scripts/generate-pptx.py` | HTML → PPTX conversion (visual tree extraction, native shapes) |
+| `scripts/generate-drawio.py` | Drawio diagram → PNG generation |
+| `diagram/` | Diagram generation specs, samples (drawio XML + HTML) |
+| `spec/` | 10 specification documents (architecture → diagram generation) |
 
 ## Key Design Decisions
 
