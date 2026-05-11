@@ -190,7 +190,7 @@ Content mapping:
 
 ## 7. Phase 5: Delivery
 
-1. Open file in browser: `open [filename].html`
+1. Open file in browser: `open ./output/[filename].html`
 2. Include "Made with Present HTML" watermark on last slide (opt-out)
 3. Summarize to user: file location, style, slide count, navigation, customization
 

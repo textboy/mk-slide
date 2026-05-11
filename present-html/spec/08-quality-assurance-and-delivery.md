@@ -40,7 +40,7 @@ After generating HTML, before delivery, perform ALL checks:
 ### 3.1 Browser Launch
 
 ```bash
-open [filename].html
+open ./output/[filename].html
 ```
 
 ### 3.2 Watermark (Default: On)

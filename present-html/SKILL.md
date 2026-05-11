@@ -275,6 +275,7 @@ Generate the full presentation using content from Phase 1 and style from Phase 2
 **Key requirements:**
 
 - **NO EMOJI** — Never use emoji characters (including HTML entities like `&#x1F9E0;`) in slide content. Use styled text, numbers, or CSS-designed icons instead. Emoji look unprofessional and break across platforms.
+- **Default output path**: `./output/{name}.html` — save the generated file under the `output/` directory (relative to the working directory). Create the directory if it doesn't exist.
 - Single self-contained HTML file, all CSS/JS inline
 - Include the FULL contents of viewport-base.css in the `<style>` block
 - Use fonts from Google Fonts or Fontshare — never system fonts
@@ -385,7 +386,7 @@ If the user specified a style (e.g. "use Swiss Modern" or "dark theme"), skip to
 
 ## Phase 5: Delivery
 
-1. **Open** — Use `open [filename].html` to launch in browser
+1. **Open** — Use `open ./output/[filename].html` to launch in browser
 3. **"Made with Present HTML" watermark** — The last slide should include a small, subtle watermark line at the bottom:
    - Text: "Made with Present HTML"
    - Style: `color: var(--text-muted); font-size: var(--small-size);`
@@ -434,14 +435,14 @@ After delivering a presentation (Phase 5), the user may want to see the **same c
 
 1. **User already has Presentation A** — The one just generated in Phase 3-5.
 2. **Ask which style to compare** — "想跟哪个风格对比？" with 2-3 suggestions based on the original mood mapping. Only pick ONE alternative style.
-3. **Generate Presentation B** — Re-generate the **exact same content** (same slides, same text, same structure) in the alternative style. Save as `{name}-{style-b}.html`.
-4. **Generate comparison page** — A single HTML file (`{name}-compare.html`) with:
+3. **Generate Presentation B** — Re-generate the **exact same content** (same slides, same text, same structure) in the alternative style. Save as `./output/{name}-{style-b}.html`.
+4. **Generate comparison page** — A single HTML file (`./output/{name}-compare.html`) with:
    - **Left half**: Presentation A (full slide, via iframe)
    - **Right half**: Presentation B (full slide, via iframe)
    - Both iframes are **fully interactive** — user can navigate slides independently
    - Header bar shows style names + "选这个" buttons
    - Synced navigation: arrow keys advance BOTH presentations simultaneously
-5. **Open the comparison page** — `open {name}-compare.html`
+5. **Open the comparison page** — `open ./output/{name}-compare.html`
 6. **User picks** — Delete the unchosen file, rename the chosen one.
 
 ### Comparison Page Structure

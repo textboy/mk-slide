@@ -57,7 +57,7 @@ git clone https://github.com/textboy/mk-present && cd present-html && bash insta
 /present-html
 
 # 3. 演示
-open my-presentation.html    # 单个文件，零依赖
+open ./output/my-presentation.html    # 单个文件，零依赖
 ```
 
 ### 三平台对比

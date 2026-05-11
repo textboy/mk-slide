@@ -15,6 +15,7 @@ This skill is preset-driven.
 ## First steps
 
 1. Read the incoming HTML and identify the slide family.
+2. Place the output PPTX in `./output/<name>.pptx` (create the directory if it doesn't exist).
 2. If you are on a new machine, a fresh agent, or dependency state is unclear, read `references/setup.md` first.
 3. Run `npm run check-env` before first use on a new environment.
 4. If dependencies are missing, run `npm ci` or `npm install` in the skill directory.
@@ -62,7 +63,8 @@ npm run check-env
 ### Convert HTML to PPTX
 
 ```bash
-node scripts/html_to_pptx.js <input.html> <output.pptx> [--preset=v9-architecture|ai-runtime-page] [--dump-model <file.json>]
+# Output is saved to ./output/<name>.pptx by default
+node scripts/html_to_pptx.js <input.html> ./output/<name>.pptx [--preset=v9-architecture|ai-runtime-page] [--dump-model <file.json>]
 ```
 
 ### Run preflight QA

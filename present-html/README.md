@@ -42,7 +42,7 @@ git clone https://github.com/textboy/mk-present ~/.claude/skills/present-html
 /present-html
 
 # 3. Present
-open my-presentation.html    # One file. Zero dependencies.
+open ./output/my-presentation.html    # One file. Zero dependencies.
 ```
 
 ### Also works with

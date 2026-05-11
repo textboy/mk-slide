@@ -207,6 +207,10 @@ Before delivery, check:
 
 If any capability limitations affected the result, say so plainly.
 
+### 11. Save output to file
+
+Save the final approved deck plan (or whichever output layer was delivered) to `./output/<name>.md`. Create the `./output/` directory if it doesn't exist. This markdown file serves as the input for the next skill in the pipeline (e.g. `present-html`).
+
 ## Coordination Rules
 
 ### Research rule
