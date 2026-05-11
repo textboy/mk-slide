@@ -52,7 +52,7 @@ open [filename].html
           transform: translateX(-50%); font-size: var(--small-size);
           color: var(--text-muted); opacity: 0.5;">
     Made with <a href="https://github.com/textboy/mk-slide" style="color: inherit;
-               text-decoration: underline;" target="_blank">MK Slide</a>
+               text-decoration: underline;" target="_blank">Present HTML</a>
 </p>
 ```
 

@@ -4,8 +4,8 @@
 
 | Platform | Type | Trigger |
 |----------|------|---------|
-| Claude Code | AI CLI (terminal, desktop, VS Code, JetBrains) | `/mk-slide` or natural language |
-| Hermes Agent | AI CLI | `/mk-slide` or natural language |
+| Claude Code | AI CLI (terminal, desktop, VS Code, JetBrains) | `/present-html` or natural language |
+| Hermes Agent | AI CLI | `/present-html` or natural language |
 | OpenClaw | Plugin system | Plugin manifest triggers |
 | Any AI tool | Manual setup | Paste `SKILL.md` as system prompt |
 
@@ -14,7 +14,7 @@
 ### 2.1 Manual Git Clone (All Platforms)
 
 ```bash
-git clone https://github.com/textboy/mk-slide ~/.claude/skills/mk-slide
+git clone https://github.com/textboy/mk-slide ~/.claude/skills/present-html
 ```
 
 ### 2.2 Automated Install Script
@@ -34,24 +34,24 @@ bash install.sh
 
 **Claude Code:**
 ```bash
-git clone https://github.com/textboy/mk-slide ~/.claude/skills/mk-slide
+git clone https://github.com/textboy/mk-slide ~/.claude/skills/present-html
 ```
 
 **Hermes Agent:**
 ```bash
-git clone https://github.com/textboy/mk-slide ~/.hermes/skills/mk-slide
+git clone https://github.com/textboy/mk-slide ~/.hermes/skills/present-html
 ```
 
 **OpenClaw:**
 ```bash
-clawhub install mk-slide
+clawhub install present-html
 ```
 
 ## 3. Install Script Behavior
 
 ### 3.1 Claude Code Integration
 
-- Creates symlink from `~/.claude/skills/mk-slide` to clone location
+- Creates symlink from `~/.claude/skills/present-html` to clone location
 - Removes existing symlink or directory before creating
 - Symlink ensures updates to repo propagate automatically
 
@@ -75,7 +75,7 @@ If no platforms detected: prints manual install instructions for all three platf
 ### 4.1 Claude Code Triggers
 
 The skill triggers when user says:
-- English: "make a presentation", "build slides", "create a deck", "pitch deck", "PPT", "PowerPoint", "convert pptx", "presentation about", "talk slides", "slide deck", "mk-slide"
+- English: "make a presentation", "build slides", "create a deck", "pitch deck", "PPT", "PowerPoint", "convert pptx", "presentation about", "talk slides", "slide deck", "present-html"
 - Chinese trigger keywords
 
 ### 4.2 Slogan-Based Trigger
@@ -99,7 +99,7 @@ openclaw.plugin.json
 
 ```json
 {
-    "name": "mk-slide",
+    "name": "present-html",
     "version": "1.0.0",
     "description": "AI-powered HTML presentations. 50+ styles, zero dependencies, bilingual.",
     "author": "Callum",

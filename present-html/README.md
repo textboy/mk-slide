@@ -2,7 +2,7 @@
   <strong>English</strong> | <a href="README_CN.md">中文</a>
 </p>
 
-# MK Slide
+# Present HTML
 
 Works on **Claude Code** · **Hermes Agent** · **OpenClaw**
 
@@ -14,7 +14,7 @@ Works on **Claude Code** · **Hermes Agent** · **OpenClaw**
 
 ## What It Does
 
-You talk to your AI assistant in natural language. MK Slide turns your words into a polished, animated HTML presentation — a single file you can open in any browser.
+You talk to your AI assistant in natural language. Present HTML turns your words into a polished, animated HTML presentation — a single file you can open in any browser.
 
 ```
 You: "Make me a 10-slide presentation about AI agents, with a strong tech vibe"
@@ -29,33 +29,17 @@ You: "Make me a 10-slide presentation about AI agents, with a strong tech vibe"
 
 ---
 
-## 3 Skills in This Repository
-
-This repository contains three related skills, each handling a different stage of the presentation workflow:
-
-| Skill | Directory | Forked From | Purpose |
-|-------|-----------|-------------|---------|
-| **present-workflow** | `present-workflow/` | [ppt-agent-workflow-san/ppt-workflow](https://github.com/mucsbr/ppt-agent-workflow-san/tree/main/ppt-workflow) | Complete the storyline / workflow of the deck |
-| **present-html** | `present-html/` | [next-slide](https://github.com/codesstar/next-slide) | Generate HTML presentations with architecture & flow diagram support |
-| **present-ppt** | `present-ppt/` | [ppt-agent-workflow-san/html-slide-to-pptx](https://github.com/mucsbr/ppt-agent-workflow-san/tree/main/html-slide-to-pptx) | Convert HTML to editable PowerPoint (.pptx) |
-
-- **present-workflow** — Prepares the presentation storyline as the first stage: clarify brief, research, outline, plan, review.
-- **present-html** — Generates zero-dependency, animation-rich HTML presentations from natural language. 50+ curated styles, bilingual support. Also supports architecture and flow diagram generation (enterprise house-architecture, logical/system/physical architecture, flow charts, API sequence diagrams) via Drawio → PNG → embed or direct HTML.
-- **present-ppt** — Converts structured single-slide or small deck HTML files into editable PPTX slides with native text boxes, shapes, chips, arrows, and panels. Preset-driven, not a generic browser renderer.
-
----
-
 ## Quick Start
 
 ```bash
 # 1. Install as Claude Code skill
-git clone https://github.com/textboy/mk-slide ~/.claude/skills/mk-slide
+git clone https://github.com/textboy/mk-slide ~/.claude/skills/present-html
 
 # 2. Use — just talk naturally
 # "Make me a presentation about..."
 # "Make me a slide about XX" (in Chinese)
 # or invoke directly:
-/mk-slide
+/present-html
 
 # 3. Present
 open my-presentation.html    # One file. Zero dependencies.
@@ -65,9 +49,9 @@ open my-presentation.html    # One file. Zero dependencies.
 
 | Platform | Install |
 |----------|---------|
-| **Claude Code** | `git clone https://github.com/textboy/mk-slide ~/.claude/skills/mk-slide` |
-| **Hermes Agent** | `git clone https://github.com/textboy/mk-slide ~/.hermes/skills/mk-slide` |
-| **OpenClaw** | `clawhub install mk-slide` |
+| **Claude Code** | `git clone https://github.com/textboy/mk-slide ~/.claude/skills/present-html` |
+| **Hermes Agent** | `git clone https://github.com/textboy/mk-slide ~/.hermes/skills/present-html` |
+| **OpenClaw** | `clawhub install present-html` |
 | **Any AI tool** | Paste `SKILL.md` as system prompt + reference the support files |
 
 > Or run `bash install.sh` from a clone — it auto-detects all three and symlinks for you.
@@ -150,7 +134,7 @@ Each style is a complete design system: curated typography, color palette, layou
 
 ## Design Philosophy
 
-MK Slide isn't a template engine. It's an opinionated design system that teaches AI to think like a designer:
+Present HTML isn't a template engine. It's an opinionated design system that teaches AI to think like a designer:
 
 1. **No AI Slop** — Every style is hand-crafted with intentional typography, spacing, and motion. The AI follows exact specifications, not vibes.
 2. **Layout DNA** — Each style defines its structural patterns: slide mechanism, title alignment, navigation style, background treatment, animation approach, and component structure.
@@ -188,7 +172,7 @@ Every presentation uses CSS custom properties. Override in `:root`:
 ## File Structure
 
 ```
-mk-slide/
+present-html/
 ├── SKILL.md               # AI instructions (the brain)
 ├── STYLE_PRESETS.md        # 50+ style definitions with Layout DNA
 ├── style-gallery.html      # Local style browser (lightweight)

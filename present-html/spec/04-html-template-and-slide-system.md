@@ -194,7 +194,7 @@ img { max-width: 100%; max-height: min(50vh, 400px); object-fit: contain; }
 ## 7. Watermark
 
 Default on every presentation (last slide):
-- "Made with MK Slide"
+- "Made with Present HTML"
 - `color: var(--text-muted); font-size: var(--small-size);`
 - Link to `https://github.com/textboy/mk-slide`
 - Opt-out: remove if user explicitly requests "no watermark"

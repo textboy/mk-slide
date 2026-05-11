@@ -1,6 +1,6 @@
 {
-  "name": "mk-slide",
-  "displayName": "MK Slide 🦞",
+  "name": "present-html",
+  "displayName": "Present HTML 🦞",
   "description": "AI-powered HTML presentations. 50+ styles, zero dependencies, bilingual. 你的下个 ppt，何必是 PPT",
   "version": "0.1.0",
   "kind": "skill",
@@ -18,7 +18,7 @@
     "scripts/extract-pptx.py"
   ],
   "triggers": [
-    "presentation", "slides", "slide deck", "PPT", "演示", "做个slide", "mk-slide",
+    "presentation", "slides", "slide deck", "PPT", "演示", "做个slide", "present-html",
     "pptx", "convert ppt", "markdown to slides"
   ],
   "tags": ["presentation", "design", "html", "bilingual"]

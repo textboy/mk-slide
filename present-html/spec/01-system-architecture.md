@@ -2,7 +2,7 @@
 
 ## 1. Product Overview
 
-**MK Slide (a.k.a. MK Slide)** is an AI-agent skill that generates zero-dependency, animation-rich HTML presentations from natural language. It operates as a skill within Claude Code, Hermes Agent, and OpenClaw.
+**Present HTML (a.k.a. Present HTML)** is an AI-agent skill that generates zero-dependency, animation-rich HTML presentations from natural language. It operates as a skill within Claude Code, Hermes Agent, and OpenClaw.
 
 - **Slogan:** Your next PPT, doesn't have to be PPT.
 - **License:** MIT
@@ -142,9 +142,9 @@ presentation.html
 
 | Platform | Installation | Trigger |
 |----------|-------------|---------|
-| Claude Code | `git clone ... ~/.claude/skills/mk-slide` | Natural language or `/mk-slide` |
-| Hermes Agent | `git clone ... ~/.hermes/skills/mk-slide` | Natural language or `/mk-slide` |
-| OpenClaw | `clawhub install mk-slide` | Plugin manifest triggers |
+| Claude Code | `git clone ... ~/.claude/skills/present-html` | Natural language or `/present-html` |
+| Hermes Agent | `git clone ... ~/.hermes/skills/present-html` | Natural language or `/present-html` |
+| OpenClaw | `clawhub install present-html` | Plugin manifest triggers |
 | Any AI tool | Paste `SKILL.md` as system prompt | Manual |
 
 ## 7. New Features: Diagram Generation

@@ -200,7 +200,7 @@ Content mapping:
 ## 8. Phase 5: Delivery
 
 1. Open file in browser: `open [filename].html`
-2. Include "Made with MK Slide" watermark on last slide (opt-out)
+2. Include "Made with Present HTML" watermark on last slide (opt-out)
 3. Summarize to user: file location, style, slide count, navigation, customization
 
 ## 9. Phase 6: Share & Export (Optional)
@@ -275,7 +275,7 @@ Sample files are available in `diagram/samples/`:
 ### 11.4 Style Integration
 
 After generating the diagram:
-- **Drawio method**: Ensure the PNG fits within theme slide container. Match drawio colors to MK Slide theme.
+- **Drawio method**: Ensure the PNG fits within theme slide container. Match drawio colors to Present HTML theme.
 - **Native PowerPoint (HTML)**: Inject diagram CSS inline with theme CSS variables.
 - Apply viewport-base.css constraints to the containing slide.
 
@@ -294,7 +294,7 @@ python scripts/generate-pptx.py <deck.html> --output <deck.pptx>
 
 Opens the HTML in headless Chromium at 1920×1080, extracts the full visual tree from each slide (text nodes with computed styles, backgrounds, borders, text-shadow, inline spans, outline text), and rebuilds them as native PowerPoint shapes — text boxes, rectangles, rounded rectangles, with exact colors, fonts, and effects. Text is rendered as editable PowerPoint text, not screenshots.
 
-Supports any HTML presentation — all MK Slide themes and styles.
+Supports any HTML presentation — all Present HTML themes and styles.
 
 ### 12.3 Slide Boundary Rules
 

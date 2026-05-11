@@ -1,20 +1,20 @@
 ---
-project: mk-slide
+project: present-html
 updated: 2026-05-10
 status: active
 ---
 
-# MK Slide — Project Context
+# Present HTML — Project Context
 
 This file is for any AI/LLM working on this project. Read this first for full context.
 
 ## What This Is
 
-MK Slide is a Claude Code Skill that generates zero-dependency, animation-rich HTML presentations from natural language. 50+ curated visual styles, bilingual (EN/中文), supports PPT conversion, Markdown conversion, and one-click Vercel deploy.
+Present HTML is a Claude Code Skill that generates zero-dependency, animation-rich HTML presentations from natural language. 50+ curated visual styles, bilingual (EN/中文), supports PPT conversion, Markdown conversion, and one-click Vercel deploy.
 
 - **GitHub**: https://github.com/textboy/mk-slide
-- **Gallery**: https://mk-slide.vercel.app/gallery.html (or open `gallery.html` locally)
-- **Install**: `git clone https://github.com/textboy/mk-slide ~/.claude/skills/mk-slide`
+- **Gallery**: https://present-html.vercel.app/gallery.html (or open `gallery.html` locally)
+- **Install**: `git clone https://github.com/textboy/mk-slide ~/.claude/skills/present-html`
 
 ## File Map
 

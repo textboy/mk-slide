@@ -2,7 +2,7 @@
 
 ## 1. Overview
 
-Two new diagram features applied across all MK Slide themes and styles:
+Two new diagram features applied across all Present HTML themes and styles:
 1. **Architecture Diagram** — Layered, tiered, business, data, application, physical architectures
 2. **Flow Diagram** — Linear pipeline, branch flow, CI/CD, swimlane, system flow
 
@@ -19,7 +19,7 @@ Each feature supports two generation methods, chosen by the user at generation t
 - CSS shapes (rectangles, cylinders via border-radius, diamonds via clip-path, clouds via SVG)
 - Inline SVG for connector arrows and lines
 - Container borders (solid for physical, dashed for logical)
-- Color coding via CSS variables (maps to MK Slide theme)
+- Color coding via CSS variables (maps to Present HTML theme)
 
 **Flow:**
 - Flexbox pipeline row with node cards

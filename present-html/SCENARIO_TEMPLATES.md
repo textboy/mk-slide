@@ -213,7 +213,7 @@ Numbered section list with optional time estimates.
 | 7 | Timeline | Traction & milestones | 4-5 nodes: founding → beta → launch → current metrics → next milestone |
 | 8 | Team Grid | Founding team | 3-4 members with initials avatar, name, role, one-line background |
 | 9 | Stats | Financial highlights | 3 numbers: ARR/MRR, growth rate, runway. E.g. "$4.2M ARR", "23% MoM", "18 months" |
-| 10 | CTA / Closing | The ask | Funding amount, contact info, one-line vision statement. Include "Made with MK Slide" watermark |
+| 10 | CTA / Closing | The ask | Funding amount, contact info, one-line vision statement. Include "Made with Present HTML" watermark |
 
 ### Example Brand
 - **Name:** Melo
