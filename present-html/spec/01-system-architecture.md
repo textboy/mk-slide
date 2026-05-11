@@ -16,7 +16,7 @@
 - 53 curated visual styles across 7 categories
 - Bilingual (English / Chinese) with proper CJK typography support
 - Zero dependencies — no npm, no build tools, no runtime
-- 5 input modes: natural language, markdown, PPTX conversion, reference match, enhancement
+- 5 input modes: natural language, markdown, enhancement, reference match, style comparison
 - One-click Vercel deploy for sharing
 
 ## 2. File Map
@@ -33,7 +33,6 @@
 | `gallery.html` | Online style gallery with recommendation system (Vercel-hosted) |
 | `style-gallery.html` | Local lightweight gallery for offline use |
 | `landing/` | Product landing page |
-| `scripts/extract-pptx.py` | PowerPoint content extraction script |
 | `install.sh` | Auto-detection & install for Claude Code / Hermes / OpenClaw |
 | `openclaw.plugin.json` | OpenClaw plugin manifest |
 | `scripts/generate-drawio.py` | Drawio diagram generation → PNG embedding | Phase 8 |
@@ -43,7 +42,6 @@
 | `diagram/cross-cutting.md` | Cross-cutting layer design | Phase 8 |
 | `diagram/samples/{name}.drawio.xml` | Drawio XML sample diagrams | Phase 8 |
 | `diagram/samples/{name}.html` | HTML sample diagrams | Phase 8 |
-| `scripts/generate-pptx.py` | PPTX converter (visual tree extraction → native PowerPoint shapes) | Phase 9 |
 
 ## 3. Architecture Diagram
 

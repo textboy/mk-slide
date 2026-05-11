@@ -8,7 +8,7 @@ Works on **Claude Code** · **Hermes Agent** · **OpenClaw**
 
 > Describe what you want. Pick a style. Get a beautiful HTML presentation. No PowerPoint, no build tools, no dependencies.
 
-> **Forked from** [next-slide](https://github.com/codesstar/next-slide) — extended with diagram generation and PPTX conversion.
+> **Forked from** [next-slide](https://github.com/codesstar/next-slide) — extended with diagram generation.
 
 ---
 
@@ -24,7 +24,7 @@ You: "Make me a 10-slide presentation about AI agents, with a strong tech vibe"
 → Opens in your browser, ready to present
 ```
 
-**Input:** natural language, markdown, or even an existing .pptx file
+**Input:** natural language, markdown, or reference screenshots
 **Output:** one self-contained HTML file — animations, responsive layout, keyboard navigation, all built in
 
 ---
@@ -84,7 +84,7 @@ Each style is a complete design system: curated typography, color palette, layou
 ┌─────────────────────────────────────────────────────┐
 │  1. CONTENT                                         │
 │     Describe your topic, paste markdown,            │
-│     or drop a .pptx file                            │
+│     or share a reference screenshot                 │
 ├─────────────────────────────────────────────────────┤
 │  2. STYLE                                           │
 │     Browse 50+ styles → pick a mood →               │
@@ -108,7 +108,7 @@ Each style is a complete design system: curated typography, color palette, layou
 - **50+ curated styles** — not just color swaps, each is a distinct design language with Layout DNA
 - **Zero dependencies** — single HTML file, all CSS/JS inline
 - **Bilingual native** — English + Chinese with proper CJK font support
-- **5 input modes** — new from scratch, markdown, PPT conversion, enhancement, reference match
+- **5 input modes** — new from scratch, markdown, enhancement, reference match, style comparison
 - **Responsive** — fits any screen, from phone to 4K projector
 - **Keyboard navigation** — arrows, space, home/end
 - **Inline editing** — press `E` to edit text directly in the browser
@@ -116,7 +116,6 @@ Each style is a complete design system: curated typography, color palette, layou
 - **Quality assurance** — auto-checks overflow, fonts, density after generation
 - **Typography precision** — every style has exact clamp() values extracted from hand-crafted references
 - **Architecture & flow diagrams** — generate from natural language: enterprise house-architecture, logical/system/physical architecture, flow charts, API sequence diagrams. Supports Drawio → PNG → embed in HTML, or direct HTML with CSS-positioned cards + SVG connectors. See `diagram/` for specs and samples.
-- **HTML to PPTX conversion** — export any HTML presentation to PowerPoint with native shapes (text boxes, rectangles, rounded rectangles, styled text, borders, background fills). Not 100% pixel-perfect due to python-pptx limitations (gradients → solid fill, box-shadow ignored), but text remains editable and structure is preserved.
 
 ---
 
@@ -126,7 +125,6 @@ Each style is a complete design system: curated typography, color palette, layou
 |--------|---------|
 | Natural language | "Make a 10-slide pitch deck about AI agents" |
 | Markdown | Provide a `.md` file — headings become slides |
-| PowerPoint | Drop a `.pptx` — content extracted and restyled |
 | Reference image | Share a screenshot — AI matches the closest style |
 | Enhancement | Point to an existing HTML deck — AI improves it |
 
@@ -184,8 +182,6 @@ present-html/
 │   ├── samples/*.drawio.xml    # Drawio XML sample diagrams
 │   └── samples/*.html          # HTML sample diagrams
 ├── scripts/
-│   ├── extract-pptx.py     # PPT content extraction
-│   ├── generate-pptx.py    # HTML → PPTX (native shapes, Playwright)
 │   └── generate-drawio.py  # Drawio diagram → PNG generation
 ├── spec/                   # 10 specification documents
 ├── openclaw.plugin.json    # OpenClaw plugin manifest

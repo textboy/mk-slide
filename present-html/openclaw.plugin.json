@@ -14,12 +14,11 @@
     "html-template.md",
     "animation-patterns.md",
     "style-gallery.html",
-    "styles/",
-    "scripts/extract-pptx.py"
+    "styles/"
   ],
   "triggers": [
     "presentation", "slides", "slide deck", "PPT", "演示", "做个slide", "present-html",
-    "pptx", "convert ppt", "markdown to slides"
+    "markdown to slides"
   ],
   "tags": ["presentation", "design", "html", "bilingual"]
 }

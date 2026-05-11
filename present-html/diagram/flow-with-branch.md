@@ -2,7 +2,7 @@
 
 For flows that include decision points and feedback loops — CI/CD pipelines,
 approval workflows, incident response, etc. The existing `generate-html-flow.js`
-only handles linear sequences; this pattern uses custom HTML + PPTX for
+only handles linear sequences; this pattern uses custom HTML for
 branch/loop semantics.
 
 ---
@@ -103,35 +103,6 @@ const connectorOverlay = `
 
 ---
 
-## PPTX Implementation
-
-Custom python-pptx script (not `html-to-ppt.py`). Key patterns:
-
-### Node cards
-```python
-def add_card(slide, left, top, width, height, icon, label, desc,
-             accent_left=None, is_first=False):
-    # Rounded rectangle + accent left-border strip + icon + label + desc
-    shp = add_rect(slide, left, top, width, height, ...)
-    if accent_left:
-        strip = slide.shapes.add_shape(MSO_SHAPE.RECTANGLE,
-            left, top, Pt(4), height)  # 4pt left accent strip
-```
-
-### Arrows
-```python
-def add_arrow_svg(slide, left, top, width, height, color, arrow_color):
-    # Horizontal line (RECTANGLE, 2pt tall)
-    # Arrowhead (ISOSCELES_TRIANGLE, rotated 90°)
-```
-
-### Feedback loop
-- Down arrow: vertical RECTANGLE + downward ISOSCELES_TRIANGLE
-- Loop-back: `MSO_SHAPE.CIRCULAR_ARROW` (rotated)
-- Dashed connectors: red (#EF4444) for fail path, green (#10B981) for pass path
-
----
-
 ## Color Scheme (per slide)
 
 | Element | Color | Usage |
@@ -145,25 +116,6 @@ def add_arrow_svg(slide, left, top, width, height, color, arrow_color):
 | Base mid | #475569 | Descriptions |
 
 Single Accent Color Rule still applies: one accent per slide. Danger/success are semantic colors (not decoration).
-
----
-
-## Node Sizing
-
-| Property | HTML | PPTX |
-|----------|------|------|
-| Node width | 110px min | 1.55" (Inches) |
-| Node height | auto | 1.05" |
-| Arrow width | 32px | 0.55" |
-| Gap between nodes | 0 | 0.06" |
-
----
-
-## Naming Convention
-
-- Cover slide: `{topic}.html` / `{topic}.pptx`
-- Sample for review: `{topic}_sample.html`
-- PPTX build script: one-off, delete after generation
 
 ---
 

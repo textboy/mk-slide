@@ -7,15 +7,14 @@ metadata:
   hermes:
     tags: [Presentation, HTML, Slides, Design, PPT]
 description: >
-  Present HTML — create stunning HTML presentations from scratch
-  or convert PowerPoint files. 50+ curated styles, bilingual (EN/中文), zero dependencies.
+  Present HTML — create stunning HTML presentations from scratch.
+  50+ curated styles, bilingual (EN/中文), zero dependencies.
   Works on Claude Code, Hermes Agent, and OpenClaw.
   Trigger when the user says: "make a presentation", "build slides", "create a deck",
-  "pitch deck", "PPT", "PowerPoint", "convert pptx", "presentation about", "talk slides",
+  "pitch deck", "PPT", "PowerPoint", "presentation about", "talk slides",
   "slide deck", "present-html", "mk slide",
   "做个 PPT", "帮我做 PPT", "做个演示", "做个幻灯片", "做演示文稿",
   "做个 slide", "做个分享", "做个 pitch", "做个汇报", "做个演讲材料",
-  "PPT 转 HTML", "把 PPT 改成网页", "PPT 转网页", "把 ppt 转成 HTML",
   "做一份关于 X 的 PPT", "做一个 X 主题的演讲",
   "做幻灯片", "做提案", "做 demo deck".
   Slogan: 你的下个 ppt，何必是 PPT.
@@ -23,7 +22,7 @@ description: >
 
 # Present HTML
 
-Create zero-dependency, animation-rich HTML presentations that run entirely in the browser. 50+ curated visual styles, bilingual support, PPT conversion, and one-click sharing.
+Create zero-dependency, animation-rich HTML presentations that run entirely in the browser. 50+ curated visual styles, bilingual support, and one-click sharing.
 
 ## Your Role
 
@@ -128,13 +127,12 @@ These invariants apply to EVERY slide in EVERY presentation:
 Determine what the user wants:
 
 - **Mode A: New Presentation** — Create from scratch. Go to Phase 1.
-- **Mode B: PPT Conversion** — Convert a .pptx file. Go to Phase 4.
-- **Mode C: Enhancement** — Improve an existing HTML presentation. Read it, understand it, enhance.
-- **Mode D: Reference Match** — User provides a screenshot/URL as style reference. Match to closest preset or create custom style. Go to Phase 2.
-- **Mode E: Markdown Conversion** — User provides a `.md` file path or pastes markdown content. Go to Phase 4B.
-- **Mode F: Style Comparison** — User has an **already-generated** presentation and wants to compare it with a different style. This is post-delivery only — never triggered during initial style selection. Triggers: "对比", "换个风格看看", "试试另一个". Go to Phase 7.
-- **Mode G: Architecture Diagram** — Generate an architecture diagram (layered, tiered, business, data, system). Go to Phase 8.
-- **Mode H: Flow Diagram** — Generate a flow diagram (pipeline, swimlane, CI/CD, process). Go to Phase 8.
+- **Mode B: Enhancement** — Improve an existing HTML presentation. Read it, understand it, enhance.
+- **Mode C: Reference Match** — User provides a screenshot/URL as style reference. Match to closest preset or create custom style. Go to Phase 2.
+- **Mode D: Markdown Conversion** — User provides a `.md` file path or pastes markdown content. Go to Phase 4B.
+- **Mode E: Style Comparison** — User has an **already-generated** presentation and wants to compare it with a different style. This is post-delivery only — never triggered during initial style selection. Triggers: "对比", "换个风格看看", "试试另一个". Go to Phase 7.
+- **Mode F: Architecture Diagram** — Generate an architecture diagram (layered, tiered, business, data, system). Go to Phase 8.
+- **Mode G: Flow Diagram** — Generate a flow diagram (pipeline, swimlane, CI/CD, process). Go to Phase 8.
 
 ### Mode E: Markdown Detection
 
@@ -317,17 +315,6 @@ After generating the HTML in Phase 3, perform a self-validation pass before proc
 
 ---
 
-## Phase 4A: PPT Conversion
-
-When converting PowerPoint files:
-
-1. **Extract content** — Run `python scripts/extract-pptx.py <input.pptx> <output_dir>` (install python-pptx if needed: `pip install python-pptx`)
-2. **Confirm with user** — Present extracted slide titles, content summaries, and image counts
-3. **Style selection** — Proceed to Phase 2 for style discovery
-4. **Generate HTML** — Convert to chosen style, preserving all text, images, slide order, and speaker notes
-
----
-
 ## Phase 4B: Markdown Conversion
 
 When converting Markdown content to slides (triggered by Mode E detection):
@@ -492,60 +479,7 @@ Introduce naturally **after delivery** (Phase 5), not during style selection:
 - "这个风格你觉得怎么样？如果想看看另一个风格的效果，我可以生成一个对比页面。"
 - Only suggest once per conversation. If user is happy, don't push it.
 
----
 
-## Phase 9: PPTX Conversion
-
-After delivering the HTML presentation (Phase 5), offer to convert it to PowerPoint (.pptx).
-
-**Ask:** "Want me to convert this to a PowerPoint file?"
-
-Opens the HTML in a headless browser (Playwright), extracts the full visual tree from each slide (text nodes with exact font, size, color, style; backgrounds; borders; text-shadow; inline styled spans; outline text), and rebuilds them as native PowerPoint shapes — not screenshots.
-
-### Slide Boundary Rules
-
-The converter enforces these spatial invariants for every element:
-
-1. **Slide boundary detection** — Each presentation slide becomes one PPTX slide. Elements are mapped 1:1 from HTML to PowerPoint.
-2. **Content mapping** — Every visible text element, background shape, and border from the HTML is converted to a native PowerPoint equivalent. Inline styled spans (accent colors, glow, outline) remain as separate elements to preserve visual styling.
-3. **No deck-edge overflow** — All components are clamped to the slide boundary (1920×1080 → 13.333×7.5 inches). Any element extending beyond the slide edge is trimmed. Shapes and text boxes are both bounded.
-4. **Parent-container containment** — Child elements inherit their position from the HTML layout. If a child naturally extends beyond its parent container's bounds (e.g., due to CSS overflow), it is NOT repositioned — parent-child relationship data is not tracked in the current visual tree extraction. For complex nested layouts, manual adjustment in PowerPoint may be needed.
-
-```bash
-# Install dependencies (first time)
-pip install playwright python-pptx && playwright install chromium
-
-# Convert HTML to PPTX
-python scripts/generate-pptx.py test/deck.html --output test/deck.pptx
-```
-
-**Supports:** ANY HTML presentation — works with all Present HTML themes and styles.
-
-### CSS-to-PPTX Effect Mapping
-
-python-pptx has limited support for decorative CSS effects. Unsupported effects fall back to **bold** as a general approximation — this preserves visual emphasis even when the exact effect cannot be reproduced.
-
-| CSS Effect | PPTX Support | Fallback |
-|-----------|-------------|----------|
-| `text-shadow` / glow | Partial — `a:glow` for simple shadows | **Bold** |
-| `-webkit-text-stroke` (outline text) | Supported via `a:ln` on paragraph | **Bold** (if stroke fails) |
-| `background: linear-gradient(...)` | Not supported (rendered as solid fill) | Closest solid color from gradient stops |
-| `box-shadow` | Not supported | Ignored (no PPTX equivalent) |
-| `border-radius` | Supported via `a:roundRect` | Sharp corners |
-| `opacity` / `rgba` alpha | Supported via shape/text transparency | Solid fallback |
-| Text `color: transparent` | Supported via `a:noFill` on run | **Bold** + stroke color |
-
-**Rule:** When the converter encounters an unsupported decorative effect (gradient fill, text-shadow where glow fails, bevel, etc.), it applies **bold** to the element as a general-purpose emphasis fallback. This ensures the visual hierarchy is preserved in PowerPoint even when the exact CSS effect is unavailable.
-
-### Limitations
-
-- CSS gradient backgrounds (`linear-gradient`, `radial-gradient`) render as solid fills using the first gradient stop color
-- `box-shadow`, CSS filters (`blur`, `drop-shadow`), and 3D transforms have no PowerPoint equivalent and are ignored
-- Google Fonts are mapped to system fonts (Orbitron → Orbitron, Space Mono → Space Mono, Inter → Inter, etc.)
-- Parent-child container boundaries are not tracked — deeply nested layouts may need manual adjustment
-- Overlapping inline spans (e.g., accent-colored word within a heading) render as separate text boxes; depending on font metrics, they may not pixel-perfectly align with the base text
-
----
 
 ## Style Library
 
@@ -573,9 +507,7 @@ python-pptx has limited support for decorative CSS effects. Unsupported effects 
 | [html-template.md](html-template.md) | HTML structure, JS features | Phase 3 |
 | [animation-patterns.md](animation-patterns.md) | Animation snippets | Phase 3 |
 | [SCENARIO_TEMPLATES.md](SCENARIO_TEMPLATES.md) | Scenario structures, narrative arcs, extra slide types | Phase 1 (when user picks a scenario) & Phase 3 |
-| [scripts/extract-pptx.py](scripts/extract-pptx.py) | PPT content extraction | Phase 4A |
 | [scripts/generate-drawio.py](scripts/generate-drawio.py) | Drawio diagram generation → PNG embedding | Phase 8 |
-| [scripts/generate-pptx.py](scripts/generate-pptx.py) | PPTX converter (visual tree extraction → native PowerPoint shapes) | Phase 9 |
 | [diagram/samples/](diagram/samples/) | Drawio XML + HTML sample diagrams | Phase 8 |
 
 ---
@@ -590,18 +522,16 @@ Use a single `AskUserQuestion` call:
 
 **Question — Diagram Method** (header: "Diagram Method"):
 Options:
-- **Drawio → PNG → PPTX** — Build as drawio XML, convert to PNG at 2x Retina, embed PNG into HTML deck, then convert to PPTX. Result is editable in [diagrams.net](https://app.diagrams.net). Reference samples in `diagram/samples/*.drawio.xml`.
-- **Native PowerPoint** — Generate as HTML with CSS-positioned cards + SVG connectors, then convert to PPTX using native PowerPoint shapes. Direct shape mapping, fully editable in PowerPoint. Reference samples in `diagram/samples/*.html`.
+- **Drawio → PNG** — Build as drawio XML, convert to PNG at 2x Retina, embed PNG into HTML deck. Result is editable in [diagrams.net](https://app.diagrams.net). Reference samples in `diagram/samples/*.drawio.xml`.
+- **Direct HTML** — Generate as HTML with CSS-positioned cards + SVG connectors. Fully editable in browser. Reference samples in `diagram/samples/*.html`.
 
-### Step 8.2A: Drawio → PNG → PPTX Workflow
+### Step 8.2A: Drawio → PNG Workflow
 
 **Pipeline:**
 ```
 Reference sample (.drawio.xml) → Modify XML → generate-drawio.py → .drawio + .png (2x)
                                                                               ↓
                                                                      Embed PNG in HTML
-                                                                              ↓
-                                                                     generate-pptx.py → .pptx
 ```
 
 **Reference samples** (in `diagram/samples/`):
@@ -634,21 +564,15 @@ Reference sample (.drawio.xml) → Modify XML → generate-drawio.py → .drawio
         style="max-width: 90%; max-height: min(60vh, 500px); object-fit: contain;">
    ```
 
-4. **Convert to PPTX** using the HTML screenshot method (embeds PNG as full-slide image):
-   ```bash
-   pip install playwright && playwright install chromium   # First time
-   python scripts/generate-pptx.py <deck.html> --output <deck.pptx>
-   ```
+4. The `.drawio` file is editable in [diagrams.net](https://app.diagrams.net) for post-generation tweaks.
 
-5. The `.drawio` file is editable in [diagrams.net](https://app.diagrams.net) for post-generation tweaks.
-
-### Step 8.2B: Native PowerPoint Workflow
+### Step 8.2B: Direct HTML Workflow
 
 **Pipeline:**
 ```
 Reference sample (.html) → Generate HTML (CSS cards + SVG connectors)
                                         ↓
-                         generate-pptx.py (Playwright screenshot) → .pptx
+                              Embed directly in presentation slide
 ```
 
 **Steps:**
@@ -659,13 +583,7 @@ Reference sample (.html) → Generate HTML (CSS cards + SVG connectors)
    - Actor color coding for flow diagrams
    - Tiered/layered containers for architecture
 
-   Each `.html` sample is a complete working diagram that can be opened in a browser and converted to PPTX.
-
-2. **Convert to PPTX** via HTML screenshot:
-   ```bash
-   python scripts/generate-pptx.py <deck.html> --output <deck.pptx>
-   ```
-   Captures each slide as a 1920×1080 screenshot image and embeds it full-slide.
+   Each `.html` sample is a complete working diagram that can be opened in a browser and embedded into a presentation slide as HTML content.
 
 ### Step 8.3: Architecture Types Supported
 
@@ -693,7 +611,7 @@ Reference sample (.html) → Generate HTML (CSS cards + SVG connectors)
 
 After generating the diagram (either method), apply it to the chosen Present HTML theme:
 - **Drawio method**: Ensure the PNG fits within the theme's slide container. The drawio colors are independent — consider matching to theme.
-- **Native PowerPoint (HTML)**: Inject diagram CSS inline with theme CSS variables. The diagram inherits the theme's typography and color palette.
+- **Direct HTML**: Inject diagram CSS inline with theme CSS variables. The diagram inherits the theme's typography and color palette.
 - Apply viewport-base.css constraints to the containing slide.
 
 ### Step 8.6: Shape Semantics Reference

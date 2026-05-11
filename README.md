@@ -6,59 +6,67 @@
 
 Works on **Claude Code** · **Hermes Agent** · **OpenClaw**
 
-> Describe what you want. Pick a style. Get a beautiful HTML presentation. No PowerPoint, no build tools, no dependencies.
+> A complete presentation workflow: plan your storyline, generate beautiful HTML slides, and export to PowerPoint. Three AI skills, one seamless pipeline.
 
-> **Forked from** [next-slide](https://github.com/codesstar/next-slide) — extended with diagram generation and PPTX conversion.
+> **Forked from** [mk-present](https://github.com/textboy/mk-present) — split into 3 specialized skills covering the full presentation lifecycle.
 
 ---
 
 ## What It Does
 
-You talk to your AI assistant in natural language. MK Slide turns your words into a polished, animated HTML presentation — a single file you can open in any browser.
+MK Present is a **3-skill pipeline** covering the full presentation lifecycle:
+
+1. **📋 [present-workflow](present-workflow/README.md)** — Plan your storyline. Clarify the brief, research, outline, review.
+2. **🎨 [present-html](present-html/README.md)** — Generate a stunning HTML presentation. 50+ curated styles, bilingual, zero dependencies.
+3. **📄 [present-ppt](present-ppt/README.md)** — Convert your HTML deck into an editable PowerPoint (.pptx) with native shapes and text.
 
 ```
-You: "Make me a 10-slide presentation about AI agents, with a strong tech vibe"
+You: "I need a 10-slide pitch deck about AI agents, with a strong tech vibe"
 
-→ AI asks you to pick a style (50+ options with live preview)
-→ Generates a complete HTML presentation
-→ Opens in your browser, ready to present
+→ present-workflow drafts the storyline and gets your approval
+→ present-html generates a beautiful HTML deck in your chosen style
+→ present-ppt exports it as a PowerPoint file — ready to share
 ```
 
-**Input:** natural language, markdown, or even an existing .pptx file
-**Output:** one self-contained HTML file — animations, responsive layout, keyboard navigation, all built in
+**Input:** natural language, markdown, or reference screenshots
+**Output:** HTML presentation (.html) + optionally PowerPoint (.pptx)
 
 ---
 
 ## 3 Skills in This Repository
 
-This repository (forked from `mk-slide`) contains three related skills, each handling a different stage of the presentation workflow:
+This repository contains three related skills, each handling a different stage of the presentation workflow:
 
 | Skill | Directory | Forked From | Purpose |
 |-------|-----------|-------------|---------|
-| **present-workflow** | `present-workflow/` | [ppt-agent-workflow-san/ppt-workflow](https://github.com/mucsbr/ppt-agent-workflow-san/tree/main/ppt-workflow) | Complete the storyline / workflow of the deck |
-| **present-html** | `present-html/` | [next-slide](https://github.com/codesstar/next-slide) | Generate HTML presentations with architecture & flow diagram support |
-| **present-ppt** | `present-ppt/` | [ppt-agent-workflow-san/html-slide-to-pptx](https://github.com/mucsbr/ppt-agent-workflow-san/tree/main/html-slide-to-pptx) | Convert HTML to editable PowerPoint (.pptx) |
+| **[present-workflow](present-workflow/README.md)** | `present-workflow/` | [ppt-agent-workflow-san/ppt-workflow](https://github.com/mucsbr/ppt-agent-workflow-san/tree/main/ppt-workflow) | Complete the storyline / workflow of the deck |
+| **[present-html](present-html/README.md)** | `present-html/` | [next-slide](https://github.com/codesstar/next-slide) | Generate HTML presentations with architecture & flow diagram support |
+| **[present-ppt](present-ppt/README.md)** | `present-ppt/` | [ppt-agent-workflow-san/html-slide-to-pptx](https://github.com/mucsbr/ppt-agent-workflow-san/tree/main/html-slide-to-pptx) | Convert HTML to editable PowerPoint (.pptx) |
 
-- **present-workflow** — Prepares the presentation storyline as the first stage: clarify brief, research, outline, plan, review.
-- **present-html** — Generates zero-dependency, animation-rich HTML presentations from natural language. 50+ curated styles, bilingual support. Also supports architecture and flow diagram generation (enterprise house-architecture, logical/system/physical architecture, flow charts, API sequence diagrams) via Drawio → PNG → embed or direct HTML.
-- **present-ppt** — Converts structured single-slide or small deck HTML files into editable PPTX slides with native text boxes, shapes, chips, arrows, and panels. Preset-driven, not a generic browser renderer.
+- **[present-workflow](present-workflow/README.md)** — Prepares the presentation storyline as the first stage: clarify brief, research, outline, plan, review.
+- **[present-html](present-html/README.md)** — Generates zero-dependency, animation-rich HTML presentations from natural language. 50+ curated styles, bilingual support. Also supports architecture and flow diagram generation (enterprise house-architecture, logical/system/physical architecture, flow charts, API sequence diagrams) via Drawio → PNG → embed or direct HTML.
+- **[present-ppt](present-ppt/README.md)** — Converts structured single-slide or small deck HTML files into editable PPTX slides with native text boxes, shapes, chips, arrows, and panels. Preset-driven, not a generic browser renderer.
 
 ---
 
 ## Quick Start
 
 ```bash
-# 1. Install as Claude Code skill
+# 1. Install
 git clone https://github.com/textboy/mk-present ~/.claude/skills/mk-present
+```
 
-# 2. Use — just talk naturally
-# "Make me a presentation about..."
-# "Make me a slide about XX" (in Chinese)
-# or invoke directly:
-/mk-present
+```markdown
+# 2. Call the skills in sequence
 
-# 3. Present
-open my-presentation.html    # One file. Zero dependencies.
+# Step 1 — Plan your storyline
+/present-workflow, design 10 slides for presenting a centralized API platform
+
+# Step 2 — Generate HTML slides (use the output from step 1 as input)
+/present-html, [presentation content from step 1]
+
+# Step 3 — Export to PowerPoint
+/present-ppt, generate api.pptx by the output of present-html
 ```
 
 ### Also works with
@@ -100,7 +108,7 @@ Each style is a complete design system: curated typography, color palette, layou
 ┌─────────────────────────────────────────────────────┐
 │  1. CONTENT                                         │
 │     Describe your topic, paste markdown,            │
-│     or drop a .pptx file                            │
+│     or share a reference screenshot                 │
 ├─────────────────────────────────────────────────────┤
 │  2. STYLE                                           │
 │     Browse 50+ styles → pick a mood →               │
@@ -124,7 +132,7 @@ Each style is a complete design system: curated typography, color palette, layou
 - **50+ curated styles** — not just color swaps, each is a distinct design language with Layout DNA
 - **Zero dependencies** — single HTML file, all CSS/JS inline
 - **Bilingual native** — English + Chinese with proper CJK font support
-- **5 input modes** — new from scratch, markdown, PPT conversion, enhancement, reference match
+- **5 input modes** — new from scratch, markdown, enhancement, reference match, style comparison
 - **Responsive** — fits any screen, from phone to 4K projector
 - **Keyboard navigation** — arrows, space, home/end
 - **Inline editing** — press `E` to edit text directly in the browser
@@ -142,7 +150,6 @@ Each style is a complete design system: curated typography, color palette, layou
 |--------|---------|
 | Natural language | "Make a 10-slide pitch deck about AI agents" |
 | Markdown | Provide a `.md` file — headings become slides |
-| PowerPoint | Drop a `.pptx` — content extracted and restyled |
 | Reference image | Share a screenshot — AI matches the closest style |
 | Enhancement | Point to an existing HTML deck — AI improves it |
 
@@ -150,7 +157,7 @@ Each style is a complete design system: curated typography, color palette, layou
 
 ## Design Philosophy
 
-MK Slide isn't a template engine. It's an opinionated design system that teaches AI to think like a designer:
+MK Present isn't a template engine. It's an opinionated design system that teaches AI to think like a designer:
 
 1. **No AI Slop** — Every style is hand-crafted with intentional typography, spacing, and motion. The AI follows exact specifications, not vibes.
 2. **Layout DNA** — Each style defines its structural patterns: slide mechanism, title alignment, navigation style, background treatment, animation approach, and component structure.
@@ -226,8 +233,6 @@ mk-present/
 │   │       ├── *.drawio.xml     # Drawio XML sample diagrams
 │   │       └── *.html           # HTML sample diagrams
 │   ├── scripts/
-│   │   ├── extract-pptx.py     # PPT content extraction
-│   │   ├── generate-pptx.py    # HTML → PPTX (native shapes)
 │   │   └── generate-drawio.py  # Drawio diagram → PNG generation
 │   ├── spec/                   # 10 specification documents
 │   └── landing/                # Landing page

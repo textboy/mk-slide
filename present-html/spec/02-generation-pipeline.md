@@ -7,7 +7,6 @@ Auto-detect user intent from the initial message:
 | Mode | Description | Trigger Keywords |
 |------|-------------|-----------------|
 | **A: New Presentation** | Create from scratch | "make a presentation", "build slides", "create a deck" |
-| **B: PPT Conversion** | Convert .pptx file | "convert pptx", "PPT to HTML" |
 | **C: Enhancement** | Improve existing HTML | User provides existing HTML file |
 | **D: Reference Match** | Match style from screenshot | User provides image as style reference |
 | **E: Markdown Conversion** | Convert .md or markdown paste | Path ending in .md, or content with `---` / `##` slide patterns |
@@ -147,17 +146,9 @@ Self-validation before delivery:
 9. **Check nav dots overflow** — 15+ slides = scrollable nav container
 10. **Fix before proceeding**
 
-## 6. Phase 4A: PPT Conversion
+## 6. Phase 4B: Markdown Conversion
 
-1. Run `python scripts/extract-pptx.py <input.pptx> <output_dir>`
-2. Install `python-pptx` if needed: `pip install python-pptx`
-3. Present slide titles, content summaries, image counts to user
-4. Proceed to Phase 2 for style selection
-5. Generate HTML preserving all text, images, slide order, speaker notes
-
-## 7. Phase 4B: Markdown Conversion
-
-### 7.1 Parse Rules
+### 6.1 Parse Rules
 
 Slide boundary detection (priority order):
 1. `---` (horizontal rule) = explicit separator — highest priority
@@ -176,7 +167,7 @@ Content mapping:
 - `**bold**` → Emphasis
 - Tables → Comparison/data slide
 
-### 7.2 Auto-Detect Slide Types
+### 6.2 Auto-Detect Slide Types
 
 | Content Pattern | Slide Type |
 |----------------|------------|
@@ -190,20 +181,20 @@ Content mapping:
 | Code block | Code |
 | Image reference | Image |
 
-### 7.3 Generation Rules
+### 6.3 Generation Rules
 
 - Preserve ALL text — never summarize or omit
 - Convert markdown formatting to HTML
 - Respect content density limits
 - Speaker notes: HTML comments from `<!-- notes: ... -->`
 
-## 8. Phase 5: Delivery
+## 7. Phase 5: Delivery
 
 1. Open file in browser: `open [filename].html`
 2. Include "Made with Present HTML" watermark on last slide (opt-out)
 3. Summarize to user: file location, style, slide count, navigation, customization
 
-## 9. Phase 6: Share & Export (Optional)
+## 8. Phase 6: Share & Export (Optional)
 
 ### 9A: Vercel Deploy
 - `npx vercel --prod`
@@ -213,7 +204,7 @@ Content mapping:
 - Playwright screenshots at 1920×1080
 - Combine into PDF
 
-## 10. Phase 7: Style Comparison
+## 9. Phase 7: Style Comparison
 
 Post-delivery only. Generate split-screen comparison page:
 - Left half: Presentation A (iframe)
@@ -224,16 +215,16 @@ Post-delivery only. Generate split-screen comparison page:
 - `pointer-events: none` on iframes to prevent independent clicking
 - User picks winner, delete unchosen file
 
-## 11. Phase 8: Diagram Generation (Architecture & Flow)
+## 10. Phase 8: Diagram Generation (Architecture & Flow)
 
-### 11.1 Method Selection
+### 10.1 Method Selection
 
 When Mode G or H is detected, ASK the user which generation method they prefer:
 
 | Method | Pipeline | Output | Sample Reference |
 |--------|----------|--------|------------------|
-| **Drawio → PNG → PPTX** | drawio XML → PNG (2x) → embed in HTML → convert to PPTX | `.drawio` + `.png` + `.html` + `.pptx` | `diagram/samples/*.drawio.xml` |
-| **Native PowerPoint** | HTML (CSS cards + SVG connectors) → convert to PPTX via native shapes | `.html` + `.pptx` | `diagram/samples/*.html` |
+| **Drawio → PNG** | drawio XML → PNG (2x) → embed in HTML | `.drawio` + `.png` + `.html` | `diagram/samples/*.drawio.xml` |
+| **Direct HTML** | Generate HTML with CSS-positioned cards + SVG connectors | `.html` | `diagram/samples/*.html` |
 
 Sample files are available in `diagram/samples/`:
 - `flow-chart.drawio.xml` / `flow-chart.html` — DevOps CI/CD pipeline flowchart
@@ -244,7 +235,7 @@ Sample files are available in `diagram/samples/`:
 - `system-architecture-gcp.drawio.xml` / `system-architecture-gcp.html` — GCP system architecture
 - `api-sequence-diagram.drawio.xml` — API sequence diagram
 
-### 11.2 Drawio → PNG → PPTX Workflow
+### 10.2 Drawio → PNG Workflow
 
 1. Reference the `.drawio.xml` samples for mxCell structure, shape styles, and layout patterns
 2. Generate or modify drawio XML → convert to PNG:
@@ -256,73 +247,17 @@ Sample files are available in `diagram/samples/`:
    <img src="<diagram_name>.png" alt="Diagram"
         style="max-width: 90%; max-height: min(60vh, 500px); object-fit: contain;">
    ```
-4. Convert to PPTX (Playwright screenshot method, embeds PNG as full-slide image):
-   ```bash
-   python scripts/generate-pptx.py <deck.html> --output <deck.pptx>
-   ```
-5. The `.drawio` file is editable in diagrams.net for post-generation tweaks.
+4. The `.drawio` file is editable in diagrams.net for post-generation tweaks.
 
-### 11.3 Native PowerPoint Workflow
+### 10.3 Direct HTML Workflow
 
 1. Reference the `.html` samples for CSS card positioning, SVG connector patterns, and layout structure
 2. Generate HTML with CSS `position: absolute` cards + inline SVG connectors
-3. Convert to PPTX via visual tree extraction (native PowerPoint shapes):
-   ```bash
-   python scripts/generate-pptx.py <deck.html> --output <deck.pptx>
-   ```
-   Extracts each slide's visual tree and builds editable PowerPoint shapes.
+3. The HTML diagram can be used directly as a slide or embedded into a presentation slide.
 
-### 11.4 Style Integration
+### 10.4 Style Integration
 
 After generating the diagram:
 - **Drawio method**: Ensure the PNG fits within theme slide container. Match drawio colors to Present HTML theme.
-- **Native PowerPoint (HTML)**: Inject diagram CSS inline with theme CSS variables.
+- **Direct HTML**: Inject diagram CSS inline with theme CSS variables. The diagram inherits the theme's typography and color palette.
 - Apply viewport-base.css constraints to the containing slide.
-
-## 12. Phase 9: PPTX Conversion
-
-Convert HTML presentations to PowerPoint (.pptx) format via Playwright visual tree extraction.
-
-### 12.1 Usage
-
-```bash
-pip install playwright python-pptx && playwright install chromium
-python scripts/generate-pptx.py <deck.html> --output <deck.pptx>
-```
-
-### 12.2 How It Works
-
-Opens the HTML in headless Chromium at 1920×1080, extracts the full visual tree from each slide (text nodes with computed styles, backgrounds, borders, text-shadow, inline spans, outline text), and rebuilds them as native PowerPoint shapes — text boxes, rectangles, rounded rectangles, with exact colors, fonts, and effects. Text is rendered as editable PowerPoint text, not screenshots.
-
-Supports any HTML presentation — all Present HTML themes and styles.
-
-### 12.3 Slide Boundary Rules
-
-1. **Slide boundary detection** — Each HTML slide → one PPTX slide, 1:1 mapping.
-2. **Content mapping** — Visible text, backgrounds, borders, inline spans all map to native PPTX equivalents.
-3. **No deck-edge overflow** — All components clamped to 1920×1080 slide boundary. Shapes and text boxes trimmed if they exceed the edge.
-4. **Parent-container containment** — Not tracked by the visual tree extraction. Deeply nested layouts may need manual adjustment.
-
-### 12.4 CSS-to-PPTX Effect Mapping
-
-python-pptx has limited support for decorative CSS effects. Unsupported effects fall back to **bold** as a general approximation — this preserves visual emphasis when the exact effect cannot be reproduced.
-
-| CSS Effect | PPTX Support | Fallback |
-|-----------|-------------|----------|
-| `text-shadow` / glow | Partial — `a:glow` for simple shadows | **Bold** |
-| `-webkit-text-stroke` (outline text) | Supported via `a:ln` on paragraph | **Bold** (if stroke fails) |
-| `background: linear-gradient(...)` | Not supported (rendered as solid fill) | Closest solid color from gradient stops |
-| `box-shadow` | Not supported | Ignored (no PPTX equivalent) |
-| `border-radius` | Supported via `a:roundRect` | Sharp corners |
-| `opacity` / `rgba` alpha | Supported via shape/text transparency | Solid fallback |
-| Text `color: transparent` | Supported via `a:noFill` on run | **Bold** + stroke color |
-
-**Rule:** When the converter encounters an unsupported decorative effect (gradient fill, text-shadow where glow fails, bevel, etc.), it applies **bold** to the element as a general-purpose emphasis fallback.
-
-### 12.5 Limitations
-
-- CSS gradient backgrounds render as solid fills using the first gradient stop color
-- `box-shadow`, CSS filters (`blur`, `drop-shadow`), 3D transforms — no PowerPoint equivalent, ignored
-- Google Fonts mapped to nearest system font equivalent
-- Parent-child container boundaries not tracked — deeply nested layouts may need manual adjustment
-- Overlapping inline spans (accent-colored word within heading) render as separate text boxes; font metrics may cause slight misalignment

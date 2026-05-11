@@ -75,7 +75,7 @@ If no platforms detected: prints manual install instructions for all three platf
 ### 4.1 Claude Code Triggers
 
 The skill triggers when user says:
-- English: "make a presentation", "build slides", "create a deck", "pitch deck", "PPT", "PowerPoint", "convert pptx", "presentation about", "talk slides", "slide deck", "present-html"
+- English: "make a presentation", "build slides", "create a deck", "pitch deck", "PPT", "PowerPoint", "presentation about", "talk slides", "slide deck", "present-html"
 - Chinese trigger keywords
 
 ### 4.2 Slogan-Based Trigger
@@ -104,14 +104,13 @@ openclaw.plugin.json
     "description": "AI-powered HTML presentations. 50+ styles, zero dependencies, bilingual.",
     "author": "Callum",
     "license": "MIT",
-    "keywords": ["presentation", "slides", "html", "pptx", "bilingual"]
+    "keywords": ["presentation", "slides", "html", "bilingual"]
 }
 ```
 
 ## 7. Requirements
 
 - **Runtime**: None (skill is markdown + file references)
-- **Python (optional)**: `python-pptx` for PPT conversion
 - **Python (optional)**: `Pillow` for image processing
 - **Node.js (optional)**: Vercel CLI for deployment
 - **Playwright (optional)**: PDF export

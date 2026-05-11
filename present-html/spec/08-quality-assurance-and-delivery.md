@@ -131,7 +131,6 @@ npx vercel --prod
 - **Mobile issues**: Disable heavy effects at 768px breakpoint, test touch events
 - **Performance jank**: Use `will-change` sparingly, prefer `transform`/`opacity` only
 - **CJK text clipping**: Ensure `line-height >= 1.5` for Chinese text
-- **PPT conversion fails**: Check python-pptx installation, verify input file exists
 
 ## 7. Troubleshooting Reference
 

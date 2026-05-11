@@ -8,7 +8,7 @@
 
 > 仓库 / 命令名为 `present-html`，中文称呼 **Present HTML**。
 >
-> **Forked 自** [next-slide](https://github.com/codesstar/next-slide) — 扩展了图表生成和 PPTX 转换功能。
+> **Forked 自** [next-slide](https://github.com/codesstar/next-slide) — 扩展了图表生成功能。
 
 兼容平台：**Claude Code** · **Hermes Agent** · **OpenClaw**
 
@@ -26,7 +26,7 @@
 → 浏览器直接打开，可以开讲
 ```
 
-**输入**：自然语言、Markdown，或者一个现成的 .pptx 文件
+**输入**：自然语言、Markdown，或者参考截图
 **输出**：一个自包含的 HTML 文件 —— 动画、响应式布局、键盘导航全部内置
 
 ---
@@ -98,7 +98,7 @@ open my-presentation.html    # 单个文件，零依赖
 ┌──────────────────────────────────────────────────┐
 │  1. 内容                                          │
 │     大白话描述、贴 Markdown，                      │
-│     或者直接丢一个 .pptx 文件                      │
+│     或者丢参考截图                                  │
 ├──────────────────────────────────────────────────┤
 │  2. 选风格                                        │
 │     看 50+ 风格 → 挑个调性 →                       │
@@ -122,7 +122,7 @@ open my-presentation.html    # 单个文件，零依赖
 - **50+ 精选风格** —— 不是换个颜色那么简单，每个都是独立设计语言（带 Layout DNA）
 - **零依赖** —— 单 HTML 文件，CSS/JS 全内联
 - **中英文原生** —— 中文 CJK 字体支持到位
-- **5 种输入方式** —— 从零开始 / Markdown / PPT 转换 / 增强已有 deck / 截图匹配
+- **5 种输入方式** —— 从零开始 / Markdown / 增强已有 deck / 截图匹配 / 风格对比
 - **响应式** —— 手机到 4K 投影都适配
 - **键盘导航** —— 方向键、空格、Home/End
 - **行内编辑** —— 按 `E` 在浏览器里直接改文字
@@ -130,7 +130,6 @@ open my-presentation.html    # 单个文件，零依赖
 - **质量自检** —— 生成后自动检查溢出、字体、信息密度
 - **字号精确** —— 每个风格的 `clamp()` 数值都从手工参考稿里抠出来
 - **架构图 & 流程图生成** —— 用自然语言描述即可生成：企业架构房、逻辑架构、系统架构、物理架构、逻辑流程图、流程图、API 时序图。支持 Drawio → PNG → 嵌入 HTML，或直接用 HTML（CSS 定位卡片 + SVG 连线）。详见 `diagram/` 目录的规格文件和示例。
-- **HTML 转 PPTX** —— 将任意 HTML 演示导出为 PowerPoint，转换后为原生形状（文本框、矩形、圆角矩形、带样式的文字、边框、背景填充）。因 python-pptx 库限制无法做到 100% 像素级一致（渐变 → 纯色填充、阴影忽略），但文字保持可编辑，结构完整保留。
 
 ---
 
@@ -140,7 +139,6 @@ open my-presentation.html    # 单个文件，零依赖
 |------|------|
 | 自然语言 | "做一份 10 页的 AI agents pitch deck" |
 | Markdown | 喂一个 `.md` 文件 —— 标题变 slide |
-| PowerPoint | 拖一个 `.pptx` —— 内容抽出来重新设计 |
 | 参考截图 | 发张图 —— AI 找最接近的风格 |
 | 增强已有 | 指向一份现成 HTML deck —— AI 帮你改进 |
 
@@ -198,8 +196,6 @@ present-html/
 │   ├── samples/*.drawio.xml    # Drawio XML 示例图表
 │   └── samples/*.html          # HTML 示例图表
 ├── scripts/
-│   ├── extract-pptx.py     # PPT 内容抽取
-│   ├── generate-pptx.py    # HTML → PPTX（原生形状，Playwright）
 │   └── generate-drawio.py  # Drawio 图表 → PNG 生成
 ├── spec/                   # 10 份规格文档
 ├── openclaw.plugin.json    # OpenClaw 插件清单

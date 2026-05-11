@@ -10,7 +10,7 @@ This file is for any AI/LLM working on this project. Read this first for full co
 
 ## What This Is
 
-Present HTML is a Claude Code Skill that generates zero-dependency, animation-rich HTML presentations from natural language. 50+ curated visual styles, bilingual (EN/中文), supports PPT conversion, Markdown conversion, and one-click Vercel deploy.
+Present HTML is a Claude Code Skill that generates zero-dependency, animation-rich HTML presentations from natural language. 50+ curated visual styles, bilingual (EN/中文), supports Markdown conversion, and one-click Vercel deploy.
 
 - **GitHub**: https://github.com/textboy/mk-present
 - **Gallery**: https://present-html.vercel.app/gallery.html (or open `gallery.html` locally)
@@ -30,9 +30,6 @@ Present HTML is a Claude Code Skill that generates zero-dependency, animation-ri
 | `gallery.html` | Online style gallery with recommendation system |
 | `style-gallery.html` | Local lightweight gallery |
 | `landing/` | Product landing page |
-| `scripts/extract-pptx.py` | PPT content extraction |
-| `scripts/generate-pptx.py` | HTML → PPTX conversion (visual tree extraction, native shapes) |
-| `scripts/generate-drawio.py` | Drawio diagram → PNG generation |
 | `diagram/` | Diagram generation specs, samples (drawio XML + HTML) |
 | `spec/` | 10 specification documents (architecture → diagram generation) |
 
@@ -63,7 +60,6 @@ Present HTML is a Claude Code Skill that generates zero-dependency, animation-ri
 - [x] Online gallery with recommendations (Vercel)
 - [x] viewport-base.css / html-template.md / animation-patterns.md
 - [x] 45 scenario templates
-- [x] PPT conversion script
 - [x] Style comparison (Phase 7)
 - [x] Expert review (PM/Designer/Engineer) — all issues fixed
 - [x] OpenClaw plugin config
