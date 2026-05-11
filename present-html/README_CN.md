@@ -37,16 +37,16 @@
 # 1. 装到 AI 助手里（任选一个或多个平台）
 
 # Claude Code
-git clone https://github.com/textboy/mk-slide ~/.claude/skills/present-html
+git clone https://github.com/textboy/mk-present ~/.claude/skills/present-html
 
 # Hermes Agent
-git clone https://github.com/textboy/mk-slide ~/.hermes/skills/present-html
+git clone https://github.com/textboy/mk-present ~/.hermes/skills/present-html
 
 # OpenClaw
 clawhub install present-html
 
 # 一键全部：克隆后跑 install.sh，自动检测三个平台
-git clone https://github.com/textboy/mk-slide && cd present-html && bash install.sh
+git clone https://github.com/textboy/mk-present && cd present-html && bash install.sh
 ```
 
 ```bash

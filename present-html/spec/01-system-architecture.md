@@ -8,7 +8,7 @@
 - **License:** MIT
 - **Author:** Callum
 - **Version:** 1.1.0
-- **Repository:** https://github.com/textboy/mk-slide
+- **Repository:** https://github.com/textboy/mk-present
 
 ### 1.1 Core Value Proposition
 

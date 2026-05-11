@@ -14,10 +14,10 @@
     "ai",
     "bilingual"
   ],
-  "homepage": "https://github.com/textboy/mk-slide",
+  "homepage": "https://github.com/textboy/mk-present",
   "repository": {
     "type": "git",
-    "url": "https://github.com/textboy/mk-slide.git"
+    "url": "https://github.com/textboy/mk-present.git"
   },
   "files": [
     "SKILL.md",

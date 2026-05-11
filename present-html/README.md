@@ -33,7 +33,7 @@ You: "Make me a 10-slide presentation about AI agents, with a strong tech vibe"
 
 ```bash
 # 1. Install as Claude Code skill
-git clone https://github.com/textboy/mk-slide ~/.claude/skills/present-html
+git clone https://github.com/textboy/mk-present ~/.claude/skills/present-html
 
 # 2. Use — just talk naturally
 # "Make me a presentation about..."
@@ -49,8 +49,8 @@ open my-presentation.html    # One file. Zero dependencies.
 
 | Platform | Install |
 |----------|---------|
-| **Claude Code** | `git clone https://github.com/textboy/mk-slide ~/.claude/skills/present-html` |
-| **Hermes Agent** | `git clone https://github.com/textboy/mk-slide ~/.hermes/skills/present-html` |
+| **Claude Code** | `git clone https://github.com/textboy/mk-present ~/.claude/skills/present-html` |
+| **Hermes Agent** | `git clone https://github.com/textboy/mk-present ~/.hermes/skills/present-html` |
 | **OpenClaw** | `clawhub install present-html` |
 | **Any AI tool** | Paste `SKILL.md` as system prompt + reference the support files |
 

@@ -14,7 +14,7 @@
 ### 2.1 Manual Git Clone (All Platforms)
 
 ```bash
-git clone https://github.com/textboy/mk-slide ~/.claude/skills/present-html
+git clone https://github.com/textboy/mk-present ~/.claude/skills/present-html
 ```
 
 ### 2.2 Automated Install Script
@@ -34,12 +34,12 @@ bash install.sh
 
 **Claude Code:**
 ```bash
-git clone https://github.com/textboy/mk-slide ~/.claude/skills/present-html
+git clone https://github.com/textboy/mk-present ~/.claude/skills/present-html
 ```
 
 **Hermes Agent:**
 ```bash
-git clone https://github.com/textboy/mk-slide ~/.hermes/skills/present-html
+git clone https://github.com/textboy/mk-present ~/.hermes/skills/present-html
 ```
 
 **OpenClaw:**

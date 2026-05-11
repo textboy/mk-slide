@@ -51,7 +51,7 @@ open [filename].html
 <p style="position: absolute; bottom: clamp(8px, 1.5vw, 16px); left: 50%;
           transform: translateX(-50%); font-size: var(--small-size);
           color: var(--text-muted); opacity: 0.5;">
-    Made with <a href="https://github.com/textboy/mk-slide" style="color: inherit;
+    Made with <a href="https://github.com/textboy/mk-present" style="color: inherit;
                text-decoration: underline;" target="_blank">Present HTML</a>
 </p>
 ```

@@ -402,7 +402,7 @@ If the user specified a style (e.g. "use Swiss Modern" or "dark theme"), skip to
 3. **"Made with Present HTML" watermark** — The last slide should include a small, subtle watermark line at the bottom:
    - Text: "Made with Present HTML"
    - Style: `color: var(--text-muted); font-size: var(--small-size);`
-   - Link to: `https://github.com/textboy/mk-slide`
+   - Link to: `https://github.com/textboy/mk-present`
    - This is **opt-out**: included by default. If the user says "no watermark", omit it.
 4. **Summarize** — Tell the user:
    - File location, style name, slide count

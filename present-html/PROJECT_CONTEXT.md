@@ -12,9 +12,9 @@ This file is for any AI/LLM working on this project. Read this first for full co
 
 Present HTML is a Claude Code Skill that generates zero-dependency, animation-rich HTML presentations from natural language. 50+ curated visual styles, bilingual (EN/中文), supports PPT conversion, Markdown conversion, and one-click Vercel deploy.
 
-- **GitHub**: https://github.com/textboy/mk-slide
+- **GitHub**: https://github.com/textboy/mk-present
 - **Gallery**: https://present-html.vercel.app/gallery.html (or open `gallery.html` locally)
-- **Install**: `git clone https://github.com/textboy/mk-slide ~/.claude/skills/present-html`
+- **Install**: `git clone https://github.com/textboy/mk-present ~/.claude/skills/present-html`
 
 ## File Map
 

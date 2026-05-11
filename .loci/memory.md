@@ -1,21 +1,21 @@
 ---
-project: mk-slide
+project: mk-present
 updated: 2026-04-06
 status: paused
 brain: /Users/callum/Desktop/cyc-brain
 ---
 
-# MK Slide — 项目记忆
+# MK Present — 项目记忆
 
 > "你的下个 ppt，何必是 PPT"
 
 ## 项目定位
 
-MK Slide 是一个 Claude Code Skill，让用户通过自然语言生成零依赖、动画丰富的 HTML 演示文稿。50+ 预设风格，中英双语，支持 PPT 转换、Markdown 转换、一键部署。
+MK Present 是一个 Claude Code Skill，让用户通过自然语言生成零依赖、动画丰富的 HTML 演示文稿。50+ 预设风格，中英双语，支持 PPT 转换、Markdown 转换、一键部署。
 
-- **GitHub**: https://github.com/textboy/mk-slide
+- **GitHub**: https://github.com/textboy/mk-present
 - **Gallery（线上）**: https://next-slide-jet.vercel.app/gallery.html
-- **安装**: `git clone https://github.com/textboy/mk-slide ~/.claude/skills/mk-slide`
+- **安装**: `git clone https://github.com/textboy/mk-present ~/.claude/skills/mk-present`
 - **OpenClaw 插件**: 已配置 `openclaw.plugin.json`
 
 ## 核心架构

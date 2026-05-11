@@ -196,5 +196,5 @@ img { max-width: 100%; max-height: min(50vh, 400px); object-fit: contain; }
 Default on every presentation (last slide):
 - "Made with Present HTML"
 - `color: var(--text-muted); font-size: var(--small-size);`
-- Link to `https://github.com/textboy/mk-slide`
+- Link to `https://github.com/textboy/mk-present`
 - Opt-out: remove if user explicitly requests "no watermark"

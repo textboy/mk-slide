@@ -212,7 +212,7 @@ Detect the user's language from conversation context. Set `<html lang="...">` ac
         </div>
         <!-- Watermark (default: on, opt-out with "no watermark") -->
         <p style="position: absolute; bottom: clamp(8px, 1.5vw, 16px); left: 50%; transform: translateX(-50%); font-size: var(--small-size); color: var(--text-muted); opacity: 0.5;">
-            Made with <a href="https://github.com/textboy/mk-slide" style="color: inherit; text-decoration: underline;" target="_blank">Present HTML</a>
+            Made with <a href="https://github.com/textboy/mk-present" style="color: inherit; text-decoration: underline;" target="_blank">Present HTML</a>
         </p>
     </section>
     <!-- NOTE: Include the watermark by default on the last slide. Remove only if user explicitly requests "no watermark". -->

@@ -2,7 +2,7 @@
   <strong>English</strong> | <a href="README_CN.md">中文</a>
 </p>
 
-# MK Slide
+# MK Present
 
 Works on **Claude Code** · **Hermes Agent** · **OpenClaw**
 
@@ -31,7 +31,7 @@ You: "Make me a 10-slide presentation about AI agents, with a strong tech vibe"
 
 ## 3 Skills in This Repository
 
-This repository contains three related skills, each handling a different stage of the presentation workflow:
+This repository (forked from `mk-slide`) contains three related skills, each handling a different stage of the presentation workflow:
 
 | Skill | Directory | Forked From | Purpose |
 |-------|-----------|-------------|---------|
@@ -49,13 +49,13 @@ This repository contains three related skills, each handling a different stage o
 
 ```bash
 # 1. Install as Claude Code skill
-git clone https://github.com/textboy/mk-slide ~/.claude/skills/mk-slide
+git clone https://github.com/textboy/mk-present ~/.claude/skills/mk-present
 
 # 2. Use — just talk naturally
 # "Make me a presentation about..."
 # "Make me a slide about XX" (in Chinese)
 # or invoke directly:
-/mk-slide
+/mk-present
 
 # 3. Present
 open my-presentation.html    # One file. Zero dependencies.
@@ -65,9 +65,9 @@ open my-presentation.html    # One file. Zero dependencies.
 
 | Platform | Install |
 |----------|---------|
-| **Claude Code** | `git clone https://github.com/textboy/mk-slide ~/.claude/skills/mk-slide` |
-| **Hermes Agent** | `git clone https://github.com/textboy/mk-slide ~/.hermes/skills/mk-slide` |
-| **OpenClaw** | `clawhub install mk-slide` |
+| **Claude Code** | `git clone https://github.com/textboy/mk-present ~/.claude/skills/mk-present` |
+| **Hermes Agent** | `git clone https://github.com/textboy/mk-present ~/.hermes/skills/mk-present` |
+| **OpenClaw** | `clawhub install mk-present` |
 | **Any AI tool** | Paste `SKILL.md` as system prompt + reference the support files |
 
 > Or run `bash install.sh` from a clone — it auto-detects all three and symlinks for you.
@@ -188,24 +188,75 @@ Every presentation uses CSS custom properties. Override in `:root`:
 ## File Structure
 
 ```
-mk-slide/
-├── SKILL.md               # AI instructions (the brain)
-├── STYLE_PRESETS.md        # 50+ style definitions with Layout DNA
-├── style-gallery.html      # Local style browser (lightweight)
-├── viewport-base.css       # Responsive CSS (included in every deck)
-├── html-template.md        # HTML architecture reference
-├── animation-patterns.md   # Animation snippets by mood
-├── styles/                 # Reference presentations for each style
-├── diagram/                # Diagram generation specs & samples
-│   ├── samples/*.drawio.xml    # Drawio XML sample diagrams
-│   └── samples/*.html          # HTML sample diagrams
-├── scripts/
-│   ├── extract-pptx.py     # PPT content extraction
-│   ├── generate-pptx.py    # HTML → PPTX (native shapes, Playwright)
-│   └── generate-drawio.py  # Drawio diagram → PNG generation
-├── spec/                   # 10 specification documents
-├── openclaw.plugin.json    # OpenClaw plugin manifest
-└── install.sh              # Auto-detect & install
+mk-present/
+├── CLAUDE.md                    # Behavioral guidelines
+├── LICENSE                      # MIT license
+├── README.md                    # This file
+│
+├── present-workflow/            # Stage 1: storyline preparation
+│   ├── SKILL.md
+│   ├── README.md
+│   └── references/
+│       ├── agent-integration.md
+│       ├── method.md
+│       └── prompts.md
+│
+├── present-html/                # Stage 2: HTML presentation generation
+│   ├── SKILL.md                 # AI instructions (the brain)
+│   ├── STYLE_PRESETS.md         # 50+ style definitions with Layout DNA
+│   ├── html-template.md         # HTML architecture reference
+│   ├── animation-patterns.md    # Animation snippets
+│   ├── viewport-base.css        # Responsive CSS base
+│   ├── gallery.html             # Style gallery (full)
+│   ├── style-gallery.html       # Style browser (lightweight)
+│   ├── SCENARIO_TEMPLATES.md    # Content scenario templates
+│   ├── PROJECT_CONTEXT.md       # Project context
+│   ├── README.md / README_CN.md # Documentation
+│   ├── openclaw.plugin.json     # OpenClaw plugin manifest
+│   ├── install.sh               # Auto-detect & install
+│   ├── package.json             # Dev metadata
+│   ├── vercel.json              # Deploy config
+│   │
+│   ├── styles/                  # 56 reference presentations for each style
+│   ├── scenarios/               # 114 scenario-based template decks
+│   │   └── images/              # Scenario images
+│   ├── diagram/                 # Diagram generation specs & samples
+│   │   ├── *.md                 # Spec docs (cross-cutting, flow, shape, etc.)
+│   │   └── samples/
+│   │       ├── *.drawio.xml     # Drawio XML sample diagrams
+│   │       └── *.html           # HTML sample diagrams
+│   ├── scripts/
+│   │   ├── extract-pptx.py     # PPT content extraction
+│   │   ├── generate-pptx.py    # HTML → PPTX (native shapes)
+│   │   └── generate-drawio.py  # Drawio diagram → PNG generation
+│   ├── spec/                   # 10 specification documents
+│   └── landing/                # Landing page
+│
+├── present-ppt/                 # Stage 3: HTML → PPTX conversion
+│   ├── SKILL.md
+│   ├── README.md
+│   ├── package.json / package-lock.json
+│   ├── references/
+│   │   ├── presets.md
+│   │   ├── preset-template.md
+│   │   ├── preset-decision-rules.md
+│   │   ├── setup.md
+│   │   ├── usage-principles.md
+│   │   ├── qa-heuristics.md
+│   │   └── roadmap.md
+│   └── scripts/
+│       ├── html_to_pptx.js / html_to_pptx_v9.js
+│       ├── layout_v9.js / layout_template.js / layout_utils.js
+│       ├── ai_runtime_preset.js / data_strategy_deck_preset.js
+│       ├── preset_template.js / preflight_qa.js / check_env.js
+│       └── layout_ai_runtime.js
+│
+├── test/                        # Test & sample outputs
+│
+├── .claude/
+│   └── settings.local.json
+└── .loci/
+    └── memory.md
 ```
 
 ---

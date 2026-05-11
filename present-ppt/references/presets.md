@@ -47,7 +47,7 @@ Important styling choices captured in code:
 Used for multi-slide data strategy / cyberpunk-themed presentation decks.
 
 Source file used during prototyping:
-- `/Users/mk/workspace/ai/mk-slide/test/data-strategy-deck.html`
+- `/Users/mk/workspace/ai/mk-present/test/data-strategy-deck.html`
 
 Semantic regions (per slide type):
 1. **title** — section label, huge title (DATA / STRATEGY), subtitle, status line
