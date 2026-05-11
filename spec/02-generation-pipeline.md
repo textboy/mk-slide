@@ -296,9 +296,33 @@ Opens the HTML in headless Chromium at 1920×1080, extracts the full visual tree
 
 Supports any HTML presentation — all MK Slide themes and styles.
 
-### 12.3 Limitations
+### 12.3 Slide Boundary Rules
 
-- Gradient backgrounds are not yet supported (rendered as solid fills)
-- CSS box-shadow has no PowerPoint equivalent
+1. **Slide boundary detection** — Each HTML slide → one PPTX slide, 1:1 mapping.
+2. **Content mapping** — Visible text, backgrounds, borders, inline spans all map to native PPTX equivalents.
+3. **No deck-edge overflow** — All components clamped to 1920×1080 slide boundary. Shapes and text boxes trimmed if they exceed the edge.
+4. **Parent-container containment** — Not tracked by the visual tree extraction. Deeply nested layouts may need manual adjustment.
+
+### 12.4 CSS-to-PPTX Effect Mapping
+
+python-pptx has limited support for decorative CSS effects. Unsupported effects fall back to **bold** as a general approximation — this preserves visual emphasis when the exact effect cannot be reproduced.
+
+| CSS Effect | PPTX Support | Fallback |
+|-----------|-------------|----------|
+| `text-shadow` / glow | Partial — `a:glow` for simple shadows | **Bold** |
+| `-webkit-text-stroke` (outline text) | Supported via `a:ln` on paragraph | **Bold** (if stroke fails) |
+| `background: linear-gradient(...)` | Not supported (rendered as solid fill) | Closest solid color from gradient stops |
+| `box-shadow` | Not supported | Ignored (no PPTX equivalent) |
+| `border-radius` | Supported via `a:roundRect` | Sharp corners |
+| `opacity` / `rgba` alpha | Supported via shape/text transparency | Solid fallback |
+| Text `color: transparent` | Supported via `a:noFill` on run | **Bold** + stroke color |
+
+**Rule:** When the converter encounters an unsupported decorative effect (gradient fill, text-shadow where glow fails, bevel, etc.), it applies **bold** to the element as a general-purpose emphasis fallback.
+
+### 12.5 Limitations
+
+- CSS gradient backgrounds render as solid fills using the first gradient stop color
+- `box-shadow`, CSS filters (`blur`, `drop-shadow`), 3D transforms — no PowerPoint equivalent, ignored
 - Google Fonts mapped to nearest system font equivalent
-- Complex overlapping elements may need manual adjustment
+- Parent-child container boundaries not tracked — deeply nested layouts may need manual adjustment
+- Overlapping inline spans (accent-colored word within heading) render as separate text boxes; font metrics may cause slight misalignment

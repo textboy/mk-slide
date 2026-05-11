@@ -7,6 +7,8 @@
 > 一句话描述你想要的，挑个风格，得到一份漂亮的 HTML 演示。不用 PowerPoint，不用打包工具，无任何依赖。
 
 > 仓库 / 命令名为 `mk-slide`，中文称呼 **MK Slide**。
+>
+> **Forked 自** [next-slide](https://github.com/codesstar/next-slide) — 扩展了图表生成和 PPTX 转换功能。
 
 兼容平台：**Claude Code** · **Hermes Agent** · **OpenClaw**
 
@@ -127,6 +129,8 @@ open my-presentation.html    # 单个文件，零依赖
 - **一键部署** —— `npx vercel --prod` 直接拿到线上 URL
 - **质量自检** —— 生成后自动检查溢出、字体、信息密度
 - **字号精确** —— 每个风格的 `clamp()` 数值都从手工参考稿里抠出来
+- **架构图 & 流程图生成** —— 用自然语言描述即可生成：企业架构房、逻辑架构、系统架构、物理架构、逻辑流程图、流程图、API 时序图。支持 Drawio → PNG → 嵌入 HTML，或直接用 HTML（CSS 定位卡片 + SVG 连线）。详见 `diagram/` 目录的规格文件和示例。
+- **HTML 转 PPTX** —— 将任意 HTML 演示导出为 PowerPoint，转换后为原生形状（文本框、矩形、圆角矩形、带样式的文字、边框、背景填充）。因 python-pptx 库限制无法做到 100% 像素级一致（渐变 → 纯色填充、阴影忽略），但文字保持可编辑，结构完整保留。
 
 ---
 
@@ -190,7 +194,14 @@ mk-slide/
 ├── html-template.md        # HTML 架构参考
 ├── animation-patterns.md   # 各情绪的动画片段
 ├── styles/                 # 每个风格的参考演示
-├── scripts/extract-pptx.py # PPT 内容抽取
+├── diagram/                # 图表生成规格文件及示例
+│   ├── samples/*.drawio.xml    # Drawio XML 示例图表
+│   └── samples/*.html          # HTML 示例图表
+├── scripts/
+│   ├── extract-pptx.py     # PPT 内容抽取
+│   ├── generate-pptx.py    # HTML → PPTX（原生形状，Playwright）
+│   └── generate-drawio.py  # Drawio 图表 → PNG 生成
+├── spec/                   # 10 份规格文档
 ├── openclaw.plugin.json    # OpenClaw 插件清单
 └── install.sh              # 三平台自动检测安装
 ```

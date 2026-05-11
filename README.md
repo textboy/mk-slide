@@ -8,6 +8,8 @@ Works on **Claude Code** · **Hermes Agent** · **OpenClaw**
 
 > Describe what you want. Pick a style. Get a beautiful HTML presentation. No PowerPoint, no build tools, no dependencies.
 
+> **Forked from** [next-slide](https://github.com/codesstar/next-slide) — extended with diagram generation and PPTX conversion.
+
 ---
 
 ## What It Does
@@ -113,6 +115,8 @@ Each style is a complete design system: curated typography, color palette, layou
 - **One-click deploy** — `npx vercel --prod` and you have a live URL
 - **Quality assurance** — auto-checks overflow, fonts, density after generation
 - **Typography precision** — every style has exact clamp() values extracted from hand-crafted references
+- **Architecture & flow diagrams** — generate from natural language: enterprise house-architecture, logical/system/physical architecture, flow charts, API sequence diagrams. Supports Drawio → PNG → embed in HTML, or direct HTML with CSS-positioned cards + SVG connectors. See `diagram/` for specs and samples.
+- **HTML to PPTX conversion** — export any HTML presentation to PowerPoint with native shapes (text boxes, rectangles, rounded rectangles, styled text, borders, background fills). Not 100% pixel-perfect due to python-pptx limitations (gradients → solid fill, box-shadow ignored), but text remains editable and structure is preserved.
 
 ---
 
@@ -176,7 +180,14 @@ mk-slide/
 ├── html-template.md        # HTML architecture reference
 ├── animation-patterns.md   # Animation snippets by mood
 ├── styles/                 # Reference presentations for each style
-├── scripts/extract-pptx.py # PPT content extraction
+├── diagram/                # Diagram generation specs & samples
+│   ├── samples/*.drawio.xml    # Drawio XML sample diagrams
+│   └── samples/*.html          # HTML sample diagrams
+├── scripts/
+│   ├── extract-pptx.py     # PPT content extraction
+│   ├── generate-pptx.py    # HTML → PPTX (native shapes, Playwright)
+│   └── generate-drawio.py  # Drawio diagram → PNG generation
+├── spec/                   # 10 specification documents
 ├── openclaw.plugin.json    # OpenClaw plugin manifest
 └── install.sh              # Auto-detect & install
 ```

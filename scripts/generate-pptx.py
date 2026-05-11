@@ -12,6 +12,16 @@ Extracts full visual tree from each HTML slide via Playwright:
   - Styled inline spans (accent colors) → inline text runs
   - Outline text (-webkit-text-stroke) → text outline effect
 
+Spatial invariants:
+  - All components clamped to slide boundary (1920×1080)
+  - Shapes and text boxes trimmed if they exceed deck edge
+  - Parent-container containment: not tracked (manual adj. for deep nests)
+
+Unsupported CSS effects fallback:
+  - Gradient fills → solid fill from first stop
+  - box-shadow, CSS filters → ignored (no PPTX equivalent)
+  - Unsupported decorative effects → bold (preserves visual emphasis)
+
 Usage:
     python scripts/generate-pptx.py test/deck.html --output test/deck.pptx
 """

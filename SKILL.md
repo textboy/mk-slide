@@ -523,9 +523,26 @@ python scripts/generate-pptx.py test/deck.html --output test/deck.pptx
 
 **Supports:** ANY HTML presentation — works with all MK Slide themes and styles.
 
+### CSS-to-PPTX Effect Mapping
+
+python-pptx has limited support for decorative CSS effects. Unsupported effects fall back to **bold** as a general approximation — this preserves visual emphasis even when the exact effect cannot be reproduced.
+
+| CSS Effect | PPTX Support | Fallback |
+|-----------|-------------|----------|
+| `text-shadow` / glow | Partial — `a:glow` for simple shadows | **Bold** |
+| `-webkit-text-stroke` (outline text) | Supported via `a:ln` on paragraph | **Bold** (if stroke fails) |
+| `background: linear-gradient(...)` | Not supported (rendered as solid fill) | Closest solid color from gradient stops |
+| `box-shadow` | Not supported | Ignored (no PPTX equivalent) |
+| `border-radius` | Supported via `a:roundRect` | Sharp corners |
+| `opacity` / `rgba` alpha | Supported via shape/text transparency | Solid fallback |
+| Text `color: transparent` | Supported via `a:noFill` on run | **Bold** + stroke color |
+
+**Rule:** When the converter encounters an unsupported decorative effect (gradient fill, text-shadow where glow fails, bevel, etc.), it applies **bold** to the element as a general-purpose emphasis fallback. This ensures the visual hierarchy is preserved in PowerPoint even when the exact CSS effect is unavailable.
+
 ### Limitations
 
-- Some CSS effects (gradient backgrounds, box-shadow, CSS animations) may not translate exactly to PowerPoint equivalents
+- CSS gradient backgrounds (`linear-gradient`, `radial-gradient`) render as solid fills using the first gradient stop color
+- `box-shadow`, CSS filters (`blur`, `drop-shadow`), and 3D transforms have no PowerPoint equivalent and are ignored
 - Google Fonts are mapped to system fonts (Orbitron → Orbitron, Space Mono → Space Mono, Inter → Inter, etc.)
 - Parent-child container boundaries are not tracked — deeply nested layouts may need manual adjustment
 - Overlapping inline spans (e.g., accent-colored word within a heading) render as separate text boxes; depending on font metrics, they may not pixel-perfectly align with the base text
