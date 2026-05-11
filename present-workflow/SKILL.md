@@ -55,13 +55,13 @@ If inputs are incomplete, ask for the minimum missing fields:
 - audience
 - purpose
 - page-count range
-- preferred tone or style
+- preferred scenario, tone, or style
 - whether fresh fact-finding is needed
 - whether the user wants intermediate review before full generation
 
 ### 2. Topic + brief
 
-Use when the user already provides audience, purpose, style, page count, and key messages.
+Use when the user already provides audience, purpose, scenario, style, page count, and key messages.
 
 ### 3. Source-driven request
 
@@ -105,7 +105,7 @@ Collect only the inputs necessary to avoid avoidable misfires:
 - audience
 - purpose
 - page-count range
-- style or tone
+- scenario, style, or tone
 - must-have sections
 - must-avoid claims or directions
 - whether the user wants fast rough output or staged confirmation

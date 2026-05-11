@@ -51,10 +51,26 @@ Based on the user's PPT topic, target audience, presentation purpose, and backgr
 - PPT Topic: {{TOPIC}}
 - Audience: {{AUDIENCE}}
 - Purpose: {{PURPOSE}}
+- Scenario: {{SCENARIO}}
 - Style: {{STYLE}}
-- Page requirements: {{PAGE_REQUIREMENTS}}
+- Background Tune: {{BACKGROUND_TUNE}}
+- Page requirements / Minutes presentation: {{PAGE_OR_MINS}}
 - Background information:
 {{CONTEXT}}
+- Architecture / flow generation approach: {{DIAGRAM_APPROACH}}
+
+## Samples
+
+Refer to these sample values when filling in the Input fields above:
+
+| Field | Sample Values |
+|-------|--------------|
+| **Audience** | C-Level, Senior Management, Technical Team, Analytics Team, Engineering, Investor |
+| **Purpose** | Inform, Persuade, Decide, Inspire, Educate/Train |
+| **Scenario** | AI, ecommerce, promo, product-launch, tech-talk, thesis, year-end-review — more at https://next-slide-jet.vercel.app/gallery |
+| **Style** | Tech, Campus, Fashion, Futuristic, Chinese Ink, Korean-Soft, Cinema, Midnight, premium — more at https://next-slide-jet.vercel.app/gallery |
+| **Background Tune** | dark, bright, professional, playful, minimal |
+| **Diagram Approach** | drawio, html, N/A (select N/A if no architecture/flow/diagram) |
 
 ## Requirements
 - Must leverage existing background information — do not expand without factual basis
@@ -107,7 +123,9 @@ You are a senior PPT planner. Your job is not to produce the final design direct
 
 ## Input
 - PPT Topic: {{TOPIC}}
+- Overall scenario: {{SCENARIO}}
 - Overall style: {{STYLE}}
+- Overall Background Tune: {{BACKGROUND_TUNE}}
 - Audience: {{AUDIENCE}}
 - Outline JSON:
 {{OUTLINE_JSON}}
@@ -185,7 +203,9 @@ As an expert in information architecture and SVG encoding, your task is to trans
 - Slide goal: {{SLIDE_GOAL}}
 - Slide content:
 {{SLIDE_CONTENT}}
+- Scenario requirements: {{SCENARIO}}
 - Style requirements: {{STYLE}}
+- Background Tune: {{BACKGROUND_TUNE}}
 
 ## Requirements
 1. Analyze content structure first, then determine hierarchy and visual layering
