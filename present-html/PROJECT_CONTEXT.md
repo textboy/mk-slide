@@ -13,7 +13,7 @@ This file is for any AI/LLM working on this project. Read this first for full co
 Present HTML is a Claude Code Skill that generates zero-dependency, animation-rich HTML presentations from natural language. 50+ curated visual styles, bilingual (EN/中文), supports Markdown conversion, and one-click Vercel deploy.
 
 - **GitHub**: https://github.com/textboy/mk-present
-- **Gallery**: https://present-html.vercel.app/gallery.html (or open `gallery.html` locally)
+- **Gallery**: open `gallery.html` locally
 - **Install**: `git clone https://github.com/textboy/mk-present ~/.claude/skills/present-html`
 
 ## File Map
@@ -27,8 +27,8 @@ Present HTML is a Claude Code Skill that generates zero-dependency, animation-ri
 | `html-template.md` | HTML skeleton + JS navigation controller + `window.go()` |
 | `animation-patterns.md` | Animation snippets by feeling |
 | `SCENARIO_TEMPLATES.md` | Scenario structures, narrative arcs, 45 examples |
-| `gallery.html` | Online style gallery with recommendation system |
-| `style-gallery.html` | Local lightweight gallery |
+| `gallery.html` | Style gallery with recommendation system |
+| `gallery_cn.html` | Style gallery (Chinese) |
 | `landing/` | Product landing page |
 | `diagram/` | Diagram generation specs, samples (drawio XML + HTML) |
 | `spec/` | 10 specification documents (architecture → diagram generation) |

@@ -88,7 +88,7 @@ open ./output/my-presentation.html    # 单个文件，零依赖
 
 每个风格都是完整的设计系统：精挑的字体、色板、版式、专属动画、响应式断点。
 
-**看全部风格**：[Style Gallery](https://next-slide-jet.vercel.app/gallery)，或本地 `open style-gallery.html`。
+**浏览全部场景/风格/图表**：<a href="gallery_cn.html" target="_blank">浏览画廊</a>
 
 ---
 
@@ -187,7 +187,6 @@ Present HTML 不是模板引擎。它是一套有立场的设计系统，教 AI 
 present-html/
 ├── SKILL.md               # AI 指令（大脑）
 ├── STYLE_PRESETS.md        # 50+ 风格定义（带 Layout DNA）
-├── style-gallery.html      # 本地风格浏览器
 ├── viewport-base.css       # 响应式 CSS（每个 deck 都内置）
 ├── html-template.md        # HTML 架构参考
 ├── animation-patterns.md   # 各情绪的动画片段

@@ -52,12 +52,16 @@ This repository contains three related skills, each handling a different stage o
 ## Quick Start
 
 ```bash
-# 1. Install
-git clone https://github.com/textboy/mk-present ~/.claude/skills/mk-present
+# 1. Clone the repo anywhere
+git clone https://github.com/textboy/mk-present
+
+# 2. Install all 3 skills
+bash install.sh           # Auto-detect all available platforms
+bash install.sh claude    # Or specify: claude / codex / hermes / openclaw
 ```
 
 ```markdown
-# 2. Call the skills in sequence
+# 3. Call the skills in sequence
 
 # Step 1 — Plan your storyline
 /present-workflow, design 10 slides for presenting a centralized API platform
@@ -73,10 +77,11 @@ git clone https://github.com/textboy/mk-present ~/.claude/skills/mk-present
 
 | Platform | Install |
 |----------|---------|
-| **Claude Code** | `git clone https://github.com/textboy/mk-present ~/.claude/skills/mk-present` |
-| **Hermes Agent** | `git clone https://github.com/textboy/mk-present ~/.hermes/skills/mk-present` |
-| **OpenClaw** | `clawhub install mk-present` |
-| **Any AI tool** | Paste `SKILL.md` as system prompt + reference the support files |
+| **Claude Code** | `git clone https://github.com/textboy/mk-present && cd mk-present && bash install.sh claude` |
+| **OpenAI Codex** | `git clone https://github.com/textboy/mk-present && cd mk-present && bash install.sh codex` |
+| **Hermes Agent** | `git clone https://github.com/textboy/mk-present && cd mk-present && bash install.sh hermes` |
+| **OpenClaw** | `git clone https://github.com/textboy/mk-present && cd mk-present && bash install.sh openclaw` |
+| **Any AI tool** | Paste each `SKILL.md` as system prompt + reference the support files |
 
 > Or run `bash install.sh` from a clone — it auto-detects all three and symlinks for you.
 
@@ -98,7 +103,7 @@ No runtime, no API keys, no vendor lock-in. Just markdown instructions + CSS/HTM
 
 Each style is a complete design system: curated typography, color palette, layout patterns, signature animations, and responsive breakpoints.
 
-**Browse all styles:** [Style Gallery](https://next-slide-jet.vercel.app/gallery) or run `open style-gallery.html` locally after installing.
+**Browse all Scenarios/Styles/Diagrams:** <a href="present-html/gallery.html" target="_blank">View Gallery</a>
 
 ---
 
@@ -129,6 +134,13 @@ Each style is a complete design system: curated typography, color palette, layou
 
 ## Features
 
+### present-workflow
+- **Staged workflow** — brief → research → outline → planning draft → review → finalize
+- **Pyramid Principle** — conclusion-first structure, top-down logic, grouped by category
+- **Review gates** — pause for feedback on important decks before committing to full drafts
+- **Source-driven** — accepts URLs, reports, PDFs, transcripts as input context
+
+### present-html
 - **50+ curated styles** — not just color swaps, each is a distinct design language with Layout DNA
 - **Zero dependencies** — single HTML file, all CSS/JS inline
 - **Bilingual native** — English + Chinese with proper CJK font support
@@ -139,8 +151,13 @@ Each style is a complete design system: curated typography, color palette, layou
 - **One-click deploy** — `npx vercel --prod` and you have a live URL
 - **Quality assurance** — auto-checks overflow, fonts, density after generation
 - **Typography precision** — every style has exact clamp() values extracted from hand-crafted references
-- **Architecture & flow diagrams** — generate from natural language: enterprise house-architecture, logical/system/physical architecture, flow charts, API sequence diagrams. Supports Drawio → PNG → embed in HTML, or direct HTML with CSS-positioned cards + SVG connectors. See `diagram/` for specs and samples.
-- **HTML to PPTX conversion** — export any HTML presentation to PowerPoint with native shapes (text boxes, rectangles, rounded rectangles, styled text, borders, background fills). Not 100% pixel-perfect due to python-pptx limitations (gradients → solid fill, box-shadow ignored), but text remains editable and structure is preserved.
+- **Architecture & flow diagrams** — generate from natural language: enterprise house-architecture, logical/system/physical architecture, flow charts, API sequence diagrams. Supports Drawio → PNG → embed in HTML, or direct HTML with CSS-positioned cards + SVG connectors.
+
+### present-ppt
+- **HTML to PPTX conversion** — export any HTML presentation to PowerPoint with native shapes (text boxes, rectangles, rounded rectangles, styled text, borders, background fills)
+- **Preset-driven** — semantic block mapping, not a generic browser renderer
+- **Editable output** — text remains editable in PowerPoint, structure is preserved
+- **QA/preflight** — built-in checks for spacing, overflow, and arrow direction
 
 ---
 
@@ -157,13 +174,22 @@ Each style is a complete design system: curated typography, color palette, layou
 
 ## Design Philosophy
 
-MK Present isn't a template engine. It's an opinionated design system that teaches AI to think like a designer:
+MK Present is a **3-skill pipeline** built on distinct principles at each stage:
 
+### present-workflow
+1. **Constrain the workflow, not the implementation** — Tell the agent what must happen and when, but leave how to execute to the environment.
+2. **Staged over one-shot** — Research → outline → planning → review before any full generation. Avoid expensive misfires.
+3. **Review gates for important decks** — External-facing, board-level, or high-stakes presentations pause for user feedback before scaling up.
+
+### present-html
 1. **No AI Slop** — Every style is hand-crafted with intentional typography, spacing, and motion. The AI follows exact specifications, not vibes.
 2. **Layout DNA** — Each style defines its structural patterns: slide mechanism, title alignment, navigation style, background treatment, animation approach, and component structure.
 3. **Typography Scale** — Precise `clamp()` values for every element ensure the AI reproduces exact font sizes, weights, line-heights, and letter-spacing.
 4. **Viewport First** — Every slide fits exactly in 100vh. No scrolling. Content too long? Split into multiple slides automatically.
-5. **Zero Dependencies** — One HTML file. Open it anywhere. No npm, no build step, no CDN that might go down.
+
+### present-ppt
+1. **Semantic mapping over screenshot embedding** — Parse HTML into a small intermediate model, then rebuild as native PowerPoint shapes.
+2. **Editability first** — Text remains editable in PowerPoint. Fidelity is iterated, not sacrificed for pixel-perfection.
 
 ---
 
@@ -214,8 +240,8 @@ mk-present/
 │   ├── html-template.md         # HTML architecture reference
 │   ├── animation-patterns.md    # Animation snippets
 │   ├── viewport-base.css        # Responsive CSS base
-│   ├── gallery.html             # Style gallery (full)
-│   ├── style-gallery.html       # Style browser (lightweight)
+│   ├── gallery.html             # Style gallery (English)
+│   ├── gallery_cn.html          # Style gallery (Chinese)
 │   ├── SCENARIO_TEMPLATES.md    # Content scenario templates
 │   ├── PROJECT_CONTEXT.md       # Project context
 │   ├── README.md / README_CN.md # Documentation

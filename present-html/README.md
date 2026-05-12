@@ -74,7 +74,7 @@ No runtime, no API keys, no vendor lock-in. Just markdown instructions + CSS/HTM
 
 Each style is a complete design system: curated typography, color palette, layout patterns, signature animations, and responsive breakpoints.
 
-**Browse all styles:** [Style Gallery](https://next-slide-jet.vercel.app/gallery) or run `open style-gallery.html` locally after installing.
+**Browse all Scenarios/Styles/Diagrams:** <a href="gallery.html" target="_blank">View Gallery</a>
 
 ---
 
@@ -173,7 +173,6 @@ Every presentation uses CSS custom properties. Override in `:root`:
 present-html/
 ├── SKILL.md               # AI instructions (the brain)
 ├── STYLE_PRESETS.md        # 50+ style definitions with Layout DNA
-├── style-gallery.html      # Local style browser (lightweight)
 ├── viewport-base.css       # Responsive CSS (included in every deck)
 ├── html-template.md        # HTML architecture reference
 ├── animation-patterns.md   # Animation snippets by mood

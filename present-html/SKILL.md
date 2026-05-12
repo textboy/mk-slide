@@ -12,7 +12,7 @@ description: >
   Works on Claude Code, Hermes Agent, and OpenClaw.
   Trigger when the user says: "make a presentation", "build slides", "create a deck",
   "pitch deck", "PPT", "PowerPoint", "presentation about", "talk slides",
-  "slide deck", "present-html", "mk slide",
+  "slide deck", "present-html", "mk present",
   "做个 PPT", "帮我做 PPT", "做个演示", "做个幻灯片", "做演示文稿",
   "做个 slide", "做个分享", "做个 pitch", "做个汇报", "做个演讲材料",
   "做一份关于 X 的 PPT", "做一个 X 主题的演讲",
