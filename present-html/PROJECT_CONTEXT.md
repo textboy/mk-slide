@@ -10,7 +10,7 @@ This file is for any AI/LLM working on this project. Read this first for full co
 
 ## What This Is
 
-Present HTML is a Claude Code Skill that generates zero-dependency, animation-rich HTML presentations from natural language. 50+ curated visual styles, bilingual (EN/中文), supports Markdown conversion, and one-click Vercel deploy.
+Present HTML is a Claude Code Skill that generates animation-rich HTML presentations from natural language. 50+ curated visual styles, bilingual (EN/中文), supports Markdown conversion, and one-click Vercel deploy.
 
 - **GitHub**: https://github.com/textboy/mk-present
 - **Gallery**: open `gallery.html` locally

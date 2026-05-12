@@ -6,9 +6,9 @@
 
 Works on **Claude Code** · **Hermes Agent** · **OpenClaw**
 
-> Describe what you want. Pick a style. Get a beautiful HTML presentation. No PowerPoint, no build tools, no dependencies.
+> Describe what you want. Pick a style. Get a beautiful HTML presentation. No PowerPoint, no build tools.
 
-> **Forked from** [next-slide](https://github.com/codesstar/next-slide) — extended with diagram generation.
+> **Forked & enhanced from** [next-slide](https://github.com/codesstar/next-slide) — extended with diagram generation.
 
 ---
 
@@ -42,7 +42,7 @@ git clone https://github.com/textboy/mk-present ~/.claude/skills/present-html
 /present-html
 
 # 3. Present
-open ./output/my-presentation.html    # One file. Zero dependencies.
+open ./output/my-presentation.html    # One file.
 ```
 
 ### Also works with
@@ -106,7 +106,6 @@ Each style is a complete design system: curated typography, color palette, layou
 ## Features
 
 - **50+ curated styles** — not just color swaps, each is a distinct design language with Layout DNA
-- **Zero dependencies** — single HTML file, all CSS/JS inline
 - **Bilingual native** — English + Chinese with proper CJK font support
 - **5 input modes** — new from scratch, markdown, enhancement, reference match, style comparison
 - **Responsive** — fits any screen, from phone to 4K projector
@@ -138,7 +137,6 @@ Present HTML isn't a template engine. It's an opinionated design system that tea
 2. **Layout DNA** — Each style defines its structural patterns: slide mechanism, title alignment, navigation style, background treatment, animation approach, and component structure.
 3. **Typography Scale** — Precise `clamp()` values for every element ensure the AI reproduces exact font sizes, weights, line-heights, and letter-spacing.
 4. **Viewport First** — Every slide fits exactly in 100vh. No scrolling. Content too long? Split into multiple slides automatically.
-5. **Zero Dependencies** — One HTML file. Open it anywhere. No npm, no build step, no CDN that might go down.
 
 ---
 

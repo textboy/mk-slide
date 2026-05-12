@@ -1,6 +1,6 @@
 # present-workflow
 
-> **present-workflow** 是 [ppt-agent-workflow-san/ppt-workflow](https://github.com/mucsbr/ppt-agent-workflow-san/tree/main/ppt-workflow) 的重命名和 Fork，用于准备演示文稿的故事线作为第一阶段。
+> **present-workflow** Fork 并增强自 [ppt-agent-workflow-san/ppt-workflow](https://github.com/mucsbr/ppt-agent-workflow-san/tree/main/ppt-workflow)，用于准备演示文稿的故事线作为第一阶段。
 
 ## 概述
 

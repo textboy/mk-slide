@@ -17,7 +17,7 @@ Works on **Claude Code** · **Hermes Agent** · **OpenClaw**
 MK Present is a **3-skill pipeline** covering the full presentation lifecycle:
 
 1. **📋 [present-workflow](present-workflow/README.md)** — Plan your storyline. Clarify the brief, research, outline, review.
-2. **🎨 [present-html](present-html/README.md)** — Generate a stunning HTML presentation. 50+ curated styles, bilingual, zero dependencies.
+2. **🎨 [present-html](present-html/README.md)** — Generate a stunning HTML presentation. 50+ curated styles, bilingual.
 3. **📄 [present-ppt](present-ppt/README.md)** — Convert your HTML deck into an editable PowerPoint (.pptx) with native shapes and text.
 
 ```
@@ -44,7 +44,7 @@ This repository contains three related skills, each handling a different stage o
 | **[present-ppt](present-ppt/README.md)** | `present-ppt/` | [ppt-agent-workflow-san/html-slide-to-pptx](https://github.com/mucsbr/ppt-agent-workflow-san/tree/main/html-slide-to-pptx) | Convert HTML to editable PowerPoint (.pptx) |
 
 - **[present-workflow](present-workflow/README.md)** — Prepares the presentation storyline as the first stage: clarify brief, research, outline, plan, review.
-- **[present-html](present-html/README.md)** — Generates zero-dependency, animation-rich HTML presentations from natural language. 50+ curated styles, bilingual support. Also supports architecture and flow diagram generation (enterprise house-architecture, logical/system/physical architecture, flow charts, API sequence diagrams) via Drawio → PNG → embed or direct HTML.
+- **[present-html](present-html/README.md)** — Generates animation-rich HTML presentations from natural language. 50+ curated styles, bilingual support. Also supports architecture and flow diagram generation (enterprise house-architecture, logical/system/physical architecture, flow charts, API sequence diagrams) via Drawio → PNG → embed or direct HTML.
 - **[present-ppt](present-ppt/README.md)** — Converts structured single-slide or small deck HTML files into editable PPTX slides with native text boxes, shapes, chips, arrows, and panels. Preset-driven, not a generic browser renderer.
 
 ---
@@ -142,7 +142,6 @@ Each style is a complete design system: curated typography, color palette, layou
 
 ### present-html
 - **50+ curated styles** — not just color swaps, each is a distinct design language with Layout DNA
-- **Zero dependencies** — single HTML file, all CSS/JS inline
 - **Bilingual native** — English + Chinese with proper CJK font support
 - **5 input modes** — new from scratch, markdown, enhancement, reference match, style comparison
 - **Responsive** — fits any screen, from phone to 4K projector

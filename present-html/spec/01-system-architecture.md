@@ -2,7 +2,7 @@
 
 ## 1. Product Overview
 
-**Present HTML (a.k.a. Present HTML)** is an AI-agent skill that generates zero-dependency, animation-rich HTML presentations from natural language. It operates as a skill within Claude Code, Hermes Agent, and OpenClaw.
+**Present HTML (a.k.a. Present HTML)** is an AI-agent skill that generates animation-rich HTML presentations from natural language. It operates as a skill within Claude Code, Hermes Agent, and OpenClaw.
 
 - **Slogan:** Your next PPT, doesn't have to be PPT.
 - **License:** MIT
@@ -15,7 +15,6 @@
 - Generate single-file HTML presentations from natural language
 - 53 curated visual styles across 7 categories
 - Bilingual (English / Chinese) with proper CJK typography support
-- Zero dependencies — no npm, no build tools, no runtime
 - 5 input modes: natural language, markdown, enhancement, reference match, style comparison
 - One-click Vercel deploy for sharing
 
@@ -122,11 +121,10 @@ presentation.html
 
 ## 5. Design Principles
 
-1. **Zero Dependencies** — Single HTML files with inline CSS/JS
-2. **Show, Don't Tell** — Generate visual previews via style gallery
-3. **Distinctive Design** — No generic "AI slop," every presentation custom-crafted
-4. **Viewport Fitting (NON-NEGOTIABLE)** — Every slide fits exactly within 100vh
-5. **Bilingual Native** — Full Chinese + English with CJK font fallbacks
+1. **Show, Don't Tell** — Generate visual previews via style gallery
+2. **Distinctive Design** — No generic "AI slop," every presentation custom-crafted
+3. **Viewport Fitting (NON-NEGOTIABLE)** — Every slide fits exactly within 100vh
+4. **Bilingual Native** — Full Chinese + English with CJK font fallbacks
 
 ### 5.1 Anti-AI-Slop Rules
 

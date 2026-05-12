@@ -11,7 +11,7 @@ brain: /Users/callum/Desktop/cyc-brain
 
 ## 项目定位
 
-MK Present 是一个 Claude Code Skill，让用户通过自然语言生成零依赖、动画丰富的 HTML 演示文稿。50+ 预设风格，中英双语，支持 PPT 转换、Markdown 转换、一键部署。
+MK Present 是一个 Claude Code Skill，让用户通过自然语言生成动画丰富的 HTML 演示文稿。50+ 预设风格，中英双语，支持 PPT 转换、Markdown 转换、一键部署。
 
 - **GitHub**: https://github.com/textboy/mk-present
 - **Gallery（线上）**: https://next-slide-jet.vercel.app/gallery.html

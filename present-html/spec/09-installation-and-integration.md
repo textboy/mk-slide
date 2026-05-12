@@ -101,7 +101,7 @@ openclaw.plugin.json
 {
     "name": "present-html",
     "version": "1.0.0",
-    "description": "AI-powered HTML presentations. 50+ styles, zero dependencies, bilingual.",
+    "description": "AI-powered HTML presentations. 50+ styles, bilingual.",
     "author": "Callum",
     "license": "MIT",
     "keywords": ["presentation", "slides", "html", "bilingual"]

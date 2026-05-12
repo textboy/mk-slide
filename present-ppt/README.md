@@ -1,6 +1,6 @@
 # present-ppt
 
-> **present-ppt** is a rename & fork of [html-slide-to-pptx](https://github.com/mucsbr/ppt-agent-workflow-san/tree/main/html-slide-to-pptx).
+> **present-ppt** is forked & enhanced from [html-slide-to-pptx](https://github.com/mucsbr/ppt-agent-workflow-san/tree/main/html-slide-to-pptx).
 
 Convert structured HTML slides into editable PowerPoint (.pptx) slides with native text boxes, shapes, chips, arrows, and panels.
 

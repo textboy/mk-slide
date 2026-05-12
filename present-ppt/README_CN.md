@@ -1,6 +1,6 @@
 # present-ppt
 
-> **present-ppt** 是 [html-slide-to-pptx](https://github.com/mucsbr/ppt-agent-workflow-san/tree/main/html-slide-to-pptx) 的重命名和 Fork。
+> **present-ppt** Fork 并增强自 [html-slide-to-pptx](https://github.com/mucsbr/ppt-agent-workflow-san/tree/main/html-slide-to-pptx)。
 
 将结构化的 HTML 幻灯片转换为可编辑的 PowerPoint (.pptx) 幻灯片，包含原生文本框、形状、标签、箭头和面板。
 

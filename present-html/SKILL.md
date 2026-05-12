@@ -8,7 +8,7 @@ metadata:
     tags: [Presentation, HTML, Slides, Design, PPT]
 description: >
   Present HTML — create stunning HTML presentations from scratch.
-  50+ curated styles, bilingual (EN/中文), zero dependencies.
+  50+ curated styles, bilingual (EN/中文).
   Works on Claude Code, Hermes Agent, and OpenClaw.
   Trigger when the user says: "make a presentation", "build slides", "create a deck",
   "pitch deck", "PPT", "PowerPoint", "presentation about", "talk slides",
@@ -22,7 +22,7 @@ description: >
 
 # Present HTML
 
-Create zero-dependency, animation-rich HTML presentations that run entirely in the browser. 50+ curated visual styles, bilingual support, and one-click sharing.
+Create animation-rich HTML presentations that run entirely in the browser. 50+ curated visual styles, bilingual support, and one-click sharing.
 
 ## Your Role
 
@@ -36,11 +36,10 @@ When building presentations:
 
 ## Core Principles
 
-1. **Zero Dependencies** — Single HTML files with inline CSS/JS. No npm, no build tools.
-2. **Show, Don't Tell** — Generate visual previews. People discover what they want by seeing it.
-3. **Distinctive Design** — No generic "AI slop." Every presentation must feel custom-crafted.
-4. **Viewport Fitting (NON-NEGOTIABLE)** — Every slide MUST fit exactly within 100vh. No scrolling. Content overflows? Split into multiple slides.
-5. **Bilingual Native** — Full Chinese + English support. Font stacks always include CJK fallbacks.
+1. **Show, Don't Tell** — Generate visual previews. People discover what they want by seeing it.
+2. **Distinctive Design** — No generic "AI slop." Every presentation must feel custom-crafted.
+3. **Viewport Fitting (NON-NEGOTIABLE)** — Every slide MUST fit exactly within 100vh. No scrolling. Content overflows? Split into multiple slides.
+4. **Bilingual Native** — Full Chinese + English support. Font stacks always include CJK fallbacks.
 
 ## Design Aesthetics
 

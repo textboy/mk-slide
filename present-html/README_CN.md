@@ -8,7 +8,7 @@
 
 > 仓库 / 命令名为 `present-html`，中文称呼 **Present HTML**。
 >
-> **Forked 自** [next-slide](https://github.com/codesstar/next-slide) — 扩展了图表生成功能。
+> **Forked & enhanced 自** [next-slide](https://github.com/codesstar/next-slide) — 扩展了图表生成功能。
 
 兼容平台：**Claude Code** · **Hermes Agent** · **OpenClaw**
 
@@ -57,7 +57,7 @@ git clone https://github.com/textboy/mk-present && cd present-html && bash insta
 /present-html
 
 # 3. 演示
-open ./output/my-presentation.html    # 单个文件，零依赖
+open ./output/my-presentation.html    # 单个文件
 ```
 
 ### 三平台对比
@@ -120,7 +120,6 @@ open ./output/my-presentation.html    # 单个文件，零依赖
 ## 特性
 
 - **50+ 精选风格** —— 不是换个颜色那么简单，每个都是独立设计语言（带 Layout DNA）
-- **零依赖** —— 单 HTML 文件，CSS/JS 全内联
 - **中英文原生** —— 中文 CJK 字体支持到位
 - **5 种输入方式** —— 从零开始 / Markdown / 增强已有 deck / 截图匹配 / 风格对比
 - **响应式** —— 手机到 4K 投影都适配
@@ -152,7 +151,6 @@ Present HTML 不是模板引擎。它是一套有立场的设计系统，教 AI 
 2. **Layout DNA** —— 每个风格都定义了结构模式：slide 机制、标题对齐、导航样式、背景处理、动画路数、组件结构
 3. **字号精确** —— 每个元素都有精确的 `clamp()` 值，确保 AI 能复现字号、字重、行高、字距
 4. **Viewport First** —— 每页正好 100vh。不滚动。内容超了？自动拆成多页
-5. **零依赖** —— 一个 HTML。哪儿都能开。无 npm、无打包、无可能挂掉的 CDN
 
 ---
 
