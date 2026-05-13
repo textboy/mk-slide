@@ -103,7 +103,29 @@ No runtime, no API keys, no vendor lock-in. Just markdown instructions + CSS/HTM
 
 Each style is a complete design system: curated typography, color palette, layout patterns, signature animations, and responsive breakpoints.
 
-**Browse all Scenarios/Styles/Diagrams:** <a href="present-html/gallery.html" target="_blank">View Gallery</a>
+**Browse all Scenarios/Styles/Diagrams:** <a href="present-html/gallery.html" target="_blank" style="font-weight: bold; font-size: 18px;">View Gallery</a>
+
+### Gallery UI
+
+![Gallery UI](sample/webui.png)
+
+### Scenarios Sample
+
+| Scenario 01 | Scenario 02 |
+|:-----------:|:-----------:|
+| ![Scenario 01](sample/scenario01.png) | ![Scenario 02](sample/scenario02.png) |
+
+### Styles Sample
+
+| Style 01 | Style 02 |
+|:--------:|:--------:|
+| ![Style 01](sample/style01.png) | ![Style 02](sample/style02.png) |
+
+### Diagrams Sample
+
+| Diagram 01 | Diagram 02 |
+|:----------:|:----------:|
+| ![Diagram 01](sample/diagram01.png) | ![Diagram 02](sample/diagram02.png) |
 
 ---
 

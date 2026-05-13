@@ -103,7 +103,29 @@ bash install.sh claude    # 或指定平台：claude / codex / hermes / openclaw
 
 每个风格都是完整的设计系统：精挑的字体、色板、版式、专属动画、响应式断点。
 
-**浏览全部场景/风格/图表**：<a href="present-html/gallery_cn.html" target="_blank">浏览画廊</a>
+**浏览全部场景/风格/图表**：<a href="present-html/gallery_cn.html" target="_blank" style="font-weight: bold; font-size: 18px;">浏览画廊</a>
+
+### 画廊界面
+
+![画廊界面](sample/webui.png)
+
+### 场景样例
+
+| 场景 01 | 场景 02 |
+|:------:|:------:|
+| ![场景 01](sample/scenario01.png) | ![场景 02](sample/scenario02.png) |
+
+### 风格样例
+
+| 风格 01 | 风格 02 |
+|:------:|:------:|
+| ![风格 01](sample/style01.png) | ![风格 02](sample/style02.png) |
+
+### 图表样例
+
+| 图表 01 | 图表 02 |
+|:------:|:------:|
+| ![图表 01](sample/diagram01.png) | ![图表 02](sample/diagram02.png) |
 
 ---
 
