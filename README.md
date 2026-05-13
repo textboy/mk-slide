@@ -17,7 +17,7 @@ Works on **Claude Code** · **Codex** · **Hermes Agent** · **OpenClaw**
 MK Present is a **3-skill pipeline** covering the full presentation lifecycle:
 
 1. **📋 [present-workflow](present-workflow/README.md)** — Plan your storyline. Clarify the brief, research, outline, review.
-2. **🎨 [present-html](present-html/README.md)** — Generate a stunning HTML presentation. 50+ curated styles, bilingual.
+2. **🎨 [present-html](present-html/README.md)** — Generate a stunning HTML presentation. 50+ curated styles, support architecture & flow.
 3. **📄 [present-ppt](present-ppt/README.md)** — Convert your HTML deck into an editable PowerPoint (.pptx) with native shapes and text.
 
 ```

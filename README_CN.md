@@ -17,7 +17,7 @@
 MK Present 是一个 **3-Skill 流水线**，覆盖演示文稿全生命周期：
 
 1. **📋 [present-workflow](present-workflow/README_CN.md)** — 规划故事线。明确需求、调研、大纲、审查。
-2. **🎨 [present-html](present-html/README_CN.md)** — 生成精美的 HTML 演示。50+ 精选风格，中英双语。
+2. **🎨 [present-html](present-html/README_CN.md)** — 生成精美的 HTML 演示。50+ 精选风格，支持架构图和流程图。
 3. **📄 [present-ppt](present-ppt/README_CN.md)** — 将 HTML deck 转换为可编辑的 PowerPoint (.pptx)，保留原生形状和文字。
 
 ```
