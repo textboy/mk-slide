@@ -2,7 +2,7 @@
 
 ## 1. Product Overview
 
-**Present HTML (a.k.a. Present HTML)** is an AI-agent skill that generates animation-rich HTML presentations from natural language. It operates as a skill within Claude Code, Hermes Agent, and OpenClaw.
+**Present HTML (a.k.a. Present HTML)** is an AI-agent skill that generates animation-rich HTML presentations from natural language. It operates as a skill within Claude Code, Codex, Hermes Agent, and OpenClaw.
 
 - **Slogan:** Your next PPT, doesn't have to be PPT.
 - **License:** MIT
@@ -32,7 +32,7 @@
 | `gallery.html` | Online style gallery with recommendation system (Vercel-hosted) |
 | `style-gallery.html` | Local lightweight gallery for offline use |
 | `landing/` | Product landing page |
-| `install.sh` | Auto-detection & install for Claude Code / Hermes / OpenClaw |
+| `install.sh` | Auto-detection & install for Claude Code / Codex / Hermes / OpenClaw |
 | `openclaw.plugin.json` | OpenClaw plugin manifest |
 | `scripts/generate-drawio.py` | Drawio diagram generation → PNG embedding | Phase 8 |
 | `diagram/shape.md` | Shape semantics, container logic, connectors | Phase 8 |
@@ -46,7 +46,7 @@
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│                   AI Agent (Claude Code / Hermes / OpenClaw)│
+│                   AI Agent (Claude Code / Codex / Hermes / OpenClaw)│
 │  ┌───────────────────────────────────────────────────────┐  │
 │  │  SKILL.md (Instructions + Rules + Phase Flow)         │  │
 │  │  ┌─────────┐ ┌──────────┐ ┌──────────┐ ┌─────────┐  │  │

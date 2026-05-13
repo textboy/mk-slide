@@ -4,7 +4,7 @@
 
 # MK Present
 
-Works on **Claude Code** · **Hermes Agent** · **OpenClaw**
+Works on **Claude Code** · **Codex** · **Hermes Agent** · **OpenClaw**
 
 > A complete presentation workflow: plan your storyline, generate beautiful HTML slides, and export to PowerPoint. Three AI skills, one seamless pipeline.
 

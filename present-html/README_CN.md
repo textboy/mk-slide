@@ -10,7 +10,7 @@
 >
 > **Forked & enhanced 自** [next-slide](https://github.com/codesstar/next-slide) — 扩展了图表生成功能。
 
-兼容平台：**Claude Code** · **Hermes Agent** · **OpenClaw**
+兼容平台：**Claude Code** · **Codex** · **Hermes Agent** · **OpenClaw**
 
 ---
 

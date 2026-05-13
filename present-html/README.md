@@ -4,7 +4,7 @@
 
 # Present HTML
 
-Works on **Claude Code** · **Hermes Agent** · **OpenClaw**
+Works on **Claude Code** · **Codex** · **Hermes Agent** · **OpenClaw**
 
 > Describe what you want. Pick a style. Get a beautiful HTML presentation. No PowerPoint, no build tools.
 

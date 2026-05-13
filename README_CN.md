@@ -4,7 +4,7 @@
 
 # MK Present
 
-兼容 **Claude Code** · **Hermes Agent** · **OpenClaw**
+兼容 **Claude Code** · **Codex** · **Hermes Agent** · **OpenClaw**
 
 > 完整的演示文稿工作流：规划故事线、生成精美的 HTML 幻灯片、导出为 PowerPoint。三个 AI Skill，一条无缝流水线。
 

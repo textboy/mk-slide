@@ -9,7 +9,7 @@ metadata:
 description: >
   Present HTML — create stunning HTML presentations from scratch.
   50+ curated styles, bilingual (EN/中文).
-  Works on Claude Code, Hermes Agent, and OpenClaw.
+  Works on Claude Code, Codex, Hermes Agent, and OpenClaw.
   Trigger when the user says: "make a presentation", "build slides", "create a deck",
   "pitch deck", "PPT", "PowerPoint", "presentation about", "talk slides",
   "slide deck", "present-html", "mk present",
