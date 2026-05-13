@@ -1,6 +1,8 @@
 # present-workflow
 
 > **present-workflow** Fork 并增强自 [ppt-agent-workflow-san/ppt-workflow](https://github.com/mucsbr/ppt-agent-workflow-san/tree/main/ppt-workflow)，用于准备演示文稿的故事线作为第一阶段。
+>
+> 这是 [mk-present](https://github.com/textboy/mk-present) 项目中的一个 skill。
 
 ## 概述
 

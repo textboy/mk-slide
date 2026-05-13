@@ -1,6 +1,8 @@
 # present-workflow
 
 > **present-workflow** is forked & enhanced from [ppt-agent-workflow-san/ppt-workflow](https://github.com/mucsbr/ppt-agent-workflow-san/tree/main/ppt-workflow). It prepares the presentation storyline as the first stage of the pipeline.
+>
+> This is one of the skills in [mk-present](https://github.com/textboy/mk-present).
 
 ## Overview
 

@@ -9,6 +9,8 @@
 > 仓库 / 命令名为 `present-html`，中文称呼 **Present HTML**。
 >
 > **Forked & enhanced 自** [next-slide](https://github.com/codesstar/next-slide) — 扩展了图表生成功能。
+>
+> 这是 [mk-present](https://github.com/textboy/mk-present) 项目中的一个 skill。
 
 兼容平台：**Claude Code** · **Codex** · **Hermes Agent** · **OpenClaw**
 

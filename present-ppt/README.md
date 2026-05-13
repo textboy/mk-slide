@@ -1,6 +1,8 @@
 # present-ppt
 
 > **present-ppt** is forked & enhanced from [html-slide-to-pptx](https://github.com/mucsbr/ppt-agent-workflow-san/tree/main/html-slide-to-pptx).
+>
+> This is one of the skills in [mk-present](https://github.com/textboy/mk-present).
 
 Convert structured HTML slides into editable PowerPoint (.pptx) slides with native text boxes, shapes, chips, arrows, and panels.
 

@@ -9,6 +9,8 @@ Works on **Claude Code** · **Codex** · **Hermes Agent** · **OpenClaw**
 > Describe what you want. Pick a style. Get a beautiful HTML presentation. No PowerPoint, no build tools.
 
 > **Forked & enhanced from** [next-slide](https://github.com/codesstar/next-slide) — extended with diagram generation.
+>
+> This is one of the skills in [mk-present](https://github.com/textboy/mk-present).
 
 ---
 
