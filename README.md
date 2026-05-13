@@ -107,7 +107,7 @@ Each style is a complete design system: curated typography, color palette, layou
 
 ### Gallery UI
 
-![Gallery UI](sample/webui.png)
+![Gallery UI](sample/gallery.png)
 
 ### Scenarios Sample
 

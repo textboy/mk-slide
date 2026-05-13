@@ -107,7 +107,7 @@ bash install.sh claude    # 或指定平台：claude / codex / hermes / openclaw
 
 ### 画廊界面
 
-![画廊界面](sample/webui.png)
+![画廊界面](sample/gallery.png)
 
 ### 场景样例
 
