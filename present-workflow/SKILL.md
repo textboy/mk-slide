@@ -19,6 +19,10 @@ Treat PPT creation as staged work, not one-shot generation. This skill should te
 
 Do not prescribe specific search tools, browsers, MCPs, renderers, or export paths unless a particular environment explicitly requires one.
 
+## Language Matching
+
+Match the user's input language in all replies and outputs. If the user writes in English, reply in English. If in Chinese (中文), reply in Chinese. Same for any other language — detect and follow.
+
 ## Core Principle
 
 Constrain the workflow, not the implementation.
