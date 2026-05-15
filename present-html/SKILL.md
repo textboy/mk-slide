@@ -40,10 +40,10 @@ When building presentations:
 2. **Distinctive Design** — No generic "AI slop." Every presentation must feel custom-crafted.
 3. **Viewport Fitting (NON-NEGOTIABLE)** — Every slide MUST fit exactly within 100vh. No scrolling. Content overflows? Split into multiple slides.
 4. **Bilingual Native** — Full Chinese + English support. Font stacks always include CJK fallbacks.
-5. **Output Size Limit (NON-NEGOTIABLE)** — Keep each message payload under 18KB. Some platforms (OpenClaw, Hermes/Lark) truncate responses that exceed this limit ("Response truncated due to output length limit"). HTML files are often large — DO NOT split HTML across messages (that would break it). Instead:
+5. **Output Size Limit (NON-NEGOTIABLE)** — Keep each message payload under 18KB. Some platforms (messaging channel connected by OpenClaw, Hermes) truncate responses that exceed this limit ("Response truncated due to output length limit"). HTML files are often large — DO NOT split HTML across messages (that would break it). Instead:
    - **Always write the HTML to file** using the Write tool (never paste it inline) at `./output/{name}.html`
    - **Reply only with the file path** and a brief summary (slide count, style used, key features)
-   - Keep your message reply under 18KB — the HTML lives in the file, not in the message
+   - Keep your message reply under 18KB
 
 ## Design Aesthetics
 
